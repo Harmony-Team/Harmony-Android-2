@@ -56,6 +56,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:${var.roomVersion}"
+    implementation "androidx.legacy:legacy-support-v4:${var.androidLegacyVersion}"
     kapt "androidx.room:room-compiler:${var.roomVersion}"
     implementation "androidx.room:room-ktx:${var.roomVersion}"
     androidTestImplementation "androidx.room:room-testing:${var.roomVersion}"
