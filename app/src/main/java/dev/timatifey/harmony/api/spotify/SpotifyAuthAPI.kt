@@ -1,6 +1,6 @@
-package dev.harmony.api
+package dev.timatifey.harmony.api.spotify
 
-import dev.timatifey.harmony.api.dto.SpotifyTokenResponse
+import dev.timatifey.harmony.api.spotify.dto.SpotifyTokenResponseDto
 import retrofit2.http.*
 
 interface SpotifyAuthAPI {
@@ -17,7 +17,7 @@ interface SpotifyAuthAPI {
         @Field("code") code: String,
         @Field("redirect_uri") redirectURI: String,
         @Field("code_verifier") codeVerifier: String,
-    ): SpotifyTokenResponse
+    ): SpotifyTokenResponseDto
 
     @FormUrlEncoded
     @POST("/api/token")
@@ -25,5 +25,5 @@ interface SpotifyAuthAPI {
         @Field("grant_type") grantType: String, // = "refresh_token"
         @Field("refresh_token") refreshToken: String,
         @Field("client_id") clientId: String,
-    ): SpotifyTokenResponse
+    ): SpotifyTokenResponseDto
 }

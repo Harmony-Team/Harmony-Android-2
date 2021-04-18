@@ -10,7 +10,7 @@ data class GroupEntity(
 
     var groupName: String,
     var description: String,
-    val imageUri: String?,
+    val imageUrl: String?,
     val dateCreated: String,
 
     val shareLink: String,

@@ -1,3 +1,59 @@
 <resources>
     <string name="app_name">Harmony</string>
+<!--    Sign In-->
+    <string name="sign_in_to_continue_caps">SIGN IN TO CONTINUE</string>
+    <string name="email_address_or_username_caps">EMAIL ADDRESS OR USERNAME</string>
+    <string name="prompt_password">PASSWORD</string>
+    <string name="forgot_your_password_caps"><u>FORGOT YOUR PASSWORD?</u></string>
+    <string name="authorize_with_caps">AUTHORIZE WITH</string>
+    <string name="don_t_have_an_account_caps">DON’T HAVE AN ACCOUNT?</string>
+    <string name="action_sign_in">Sign In</string>
+
+<!--    Sign Up-->
+    <string name="sign_up_to_continue_caps">SIGN UP TO CONTINUE</string>
+    <string name="already_have_an_account_caps">ALREADY HAVE AN ACCOUNT?</string>
+    <string name="prompt_username">USERNAME</string>
+    <string name="prompt_email">EMAIL</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="email_address_caps">EMAIL ADDRESS</string>
+
+<!--    Settings-->
+    <string name="user_account">User account</string>
+    <string name="edit">Edit</string>
+    <string name="spotify">Spotify</string>
+    <string name="connections">Connections</string>
+
+<!--Groups-->
+    <string name="latest_groups">Latest groups</string>
+    <string name="create_a_new_group">Create a new group…</string>
+
+<!--New group-->
+    <string name="a_new_group">A new group</string>
+    <string name="group_name">Group Name</string>
+    <string name="description_caps">DESCRIPTION</string>
+    <string name="create">Create</string>
+    <string name="cancel"><u>Cancel</u></string>
+    <string name="pick_picture">Pick Picture</string>
+
+<!--Share group-->
+    <string name="share_group">Share group</string>
+    <string name="your_group_has_created">Your group has created!</string>
+    <string name="share_this_link">Share this link with your friends to make a collaborative playlist</string>
+    <string name="link_example"><u>https://harmony/HbK2YSzd</u></string>
+    <string name="share_link">Share Link</string>
+
+    <string name="profile">Profile</string>
+    <string name="groups">Groups</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="timeout">Timeout</string>
+    <string name="invalid_params">Invalid parameters</string>
+    <string name="ban_user">User is ban</string>
+    <string name="unknown_method">Unknown method</string>
+    <string name="not_enough_perm">Not enough permissions</string>
+    <string name="request_send_limit">Request sending limit reached</string>
+    <string name="user_exist">User already exists</string>
+    <string name="user_not_found">User is not found</string>
+    <string name="wrong_token">Wrong token</string>
+    <string name="smth_went_wrong">Something went wrong</string>
+    <string name="spotify_tokens_not_received">Spotify tokens didn\'t received</string>
 </resources>

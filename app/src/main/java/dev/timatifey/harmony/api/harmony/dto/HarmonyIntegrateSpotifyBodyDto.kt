@@ -1,8 +1,8 @@
-package dev.timatifey.harmony.api.dto
+package dev.timatifey.harmony.api.harmony.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class IntegrateSpotifyBody (
+data class HarmonyIntegrateSpotifyBodyDto (
     @SerializedName("spotifyId")
     var spotifyId: String,
 

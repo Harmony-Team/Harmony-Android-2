@@ -2,9 +2,9 @@ package dev.timatifey.harmony.di.module
 
 import dagger.Module
 import dagger.Provides
-import dev.harmony.api.HarmonyAPI
-import dev.harmony.api.SpotifyAPI
-import dev.harmony.api.SpotifyAuthAPI
+import dev.timatifey.harmony.api.harmony.HarmonyAPI
+import dev.timatifey.harmony.api.spotify.SpotifyAPI
+import dev.timatifey.harmony.api.spotify.SpotifyAuthAPI
 import dev.timatifey.harmony.Config.Companion.BASE_URL
 import dev.timatifey.harmony.Config.Companion.SPOTIFY_API_BASE_URL
 import dev.timatifey.harmony.Config.Companion.SPOTIFY_AUTH_BASE_URL

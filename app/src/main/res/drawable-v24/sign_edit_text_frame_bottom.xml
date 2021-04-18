@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    <item>-->
+    <!--        <shape>-->
+    <!--            <gradient-->
+    <!--                android:angle="45"-->
+    <!--                android:endColor="#FF2662"-->
+    <!--                android:startColor="#3D269E" />-->
+    <!--            <corners android:bottomLeftRadius="10dp"-->
+    <!--                android:bottomRightRadius="10dp"/>-->
+    <!--            <padding-->
+    <!--                android:bottom="1.5dp"-->
+    <!--                android:left="1.5dp"-->
+    <!--                android:right="1.5dp"-->
+    <!--                android:top="1.5dp" />-->
+    <!--            <size-->
+    <!--                android:width="50dp"-->
+    <!--                android:height="50dp" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <!--    <item>-->
+    <!--        <shape>-->
+    <!--            <gradient-->
+    <!--                android:angle="45"-->
+    <!--                android:endColor="#FF2662"-->
+    <!--                android:startColor="#3D269E" />-->
+    <!--            <corners android:bottomLeftRadius="10dp"-->
+    <!--                android:bottomRightRadius="10dp"/>-->
+    <!--            <padding-->
+    <!--                android:bottom="1.5dp"-->
+    <!--                android:left="1.5dp"-->
+    <!--                android:right="1.5dp"-->
+    <!--                android:top="1.5dp" />-->
+    <!--            <size-->
+    <!--                android:width="50dp"-->
+    <!--                android:height="50dp" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+
+    <!--    <item >-->
+    <!--        <shape>-->
+    <!--            <gradient-->
+    <!--                android:startColor="#C0212939"-->
+    <!--                android:endColor="#C0161A24" />-->
+    <!--            <corners android:bottomLeftRadius="10dp"-->
+    <!--                android:bottomRightRadius="10dp"/>-->
+    <!--            <size-->
+    <!--                android:width="50dp"-->
+    <!--                android:height="50dp" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <item>
+        <shape>
+            <stroke
+                android:color="#3D269E"
+                android:width="1.5dp"
+                />
+            <corners
+                android:bottomLeftRadius="10dp"
+                android:bottomRightRadius="10dp" />
+        </shape>
+    </item>
+</layer-list>
