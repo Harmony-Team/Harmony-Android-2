@@ -1,8 +1,10 @@
-package dev.timatifey.harmony.mappers
+package dev.timatifey.harmony.data.mappers
 
 import com.google.gson.Gson
 import dev.timatifey.harmony.Config
 import dev.timatifey.harmony.api.harmony.dto.*
+import dev.timatifey.harmony.data.Resource
+import dev.timatifey.harmony.data.ResponseHandler
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.Token
 import java.lang.Exception

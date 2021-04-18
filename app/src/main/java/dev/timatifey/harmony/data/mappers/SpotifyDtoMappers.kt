@@ -1,8 +1,10 @@
-package dev.timatifey.harmony.mappers
+package dev.timatifey.harmony.data.mappers
 
 import dev.timatifey.harmony.Config
 import dev.timatifey.harmony.api.spotify.dto.SpotifyTokenResponseDto
 import dev.timatifey.harmony.api.spotify.dto.SpotifyUserProfileDto
+import dev.timatifey.harmony.data.Resource
+import dev.timatifey.harmony.data.ResponseHandler
 import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
 import dev.timatifey.harmony.data.model.spotify.SpotifyUserBody
 

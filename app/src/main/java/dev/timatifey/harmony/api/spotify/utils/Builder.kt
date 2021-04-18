@@ -16,5 +16,4 @@ fun constructAuthorizationURI(codeVerifier: String): String {
 
     val paramString = params.joinToString(separator = "&") { "${it.first}=${it.second}" }
     return "https://accounts.spotify.com/authorize?$paramString"
-
 }

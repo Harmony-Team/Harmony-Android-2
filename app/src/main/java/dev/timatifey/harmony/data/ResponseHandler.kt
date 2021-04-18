@@ -1,4 +1,4 @@
-package dev.timatifey.harmony.mappers
+package dev.timatifey.harmony.data
 
 import dev.timatifey.harmony.Config.Companion.SPOTIFY_TOKENS_ERROR_CODE
 import dev.timatifey.harmony.R

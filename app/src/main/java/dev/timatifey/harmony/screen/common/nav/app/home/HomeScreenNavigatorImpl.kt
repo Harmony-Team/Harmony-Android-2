@@ -1,17 +1,16 @@
-package dev.timatifey.harmony.screen.common.nav
+package dev.timatifey.harmony.screen.common.nav.app.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.ncapdevi.fragnav.FragNavController
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.HarmonyPlaylist
-import dev.timatifey.harmony.data.model.harmony.User
 import dev.timatifey.harmony.data.model.spotify.SpotifyPlaylist
 
-class ScreenNavigator(
+class HomeScreenNavigatorImpl(
     private val fragNavController: FragNavController,
     savedInstanceState: Bundle?
-) : FragNavController.RootFragmentListener, AppScreenRouter {
+) : FragNavController.RootFragmentListener, HomeScreenNavigator {
 
     init {
         fragNavController.rootFragmentListener = this
@@ -35,59 +34,39 @@ class ScreenNavigator(
         fragNavController.popFragment()
     }
 
-    override fun toSignInFragment() {
+    override fun navigateToProfileFragment() {
         TODO("Not yet implemented")
     }
 
-    override fun toSignUpFragment() {
+    override fun navigateToSettingsFragment() {
         TODO("Not yet implemented")
     }
 
-    override fun toRecoveryFragment() {
+    override fun navigateToGroupListFragment() {
         TODO("Not yet implemented")
     }
 
-    override fun toHomeScreen(user: User) {
+    override fun navigateToAddGroupFragment() {
         TODO("Not yet implemented")
     }
 
-    override fun toProfileFragment() {
+    override fun navigateToLobbyFragment(group: HarmonyGroup) {
         TODO("Not yet implemented")
     }
 
-    override fun toSettingsFragment() {
+    override fun navigateToNewGroupFragment() {
         TODO("Not yet implemented")
     }
 
-    override fun toSpotifyAuthWebView() {
+    override fun navigateToShareGroupFragment(group: HarmonyGroup) {
         TODO("Not yet implemented")
     }
 
-    override fun toGroupListFragment() {
+    override fun navigateToNewPlaylist(playlist: HarmonyPlaylist) {
         TODO("Not yet implemented")
     }
 
-    override fun toAddGroupFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun toLobbyFragment(group: HarmonyGroup) {
-        TODO("Not yet implemented")
-    }
-
-    override fun toNewGroupFragment() {
-        TODO("Not yet implemented")
-    }
-
-    override fun toShareGroupFragment(group: HarmonyGroup) {
-        TODO("Not yet implemented")
-    }
-
-    override fun toNewPlaylist(playlist: HarmonyPlaylist) {
-        TODO("Not yet implemented")
-    }
-
-    override fun toPlaylistInfo(playlist: SpotifyPlaylist) {
+    override fun navigateToPlaylistInfo(playlist: SpotifyPlaylist) {
         TODO("Not yet implemented")
     }
 

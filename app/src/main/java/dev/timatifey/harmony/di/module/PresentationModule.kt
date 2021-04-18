@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import dev.timatifey.harmony.screen.common.nav.ScreenNavigator
+import dev.timatifey.harmony.screen.common.nav.app.AppScreenNavigatorImpl
 import com.ncapdevi.fragnav.FragNavController
 import dagger.Module
 import dagger.Provides
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.di.scopes.Presentation
+import dev.timatifey.harmony.screen.common.nav.app.AppScreenNavigator
 
 @Module
 class PresentationModule(
@@ -20,37 +21,27 @@ class PresentationModule(
 ) {
     @Provides
     @Presentation
-    fun provideFragmentManager(): FragmentManager {
-        return activity.supportFragmentManager
-    }
+    fun provideFragmentManager(): FragmentManager = activity.supportFragmentManager
 
     @Provides
     @Presentation
-    fun provideLayoutInflater(): LayoutInflater {
-        return LayoutInflater.from(activity)
-    }
+    fun provideLayoutInflater(): LayoutInflater = LayoutInflater.from(activity)
 
     @Provides
     @Presentation
-    fun provideActivity(): Activity {
-        return activity
-    }
+    fun provideActivity(): Activity = activity
 
     @Provides
     @Presentation
-    fun provideContext(activity: Activity): Context {
-        return activity
-    }
+    fun provideContext(activity: Activity): Context = activity
 
     @Provides
     @Presentation
-    fun provideFragNavController(fragmentManager: FragmentManager): FragNavController {
-        return FragNavController(fragmentManager, R.id.container)
-    }
+    fun provideFragNavController(fragmentManager: FragmentManager): FragNavController =
+        FragNavController(fragmentManager, R.id.container)
 
     @Provides
     @Presentation
-    fun provideScreenNavigator(fragNavController: FragNavController): ScreenNavigator {
-        return ScreenNavigator(fragNavController, savedInstanceState)
-    }
+    fun provideAppScreenNavigator(fragNavController: FragNavController): AppScreenNavigator =
+        AppScreenNavigatorImpl(fragNavController, savedInstanceState)
 }

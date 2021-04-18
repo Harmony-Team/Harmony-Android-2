@@ -1,4 +1,4 @@
-package dev.timatifey.harmony.mappers
+package dev.timatifey.harmony.data
 
 data class Resource<out T>(
     val status: Status,
