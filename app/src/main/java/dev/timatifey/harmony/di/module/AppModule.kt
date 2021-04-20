@@ -1,9 +1,7 @@
 package dev.timatifey.harmony.di.module
 
-import android.app.Application
 import dagger.Module
 import dagger.Provides
-import dev.timatifey.harmony.api.harmony.HarmonyAPI
 import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.repo.user.UserRepo
 import dev.timatifey.harmony.repo.user.UserRepoImpl

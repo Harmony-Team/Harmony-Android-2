@@ -22,8 +22,8 @@ class AuthService @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun authHarmony(username: String, password: String): Resource<Token> {
-        return withContext(ioDispatcher) {
+    suspend fun authHarmony(username: String, password: String): Resource<Token> =
+        withContext(ioDispatcher) {
             try {
                 val authDto: HarmonyAuthResponseDto = harmonyApi.authUser(username, password)
                 return@withContext authDto.mapToResourceToken()
@@ -31,14 +31,13 @@ class AuthService @Inject constructor(
                 return@withContext Resource.error(msg = t.message)
             }
         }
-    }
 
     suspend fun registerHarmony(
         username: String,
         email: String,
         password: String
-    ): Resource<Token> {
-        return withContext(ioDispatcher) {
+    ): Resource<Token> =
+        withContext(ioDispatcher) {
             try {
                 val authDto: HarmonyAuthResponseDto = harmonyApi.registerUser(
                     login = username,
@@ -50,11 +49,10 @@ class AuthService @Inject constructor(
                 return@withContext Resource.error(msg = t.message)
             }
         }
-    }
 
 
-    fun authCacheIsValid(): Resource<Token> {
-        return try {
+    fun authCacheIsValid(): Resource<Token> =
+        try {
             Thread.sleep(2000)// emulating http request to server
             //TODO("Local Cache check on auth token valid")
 //            Resource.success(Token(randomString(40, 60)))
@@ -62,5 +60,15 @@ class AuthService @Inject constructor(
         } catch (t: Throwable) {
             Resource.error(t.message)
         }
-    }
+
+    suspend fun recoveryAcc(email: String): Resource<Token> =
+        withContext(ioDispatcher) {
+            try {
+                delay(5000)
+                //TODO("recovery harmony acc")
+                return@withContext Resource.success(Token(randomString(50, 60)))
+            } catch (t: Throwable) {
+                return@withContext Resource.error(msg = t.message)
+            }
+        }
 }

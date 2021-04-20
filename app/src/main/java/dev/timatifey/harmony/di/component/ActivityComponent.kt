@@ -18,6 +18,7 @@ interface ActivityComponent {
 
     @Subcomponent.Builder
     interface Builder {
+
         @BindsInstance
         fun activity(baseActivity: BaseActivity): Builder
 

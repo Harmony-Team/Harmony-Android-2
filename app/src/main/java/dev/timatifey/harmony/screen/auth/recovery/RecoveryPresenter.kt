@@ -1,4 +1,4 @@
-package dev.timatifey.harmony.screen.auth.signup
+package dev.timatifey.harmony.screen.auth.recovery
 
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpPresenter
@@ -9,16 +9,16 @@ import dev.timatifey.harmony.service.AuthService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
 
-class SignUpPresenter(
+class RecoveryPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val authService: AuthService
-) : MvpPresenter<SignUpMvpView>, SignUpMvpView.Listener {
+) : MvpPresenter<RecoveryMvpView>, RecoveryMvpView.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-    private lateinit var view: SignUpMvpView
+    private lateinit var view: RecoveryMvpView
 
-    override fun bindView(view: SignUpMvpView) {
+    override fun bindView(view: RecoveryMvpView) {
         this.view = view
     }
 
@@ -36,10 +36,10 @@ class SignUpPresenter(
         coroutineScope.coroutineContext.cancelChildren()
     }
 
-    override fun onSignUpBtnClicked(username: String, email: String, password: String) {
+    override fun onRecoveryBtnClicked(email: String) {
         coroutineScope.launch {
             view.showLoading()
-            val result = authService.registerHarmony(username, email, password)
+            val result = authService.recoveryAcc(email)
             view.hideLoading()
             when (result.status) {
                 is Status.Success -> {
@@ -52,16 +52,8 @@ class SignUpPresenter(
         }
     }
 
-    override fun onHaveAccTvClicked() {
-        appScreenNavigator.toSignIn()
-    }
-
-    override fun onUsernameFieldTextChanged(text: String) {
-        if (!Validator.isUserNameValid(text)) {
-            view.showUsernameFieldError(R.string.invalid_username)
-        } else {
-            view.hideUsernameFieldError()
-        }
+    override fun onHaveNotAccTvClicked() {
+        appScreenNavigator.toSignUp()
     }
 
     override fun onEmailFieldTextChanged(text: String) {
@@ -69,14 +61,6 @@ class SignUpPresenter(
             view.showEmailFieldError(R.string.invalid_username)
         } else {
             view.hideEmailFieldError()
-        }
-    }
-
-    override fun onPasswordFieldTextChanged(text: String) {
-        if (!Validator.isPasswordValid(text)) {
-            view.showPasswordFieldError(R.string.invalid_password)
-        } else {
-            view.hidePasswordFieldError()
         }
     }
 

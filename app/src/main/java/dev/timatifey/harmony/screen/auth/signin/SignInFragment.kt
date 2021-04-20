@@ -15,6 +15,7 @@ class SignInFragment : BaseFragment() {
 
     @Inject
     lateinit var mvpViewFactory: MvpViewFactory
+
     @Inject
     lateinit var presenterFactory: PresenterFactory
 
@@ -50,10 +51,7 @@ class SignInFragment : BaseFragment() {
     }
 
     companion object {
-
-        fun newInstance(): Fragment {
-            return SignInFragment()
-        }
+        fun newInstance(): Fragment = SignInFragment()
     }
 
 }

@@ -5,7 +5,9 @@ import dev.timatifey.harmony.di.scope.PresentationScope
 import dev.timatifey.harmony.screen.auth.signin.SignInFragment
 import dev.timatifey.harmony.common.MainActivity
 import dev.timatifey.harmony.common.base.BaseActivity
+import dev.timatifey.harmony.screen.auth.recovery.RecoveryFragment
 import dev.timatifey.harmony.screen.auth.signup.SignUpFragment
+import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthFragment
 
 @PresentationScope
 @Subcomponent(modules = [])
@@ -18,4 +20,8 @@ interface PresentationComponent {
     fun inject(signInFragment: SignInFragment)
 
     fun inject(signUpFragment: SignUpFragment)
+
+    fun inject(recoveryFragment: RecoveryFragment)
+
+    fun inject(spotifyAuthFragment: SpotifyAuthFragment)
 }
