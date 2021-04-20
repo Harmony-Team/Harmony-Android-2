@@ -9,7 +9,8 @@ import dev.timatifey.harmony.data.database.GroupsDao
 import javax.inject.Singleton
 
 @Module
-class RoomModule {
+object RoomModule {
+    private const val DATABASE_NAME = "harmony_database"
 
     @Singleton
     @Provides
@@ -23,9 +24,5 @@ class RoomModule {
     @Singleton
     @Provides
     fun provideGroupsDao(database: AppDatabase): GroupsDao = database.groupsDao()
-
-    companion object {
-        const val DATABASE_NAME = "harmony_database"
-    }
 
 }

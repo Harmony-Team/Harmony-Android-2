@@ -17,7 +17,7 @@ fun HarmonyAuthResponseDto.mapToResourceToken(): Resource<Token> {
     }
 }
 
-fun HarmonyUserResponseDto.mapToResourceUserDto(gson: Gson): Resource<HarmonyUserDto> {
+fun HarmonyUserResponseDto.mapToResourceUserDto(): Resource<HarmonyUserDto> {
     return if (code == Config.SUCCESS_CODE && users != null) {
         ResponseHandler.handleSuccess(users[0])
     } else {

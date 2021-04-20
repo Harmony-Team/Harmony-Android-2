@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
@@ -31,6 +31,7 @@ class NetworkModule {
             .addInterceptor(interceptor)
             .build()
 
+    @Singleton
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()

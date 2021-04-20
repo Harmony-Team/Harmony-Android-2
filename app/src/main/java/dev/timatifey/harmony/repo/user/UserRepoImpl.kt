@@ -1,4 +1,8 @@
 package dev.timatifey.harmony.repo.user
 
-class UserRepoImpl: UserRepo {
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class UserRepoImpl @Inject constructor(): UserRepo {
 }

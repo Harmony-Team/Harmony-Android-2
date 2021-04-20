@@ -150,6 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:background="@drawable/black_alpha__background_gradient"
         android:padding="160dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
