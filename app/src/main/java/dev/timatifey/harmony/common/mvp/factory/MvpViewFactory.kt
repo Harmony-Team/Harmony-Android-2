@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import dev.timatifey.harmony.di.scope.PresentationScope
 import dev.timatifey.harmony.screen.auth.signin.SignInMvpView
 import dev.timatifey.harmony.screen.auth.signin.SignInMvpViewImpl
-import dev.timatifey.harmony.screen.splash.SplashMvpView
-import dev.timatifey.harmony.screen.splash.SplashMvpViewImpl
+import dev.timatifey.harmony.screen.auth.signup.SignUpMvpView
+import dev.timatifey.harmony.screen.auth.signup.SignUpMvpViewImpl
 import javax.inject.Inject
 
 @PresentationScope
@@ -17,6 +17,7 @@ class MvpViewFactory @Inject constructor(
     fun createSignInMvpView(parent: ViewGroup?): SignInMvpView =
         SignInMvpViewImpl(layoutInflater, parent)
 
-    fun createSplashMvpView(parent: ViewGroup?): SplashMvpView =
-        SplashMvpViewImpl(layoutInflater, parent)
+    fun createSignUpMvpView(parent: ViewGroup?): SignUpMvpView =
+        SignUpMvpViewImpl(layoutInflater, parent)
+
 }

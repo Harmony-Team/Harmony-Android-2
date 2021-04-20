@@ -8,6 +8,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Harmony)
         setContentView(R.layout.activity_main)
     }
 

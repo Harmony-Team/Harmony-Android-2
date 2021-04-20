@@ -1,4 +1,4 @@
-package dev.timatifey.harmony.screen.auth.signin
+package dev.timatifey.harmony.screen.auth.signup
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,21 +12,18 @@ import androidx.core.widget.doAfterTextChanged
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpViewObservableBase
 
-class SignInMvpViewImpl(
-    layoutInflater: LayoutInflater,
+class SignUpMvpViewImpl(
+    inflater: LayoutInflater,
     parent: ViewGroup?
-) : MvpViewObservableBase<SignInMvpView.Listener>(), SignInMvpView {
+) : MvpViewObservableBase<SignUpMvpView.Listener>(), SignUpMvpView {
+    override var rootView: View = inflater.inflate(R.layout.fragment_sign_up, parent, false)
 
-    override var rootView: View =
-        layoutInflater.inflate(R.layout.fragment_sign_in, parent, false)
-
-    private val pbLoading: ProgressBar = findViewById(R.id.login__loading)
-    private val etUsername: AppCompatEditText = findViewById(R.id.login__username)
-    private val etPassword: AppCompatEditText = findViewById(R.id.login__password)
-    private val tvForgotPsw: AppCompatTextView = findViewById(R.id.login__forgot_password_btn)
-    private val ibSpotifyAuth: AppCompatImageButton = findViewById(R.id.login__spotify_btn)
-    private val ibSignIn: AppCompatImageButton = findViewById(R.id.login__login_btn)
-    private val tvHaveNotAcc: AppCompatTextView = findViewById(R.id.login__registration_btn)
+    private val pbLoading: ProgressBar = findViewById(R.id.register__loading)
+    private val etUsername: AppCompatEditText = findViewById(R.id.register__username)
+    private val etPassword: AppCompatEditText = findViewById(R.id.register__password)
+    private val etEmail: AppCompatEditText = findViewById(R.id.register__email)
+    private val ibSignUp: AppCompatImageButton = findViewById(R.id.register__register_btn)
+    private val tvHaveAcc: AppCompatTextView = findViewById(R.id.register__already_have_an_acc)
 
     init {
         etUsername.doAfterTextChanged {
@@ -39,37 +36,39 @@ class SignInMvpViewImpl(
                 it.onPasswordFieldTextChanged(etPassword.text.toString())
             }
         }
-        tvForgotPsw.setOnClickListener { listeners.forEach { it.onForgotPasswordTvClicked() } }
-        ibSpotifyAuth.setOnClickListener { listeners.forEach { it.onSpotifyAuthBtnClicked() } }
-        ibSignIn.setOnClickListener {
+        etEmail.doAfterTextChanged {
             listeners.forEach {
-                it.onSignInBtnClicked(
+                it.onEmailFieldTextChanged(etEmail.text.toString())
+            }
+        }
+        ibSignUp.setOnClickListener {
+            listeners.forEach {
+                it.onSignUpBtnClicked(
                     etUsername.text.toString(),
+                    etEmail.text.toString(),
                     etPassword.text.toString()
                 )
             }
         }
-        tvHaveNotAcc.setOnClickListener { listeners.forEach { it.onHaveNotAccTvClicked() } }
+        tvHaveAcc.setOnClickListener { listeners.forEach { it.onHaveAccTvClicked() } }
     }
 
     override fun showLoading() {
         pbLoading.visibility = View.VISIBLE
         etUsername.isEnabled = false
         etPassword.isEnabled = false
-        tvForgotPsw.isEnabled = false
-        ibSpotifyAuth.isEnabled = false
-        tvHaveNotAcc.isEnabled = false
-        ibSignIn.isEnabled = false
+        etEmail.isEnabled = false
+        tvHaveAcc.isEnabled = false
+        ibSignUp.isEnabled = false
     }
 
     override fun hideLoading() {
         pbLoading.visibility = View.GONE
         etUsername.isEnabled = true
         etPassword.isEnabled = true
-        tvForgotPsw.isEnabled = true
-        ibSpotifyAuth.isEnabled = true
-        tvHaveNotAcc.isEnabled = true
-        ibSignIn.isEnabled = true
+        etEmail.isEnabled = true
+        tvHaveAcc.isEnabled = true
+        ibSignUp.isEnabled = true
     }
 
     override fun showError(msgId: Int) {
@@ -80,12 +79,20 @@ class SignInMvpViewImpl(
         etUsername.error = getString(msgId)
     }
 
+    override fun showEmailFieldError(msgId: Int) {
+        etEmail.error = getString(msgId)
+    }
+
     override fun showPasswordFieldError(msgId: Int) {
         etPassword.error = getString(msgId)
     }
 
     override fun hideUsernameFieldError() {
         etUsername.error = null
+    }
+
+    override fun hideEmailFieldError() {
+        etEmail.error = null
     }
 
     override fun hidePasswordFieldError() {
@@ -95,4 +102,5 @@ class SignInMvpViewImpl(
     private fun showToast(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
+
 }

@@ -1,26 +1,24 @@
-package dev.timatifey.harmony.screen.auth.signin
+package dev.timatifey.harmony.screen.auth.signup
 
 import dev.timatifey.harmony.R
-import dev.timatifey.harmony.data.Resource
-import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
+import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.service.AuthService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
 
-class SignInPresenter(
+class SignUpPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val authService: AuthService
-) : MvpPresenter<SignInMvpView>, SignInMvpView.Listener {
+) : MvpPresenter<SignUpMvpView>, SignUpMvpView.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-    private lateinit var view: SignInMvpView
+    private lateinit var view: SignUpMvpView
 
-    override fun bindView(view: SignInMvpView) {
+    override fun bindView(view: SignUpMvpView) {
         this.view = view
     }
 
@@ -38,14 +36,10 @@ class SignInPresenter(
         coroutineScope.coroutineContext.cancelChildren()
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
-
-    override fun onSignInBtnClicked(username: String, password: String) {
+    override fun onSignUpBtnClicked(username: String, email: String, password: String) {
         coroutineScope.launch {
             view.showLoading()
-            val result: Resource<Token> = authService.authHarmony(username, password)
+            val result = authService.registerHarmony(username, email, password)
             view.hideLoading()
             when (result.status) {
                 is Status.Success -> {
@@ -58,23 +52,23 @@ class SignInPresenter(
         }
     }
 
-    override fun onForgotPasswordTvClicked() {
-        appScreenNavigator.toRecovery()
-    }
-
-    override fun onHaveNotAccTvClicked() {
-        appScreenNavigator.toSignUp()
-    }
-
-    override fun onSpotifyAuthBtnClicked() {
-        appScreenNavigator.toSpotifyAuthWebView()
+    override fun onHaveAccTvClicked() {
+        appScreenNavigator.toSignIn()
     }
 
     override fun onUsernameFieldTextChanged(text: String) {
-        if (Validator.isUserNameValid(text) && Validator.isEmailValid(text)) {
-            view.hideUsernameFieldError()
-        } else {
+        if (!Validator.isUserNameValid(text)) {
             view.showUsernameFieldError(R.string.invalid_username)
+        } else {
+            view.hideUsernameFieldError()
+        }
+    }
+
+    override fun onEmailFieldTextChanged(text: String) {
+        if (!Validator.isEmailValid(text)) {
+            view.showEmailFieldError(R.string.invalid_username)
+        } else {
+            view.hidePasswordFieldError()
         }
     }
 
@@ -84,5 +78,10 @@ class SignInPresenter(
         } else {
             view.hidePasswordFieldError()
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        appScreenNavigator.navigateUp()
+        return true
     }
 }

@@ -1,7 +1,7 @@
 package dev.timatifey.harmony.api.spotify.utils
 
-import dev.timatifey.harmony.Config
-import dev.timatifey.harmony.Config.Companion.SPOTIFY_SCOPES
+import dev.timatifey.harmony.common.app.Config
+import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_SCOPES
 import dev.timatifey.harmony.util.hashBySHA256WithBase64Encode
 
 fun constructAuthorizationURI(codeVerifier: String): String {

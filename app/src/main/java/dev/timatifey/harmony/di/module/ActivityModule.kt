@@ -9,10 +9,12 @@ import com.ncapdevi.fragnav.FragNavController
 import dagger.Module
 import dagger.Provides
 import dev.timatifey.harmony.R
+import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
+import javax.inject.Named
 
 @Module
 object ActivityModule {
@@ -23,8 +25,9 @@ object ActivityModule {
         LayoutInflater.from(baseActivity)
 
     @Provides
+    @Named("ActivityFragmentManager")
     @ActivityScope
-    fun provideFragmentManager(baseActivity: BaseActivity): FragmentManager =
+    fun provideBaseActivityFragmentManager(baseActivity: BaseActivity): FragmentManager =
         baseActivity.supportFragmentManager
 
     @Provides
@@ -33,16 +36,12 @@ object ActivityModule {
 
     @Provides
     @ActivityScope
-    fun provideFragNavController(fragmentManager: FragmentManager): FragNavController =
-        FragNavController(fragmentManager, R.id.container)
-
-    @Provides
-    @ActivityScope
     fun provideAppScreenNavigator(
-        fragNavController: FragNavController,
+        appSettings: AppSettings,
+        @Named("ActivityFragmentManager") fragmentManager: FragmentManager,
         savedInstanceState: Bundle?
     ): AppScreenNavigator =
-        AppScreenNavigator(fragNavController, savedInstanceState)
+        AppScreenNavigator(appSettings, fragmentManager, savedInstanceState)
 
     @Module
     interface Binds {

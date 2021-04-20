@@ -1,9 +1,8 @@
-package dev.timatifey.harmony
+package dev.timatifey.harmony.common.app
 
 import android.app.Application
 import dev.timatifey.harmony.di.component.AppComponent
 import dev.timatifey.harmony.di.component.DaggerAppComponent
-import dev.timatifey.harmony.di.module.AppModule
 
 
 class App: Application() {

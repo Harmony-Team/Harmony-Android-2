@@ -1,7 +1,6 @@
 package dev.timatifey.harmony.data.mappers
 
-import com.google.gson.Gson
-import dev.timatifey.harmony.Config
+import dev.timatifey.harmony.common.app.Config
 import dev.timatifey.harmony.api.harmony.dto.*
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler

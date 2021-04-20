@@ -5,11 +5,12 @@ import dev.timatifey.harmony.api.harmony.dto.HarmonyAuthResponseDto
 import dev.timatifey.harmony.api.spotify.SpotifyAuthAPI
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler
+import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.mappers.mapToResourceToken
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.repo.user.UserRepo
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
+import dev.timatifey.harmony.util.randomString
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,14 +33,34 @@ class AuthService @Inject constructor(
         }
     }
 
-    suspend fun authCacheIsValid(): Resource<Token> {
+    suspend fun registerHarmony(
+        username: String,
+        email: String,
+        password: String
+    ): Resource<Token> {
         return withContext(ioDispatcher) {
             try {
-                //TODO("Local Cache check on auth token valid")
-                return@withContext Resource.error(msg="Auth Cache doesn't exist")
+                val authDto: HarmonyAuthResponseDto = harmonyApi.registerUser(
+                    login = username,
+                    email = email,
+                    password = password
+                )
+                return@withContext authDto.mapToResourceToken()
             } catch (t: Throwable) {
-                return@withContext Resource.error(t.message)
+                return@withContext Resource.error(msg = t.message)
             }
+        }
+    }
+
+
+    fun authCacheIsValid(): Resource<Token> {
+        return try {
+            Thread.sleep(2000)// emulating http request to server
+            //TODO("Local Cache check on auth token valid")
+//            Resource.success(Token(randomString(40, 60)))
+            Resource.error(msg = "Auth Cache doesn't exist")
+        } catch (t: Throwable) {
+            Resource.error(t.message)
         }
     }
 }
