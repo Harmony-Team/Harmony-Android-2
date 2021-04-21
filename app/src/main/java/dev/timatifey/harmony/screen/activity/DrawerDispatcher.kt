@@ -1,6 +1,8 @@
 package dev.timatifey.harmony.screen.activity
 
-interface DrawerLocker {
+interface DrawerDispatcher {
     fun lockDrawer()
     fun unlockDrawer()
+    fun openDrawer()
+    fun closeDrawer()
 }

@@ -32,7 +32,7 @@ class SignInFragment : BaseFragment() {
     ): View {
         val view: SignInMvpView = mvpViewFactory.createSignInMvpView(container)
         presenter.bindView(view)
-        presenter.bindDrawerLocker(drawerLocker)
+        presenter.bindDrawerDispatcher(drawerDispatcher)
         return view.rootView
     }
 

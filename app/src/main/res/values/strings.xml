@@ -65,4 +65,8 @@
     <string name="spotify_tokens_not_received">Spotify tokens didn\'t received</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Not a valid password</string>
+    <string name="user_does_not_exist">User is nullable</string>
+    <string name="token_does_not_exist">Token does not exist</string>
+    <string name="success_spotify_auth">Success spotify auth</string>
+    <string name="loading_failed">Loading failed</string>
 </resources>

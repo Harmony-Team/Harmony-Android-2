@@ -5,7 +5,8 @@ import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.screen.activity.DrawerLocker
+import dev.timatifey.harmony.screen.activity.DrawerDispatcher
+import dev.timatifey.harmony.screen.RequireDrawerDispatcher
 import dev.timatifey.harmony.service.AuthService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
@@ -14,11 +15,11 @@ class SignUpPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val authService: AuthService
-) : MvpPresenter<SignUpMvpView>, SignUpMvpView.Listener {
+) : MvpPresenter<SignUpMvpView>, SignUpMvpView.Listener, RequireDrawerDispatcher {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private lateinit var view: SignUpMvpView
-    private lateinit var drawerLocker: DrawerLocker
+    private lateinit var drawerDispatcher: DrawerDispatcher
 
     override fun bindView(view: SignUpMvpView) {
         this.view = view
@@ -46,7 +47,7 @@ class SignUpPresenter(
             when (result.status) {
                 is Status.Success -> {
                     appScreenNavigator.toHome()
-                    drawerLocker.unlockDrawer()
+                    drawerDispatcher.unlockDrawer()
                 }
                 is Status.Error -> {
                     view.showError(R.string.auth_failed)
@@ -88,7 +89,7 @@ class SignUpPresenter(
         return true
     }
 
-    override fun bindDrawerLocker(drawerLocker: DrawerLocker) {
-        this.drawerLocker = drawerLocker
+    override fun bindDrawerDispatcher(drawerDispatcher: DrawerDispatcher) {
+        this.drawerDispatcher = drawerDispatcher
     }
 }

@@ -2,6 +2,7 @@ package dev.timatifey.harmony.common.app
 
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.service.AuthService
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +17,8 @@ class AppSettings @Inject constructor(
         private set
 
     init {
-        val tokenResource = authService.authCacheIsValid()
-        harmonyToken = tokenResource.data
+        runBlocking {
+            harmonyToken = authService.authCacheIsValid().data
+        }
     }
 }

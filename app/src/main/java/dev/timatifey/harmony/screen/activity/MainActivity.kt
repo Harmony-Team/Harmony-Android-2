@@ -1,22 +1,18 @@
 package dev.timatifey.harmony.screen.activity
 
 import android.os.Bundle
-import android.util.Log
 import dev.timatifey.harmony.R
-import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.common.base.BaseActivity
 import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
 import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), DrawerLocker {
+class MainActivity : BaseActivity(), DrawerDispatcher {
 
     private lateinit var presenter: MainPresenter
     private lateinit var view: MainMvpView
-
     @Inject
     lateinit var presenterFactory: PresenterFactory
-
     @Inject
     lateinit var mvpViewFactory: MvpViewFactory
 
@@ -24,13 +20,11 @@ class MainActivity : BaseActivity(), DrawerLocker {
         super.onCreate(savedInstanceState)
         activityComponent.newPresentationComponent().inject(this)
         setTheme(R.style.Theme_Harmony)
-
         view = mvpViewFactory.createMainMvpView()
         setContentView(view.rootView)
-
         presenter = presenterFactory.createMainPresenter()
         presenter.bindView(view)
-        presenter.bindDrawerLocker(this)
+        presenter.bindDrawerDispatcher(this)
         if (appScreenNavigator.appSettings.isAuthorized) {
             unlockDrawer()
         } else {
@@ -54,6 +48,14 @@ class MainActivity : BaseActivity(), DrawerLocker {
 
     override fun unlockDrawer() {
         view.unlockDrawer()
+    }
+
+    override fun openDrawer() {
+        view.openDrawer()
+    }
+
+    override fun closeDrawer() {
+        view.closeDrawer()
     }
 
 }

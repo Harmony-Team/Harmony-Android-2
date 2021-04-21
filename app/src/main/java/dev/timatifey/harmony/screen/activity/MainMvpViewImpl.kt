@@ -33,6 +33,10 @@ class MainMvpViewImpl @Inject constructor(
         drawer.closeDrawer(GravityCompat.START)
     }
 
+    override fun openDrawer() {
+        drawer.openDrawer(GravityCompat.START)
+    }
+
     override fun aboutUs() {
         Toast.makeText(context, "About us", Toast.LENGTH_SHORT).show()
     }

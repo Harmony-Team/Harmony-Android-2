@@ -10,6 +10,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import android.widget.Toast
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpViewObservableBase
 
@@ -47,6 +48,14 @@ class SpotifyAuthMvpViewImpl(
 
     override fun hideWebView() {
         webView.visibility = View.GONE
+    }
+
+    override fun showMessage(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showMessage(msgId: Int) {
+        Toast.makeText(context, getString(msgId), Toast.LENGTH_SHORT).show()
     }
 
     override fun loadUrl(url: String) {

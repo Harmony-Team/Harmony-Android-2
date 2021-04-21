@@ -4,13 +4,16 @@ import android.view.MenuItem
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.screen.RequireDrawerDispatcher
+import dev.timatifey.harmony.service.AuthService
 
 class MainPresenter(
     private val appScreenNavigator: AppScreenNavigator,
-) : MvpPresenter<MainMvpView>, MainMvpView.Listener {
+    private val authService: AuthService,
+) : MvpPresenter<MainMvpView>, MainMvpView.Listener, RequireDrawerDispatcher {
 
     private lateinit var view: MainMvpView
-    private lateinit var drawerLocker: DrawerLocker
+    private lateinit var drawerDispatcher: DrawerDispatcher
 
     override fun bindView(view: MainMvpView) {
         this.view = view
@@ -23,7 +26,8 @@ class MainPresenter(
             R.id.menu__settings -> appScreenNavigator.toSettings()
             R.id.menu__about_us -> view.aboutUs()
             R.id.menu__logout -> {
-                drawerLocker.lockDrawer()
+                authService.logoutHarmony()
+                drawerDispatcher.lockDrawer()
                 appScreenNavigator.toAuth()
             }
         }
@@ -51,8 +55,8 @@ class MainPresenter(
     override fun onDestroy() {
     }
 
-    override fun bindDrawerLocker(drawerLocker: DrawerLocker) {
-        this.drawerLocker = drawerLocker
+    override fun bindDrawerDispatcher(drawerDispatcher: DrawerDispatcher) {
+        this.drawerDispatcher = drawerDispatcher
     }
 
 }

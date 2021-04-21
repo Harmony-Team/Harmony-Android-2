@@ -36,6 +36,9 @@ class AppScreenNavigator @Inject constructor(
     private val fragNavController: FragNavController =
         FragNavController(fragmentManager, R.id.activity_main__container)
 
+    val stackIsEmpty: Boolean
+        get() = fragNavController.currentStack?.isEmpty() ?: true
+
     init {
         fragNavController.rootFragmentListener = this
         if (appSettings.isAuthorized) {
@@ -59,15 +62,16 @@ class AppScreenNavigator @Inject constructor(
         }
     }
 
-
     override fun toHome() {
-        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
-        fragNavController.replaceFragment(ProfileFragment.newInstance(), options)
+        toProfile()
     }
 
     override fun toAuth() {
-        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
-        fragNavController.replaceFragment(SignInFragment.newInstance(), options)
+        val options = transactionOptions(
+            R.anim.fade_in,
+            R.anim.fade_out
+        )
+        fragNavController.switchTab(INDEX_AUTH, options)
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
@@ -83,6 +87,7 @@ class AppScreenNavigator @Inject constructor(
         )
         fragNavController.popFragment(options)
     }
+
 
     override fun toSignIn() {
         val options = transactionOptions(

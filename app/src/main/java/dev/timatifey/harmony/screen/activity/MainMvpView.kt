@@ -12,6 +12,7 @@ interface MainMvpView: MvpViewObservable<MainMvpView.Listener> {
     }
 
     fun closeDrawer()
+    fun openDrawer()
     fun aboutUs()
 
     fun unlockDrawer()

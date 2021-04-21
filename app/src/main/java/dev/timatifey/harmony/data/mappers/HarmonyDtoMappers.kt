@@ -6,6 +6,9 @@ import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.Token
+import dev.timatifey.harmony.data.model.harmony.User
+import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
+import dev.timatifey.harmony.data.model.spotify.SpotifyUserBody
 import java.lang.Exception
 
 fun HarmonyAuthResponseDto.mapToResourceToken(): Resource<Token> {
@@ -18,7 +21,8 @@ fun HarmonyAuthResponseDto.mapToResourceToken(): Resource<Token> {
 
 fun HarmonyUserResponseDto.mapToResourceUserDto(): Resource<HarmonyUserDto> {
     return if (code == Config.SUCCESS_CODE && users != null) {
-        ResponseHandler.handleSuccess(users[0])
+        val userDto = users[0]
+        ResponseHandler.handleSuccess(userDto)
     } else {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
@@ -65,3 +69,10 @@ fun HarmonyJoinGroupResponseDto.mapToResourceGroup(): Resource<HarmonyGroup> {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
 }
+
+fun HarmonyIntegrateSpotifyBodyDto.mapToSpotifyTokens(): SpotifyTokens =
+    SpotifyTokens(
+        accessToken = Token(this.accessToken),
+        expiresIn = null,
+        refreshToken = Token(this.refreshToken),
+    )

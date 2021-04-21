@@ -1,6 +1,7 @@
 package dev.timatifey.harmony.api.spotify
 
 import dev.timatifey.harmony.api.spotify.dto.SpotifyTokenResponseDto
+import dev.timatifey.harmony.data.model.harmony.Token
 import retrofit2.http.*
 
 interface SpotifyAuthAPI {
@@ -23,7 +24,7 @@ interface SpotifyAuthAPI {
     @POST("/api/token")
     suspend fun refreshToken(
         @Field("grant_type") grantType: String, // = "refresh_token"
-        @Field("refresh_token") refreshToken: String,
+        @Field("refresh_token") refreshToken: Token,
         @Field("client_id") clientId: String,
     ): SpotifyTokenResponseDto
 }

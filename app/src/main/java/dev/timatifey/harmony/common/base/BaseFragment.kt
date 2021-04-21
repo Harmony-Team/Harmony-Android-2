@@ -2,11 +2,11 @@ package dev.timatifey.harmony.common.base
 
 import android.content.Context
 import androidx.fragment.app.Fragment
-import dev.timatifey.harmony.screen.activity.DrawerLocker
+import dev.timatifey.harmony.screen.activity.DrawerDispatcher
 
 abstract class BaseFragment : Fragment() {
 
-    lateinit var drawerLocker: DrawerLocker
+    lateinit var drawerDispatcher: DrawerDispatcher
 
     protected val presentationComponent by lazy {
         (requireActivity() as BaseActivity).activityComponent
@@ -14,7 +14,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onAttach(context: Context) {
-        drawerLocker = activity as DrawerLocker
+        drawerDispatcher = activity as DrawerDispatcher
         super.onAttach(context)
     }
 }

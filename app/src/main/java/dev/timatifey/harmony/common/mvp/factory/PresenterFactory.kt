@@ -9,14 +9,17 @@ import dev.timatifey.harmony.screen.activity.MainPresenter
 import dev.timatifey.harmony.screen.auth.recovery.RecoveryPresenter
 import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
+import dev.timatifey.harmony.screen.home.profile.ProfilePresenter
 import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.UserService
 import javax.inject.Inject
 
 @PresentationScope
 class PresenterFactory @Inject constructor(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val authService: AuthService
+    private val authService: AuthService,
+    private val userService: UserService,
 ) {
 
     fun createSignInPresenter(): SignInPresenter =
@@ -43,11 +46,20 @@ class PresenterFactory @Inject constructor(
     fun createSpotifyAuthPresenter(): SpotifyAuthPresenter =
         SpotifyAuthPresenter(
             appScreenNavigator = appScreenNavigator,
-            backPressDispatcher = backPressDispatcher
+            backPressDispatcher = backPressDispatcher,
+            authService = authService,
         )
 
     fun createMainPresenter(): MainPresenter =
         MainPresenter(
-            appScreenNavigator = appScreenNavigator
+            appScreenNavigator = appScreenNavigator,
+            authService = authService,
+        )
+
+    fun createProfilePresenter(): ProfilePresenter =
+        ProfilePresenter(
+            appScreenNavigator = appScreenNavigator,
+            userService = userService,
+            backPressDispatcher = backPressDispatcher
         )
 }
