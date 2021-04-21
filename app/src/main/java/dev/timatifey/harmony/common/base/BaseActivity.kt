@@ -7,7 +7,7 @@ import dev.timatifey.harmony.common.app.App
 import dev.timatifey.harmony.di.component.ActivityComponent
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.BackPressedListener
-import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import javax.inject.Inject
 
 

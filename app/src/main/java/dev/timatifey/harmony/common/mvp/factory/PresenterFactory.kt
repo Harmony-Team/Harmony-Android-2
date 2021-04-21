@@ -1,9 +1,11 @@
 package dev.timatifey.harmony.common.mvp.factory
 
-import dev.timatifey.harmony.di.scope.PresentationScope
 import dev.timatifey.harmony.screen.auth.signin.SignInPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.di.scope.ActivityScope
+import dev.timatifey.harmony.di.scope.PresentationScope
+import dev.timatifey.harmony.screen.activity.MainPresenter
 import dev.timatifey.harmony.screen.auth.recovery.RecoveryPresenter
 import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
@@ -44,4 +46,8 @@ class PresenterFactory @Inject constructor(
             backPressDispatcher = backPressDispatcher
         )
 
+    fun createMainPresenter(): MainPresenter =
+        MainPresenter(
+            appScreenNavigator = appScreenNavigator
+        )
 }

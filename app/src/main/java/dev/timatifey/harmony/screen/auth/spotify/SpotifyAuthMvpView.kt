@@ -13,4 +13,6 @@ interface SpotifyAuthMvpView: MvpViewObservable<SpotifyAuthMvpView.Listener> {
     fun loadUrl(url: String)
     fun showLoading()
     fun hideLoading()
+    fun showWebView()
+    fun hideWebView()
 }

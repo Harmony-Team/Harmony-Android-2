@@ -3,8 +3,9 @@ package dev.timatifey.harmony.screen.auth.recovery
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
+import dev.timatifey.harmony.screen.activity.DrawerLocker
 import dev.timatifey.harmony.service.AuthService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
@@ -17,6 +18,7 @@ class RecoveryPresenter(
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private lateinit var view: RecoveryMvpView
+    private lateinit var drawerLocker: DrawerLocker
 
     override fun bindView(view: RecoveryMvpView) {
         this.view = view
@@ -43,7 +45,8 @@ class RecoveryPresenter(
             view.hideLoading()
             when (result.status) {
                 is Status.Success -> {
-                    appScreenNavigator.toHome(result.data!!)
+                    appScreenNavigator.toHome()
+                    drawerLocker.unlockDrawer()
                 }
                 is Status.Error -> {
                     view.showError(R.string.auth_failed)
@@ -67,5 +70,9 @@ class RecoveryPresenter(
     override fun onBackPressed(): Boolean {
         appScreenNavigator.navigateUp()
         return true
+    }
+
+    override fun bindDrawerLocker(drawerLocker: DrawerLocker) {
+        this.drawerLocker = drawerLocker
     }
 }

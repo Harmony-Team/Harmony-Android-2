@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
         <activity
-            android:name="dev.timatifey.harmony.common.MainActivity"
+            android:name="dev.timatifey.harmony.screen.activity.MainActivity"
             tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

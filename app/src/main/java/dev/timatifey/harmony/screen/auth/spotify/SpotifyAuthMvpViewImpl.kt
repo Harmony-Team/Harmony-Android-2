@@ -35,12 +35,18 @@ class SpotifyAuthMvpViewImpl(
 
     override fun showLoading() {
         pbLoading.visibility = View.VISIBLE
-        webView.visibility = View.GONE
     }
 
     override fun hideLoading() {
         pbLoading.visibility = View.GONE
+    }
+
+    override fun showWebView() {
         webView.visibility = View.VISIBLE
+    }
+
+    override fun hideWebView() {
+        webView.visibility = View.GONE
     }
 
     override fun loadUrl(url: String) {
@@ -63,12 +69,12 @@ class SpotifyAuthMvpViewImpl(
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             super.onPageStarted(view, url, favicon)
-            showLoading()
+            hideLoading()
+            showWebView()
         }
 
         override fun onPageFinished(view: WebView?, url: String) {
             super.onPageFinished(view, url)
-            hideLoading()
         }
     }
 

@@ -5,16 +5,19 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
-import com.ncapdevi.fragnav.FragNavController
 import dagger.Module
 import dagger.Provides
-import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
+import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
-import javax.inject.Named
+import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.di.qual.ActivityFragmentManager
+import dev.timatifey.harmony.screen.activity.MainActivity
+import dev.timatifey.harmony.screen.activity.MainMvpView
+import dev.timatifey.harmony.screen.activity.MainMvpViewImpl
+import dev.timatifey.harmony.service.AuthService
 
 @Module
 object ActivityModule {
@@ -25,7 +28,7 @@ object ActivityModule {
         LayoutInflater.from(baseActivity)
 
     @Provides
-    @Named("ActivityFragmentManager")
+    @ActivityFragmentManager
     @ActivityScope
     fun provideBaseActivityFragmentManager(baseActivity: BaseActivity): FragmentManager =
         baseActivity.supportFragmentManager
@@ -38,7 +41,7 @@ object ActivityModule {
     @ActivityScope
     fun provideAppScreenNavigator(
         appSettings: AppSettings,
-        @Named("ActivityFragmentManager") fragmentManager: FragmentManager,
+        @ActivityFragmentManager fragmentManager: FragmentManager,
         savedInstanceState: Bundle?
     ): AppScreenNavigator =
         AppScreenNavigator(appSettings, fragmentManager, savedInstanceState)
@@ -46,6 +49,6 @@ object ActivityModule {
     @Module
     interface Binds {
         @dagger.Binds
-        fun bindBackPressDispatcher(baseActivity: BaseActivity): BackPressDispatcher
+        fun backPressDispatcher(baseActivity: BaseActivity): BackPressDispatcher
     }
 }

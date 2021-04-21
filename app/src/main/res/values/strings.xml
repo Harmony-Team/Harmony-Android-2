@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Harmony</string>
+
+<!--Menu titles-->
+    <string name="others">Others</string>
+    <string name="profile">Profile</string>
+    <string name="groups">Groups</string>
+    <string name="settings">Settings</string>
+    <string name="about_us">About us</string>
+    <string name="logout">Logout</string>
+
 <!--    Sign In-->
     <string name="sign_in_to_continue_caps">SIGN IN TO CONTINUE</string>
     <string name="email_address_or_username_caps">EMAIL ADDRESS OR USERNAME</string>
@@ -42,8 +51,6 @@
     <string name="link_example"><u>https://harmony/HbK2YSzd</u></string>
     <string name="share_link">Share Link</string>
 
-    <string name="profile">Profile</string>
-    <string name="groups">Groups</string>
     <string name="auth_failed">Authentication failed</string>
     <string name="timeout">Timeout</string>
     <string name="invalid_params">Invalid parameters</string>

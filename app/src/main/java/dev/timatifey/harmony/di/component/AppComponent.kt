@@ -6,6 +6,7 @@ import dagger.Component
 import dev.timatifey.harmony.di.module.AppModule
 import dev.timatifey.harmony.di.module.NetworkModule
 import dev.timatifey.harmony.di.module.RoomModule
+import dev.timatifey.harmony.screen.activity.MainActivity
 import javax.inject.Singleton
 
 @Singleton

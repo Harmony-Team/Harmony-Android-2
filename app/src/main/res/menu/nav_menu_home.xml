@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu__profile"
+        android:icon="@drawable/ic_account"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/menu__groups"
+        android:icon="@drawable/ic_group"
+        android:title="@string/groups" />
+    <item android:title="@string/others">
+        <menu>
+            <item
+                android:id="@+id/menu__settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings" />
+            <item
+                android:id="@+id/menu__about_us"
+                android:icon="@drawable/ic_info"
+                android:title="@string/about_us" />
+            <item
+                android:id="@+id/menu__logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>
