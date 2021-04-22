@@ -12,4 +12,14 @@ data class SpotifyUserProfileDto(
     @SerializedName("email")
     val email: String?,
 
+    @SerializedName("error")
+    val spotifyErrorObj: SpotifyErrorObj?
+)
+
+data class SpotifyErrorObj(
+    @SerializedName("status")
+    val status: Int,
+
+    @SerializedName("message")
+    val message: String
 )

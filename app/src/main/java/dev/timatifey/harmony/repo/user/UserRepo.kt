@@ -13,7 +13,8 @@ interface UserRepo {
     fun saveHarmonyTokenToCache(token: Token)
     fun saveSpotifyToken(spotifyTokens: SpotifyTokens)
 
-    fun clearHarmonyTokenFromCache()
+    fun clearAll()
+    fun clearSpotify()
 
     fun saveHarmonyUser(harmonyUser: User)
     fun getHarmonyUser(): Resource<User>

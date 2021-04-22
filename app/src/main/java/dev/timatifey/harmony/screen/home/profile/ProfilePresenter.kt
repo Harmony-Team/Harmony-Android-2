@@ -12,7 +12,6 @@ import kotlinx.coroutines.*
 class ProfilePresenter(
     private val userService: UserService,
     private val backPressDispatcher: BackPressDispatcher,
-    private val appScreenNavigator: AppScreenNavigator,
 ): MvpPresenter<ProfileMvpView>, ProfileMvpView.Listener, RequireDrawerDispatcher {
 
     private lateinit var view: ProfileMvpView

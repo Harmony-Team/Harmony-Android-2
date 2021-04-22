@@ -1,10 +1,14 @@
 package dev.timatifey.harmony.common.nav
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.ncapdevi.fragnav.FragNavController
+import com.ncapdevi.fragnav.FragNavSwitchController
 import com.ncapdevi.fragnav.FragNavTransactionOptions
+import com.ncapdevi.fragnav.tabhistory.UniqueTabHistoryStrategy
+import com.ncapdevi.fragnav.tabhistory.UnlimitedTabHistoryStrategy
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.di.scope.ActivityScope
@@ -39,12 +43,22 @@ class AppScreenNavigator @Inject constructor(
     val stackIsEmpty: Boolean
         get() = fragNavController.currentStack?.isEmpty() ?: true
 
+    val isRoot: Boolean
+        get() = fragNavController.isRootFragment
+
     init {
-        fragNavController.rootFragmentListener = this
-        if (appSettings.isAuthorized) {
-            fragNavController.initialize(INDEX_PROFILE, savedInstanceState)
-        } else {
-            fragNavController.initialize(INDEX_AUTH, savedInstanceState)
+        fragNavController.apply {
+            rootFragmentListener = this@AppScreenNavigator
+            navigationStrategy = UnlimitedTabHistoryStrategy(object : FragNavSwitchController {
+                override fun switchTab(index: Int, transactionOptions: FragNavTransactionOptions?) {
+                    fragNavController.switchTab(index, transactionOptions)
+                }
+            })
+            if (appSettings.isAuthorized) {
+                initialize(INDEX_PROFILE, savedInstanceState)
+            } else {
+                initialize(INDEX_AUTH, savedInstanceState)
+            }
         }
 
     }

@@ -1,5 +1,7 @@
 package dev.timatifey.harmony.data.mappers
 
+import android.util.Log
+import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.app.Config
 import dev.timatifey.harmony.api.spotify.dto.SpotifyTokenResponseDto
 import dev.timatifey.harmony.api.spotify.dto.SpotifyUserProfileDto
@@ -24,8 +26,9 @@ fun SpotifyTokenResponseDto.mapToResourceSpotifyTokens(): Resource<SpotifyTokens
 }
 
 fun SpotifyUserProfileDto.mapToResourceSpotifyUserBody(): Resource<SpotifyUserBody> {
-    return if (id != null) {
-        ResponseHandler.handleSuccess(
+    Log.e("MSMS", this.toString())
+    if (id != null) {
+        return ResponseHandler.handleSuccess(
             SpotifyUserBody(
                 id = id,
                 name = name!!,
@@ -33,6 +36,9 @@ fun SpotifyUserProfileDto.mapToResourceSpotifyUserBody(): Resource<SpotifyUserBo
             )
         )
     } else {
-        ResponseHandler.handleException(code = Int.MAX_VALUE)
+        if (spotifyErrorObj != null && spotifyErrorObj.status == 401) {
+            return Resource.error(msgId = R.string.spotify_access_token_expired)
+        }
+        return ResponseHandler.handleException(code = Int.MAX_VALUE)
     }
 }

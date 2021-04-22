@@ -9,9 +9,11 @@ import dev.timatifey.harmony.common.app.Config.Companion.BASE_URL
 import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_API_BASE_URL
 import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_AUTH_BASE_URL
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -29,6 +31,7 @@ object NetworkModule {
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
+            .protocols(Collections.singletonList(Protocol.HTTP_1_1))
             .build()
 
     @Singleton

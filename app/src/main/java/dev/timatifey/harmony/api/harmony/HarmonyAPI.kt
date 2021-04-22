@@ -37,7 +37,6 @@ interface HarmonyAPI {
         @Body harmonyIntegrateSpotifyBodyDto: HarmonyIntegrateSpotifyBodyDto
     ): HarmonySimpleResponseDto
 
-    @FormUrlEncoded
     @POST("/api/user/disintegrate")
     suspend fun disintegrateSpotify(
         @Header("Authorization") authToken: Token,

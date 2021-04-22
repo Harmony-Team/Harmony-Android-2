@@ -33,6 +33,7 @@ object ResponseHandler {
             7 -> R.string.user_exist
             8 -> R.string.user_not_found
             9 -> R.string.wrong_token
+            11 -> R.string.spotify_id_integrated
             SPOTIFY_TOKENS_ERROR_CODE -> R.string.spotify_tokens_not_received
             else -> R.string.smth_went_wrong
         }

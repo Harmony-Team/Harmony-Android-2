@@ -10,6 +10,7 @@ import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.UserService
 import dev.timatifey.harmony.util.randomString
 import kotlinx.coroutines.*
 
@@ -17,16 +18,17 @@ class SpotifyAuthPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val authService: AuthService,
+    private val userService: UserService,
 ) : MvpPresenter<SpotifyAuthMvpView>, SpotifyAuthMvpView.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private lateinit var view: SpotifyAuthMvpView
+    private val spotifyCodeVerifier = randomString(43, 128)
 
     override fun bindView(view: SpotifyAuthMvpView) {
         this.view = view
-        val codeVerifier = randomString(43, 128)
         view.showLoading()
-        view.loadUrl(constructAuthorizationURI(codeVerifier))
+        view.loadUrl(constructAuthorizationURI(spotifyCodeVerifier))
     }
 
     override fun onStart() {
@@ -49,10 +51,11 @@ class SpotifyAuthPresenter(
             val uri: Uri = Uri.parse(url)
             val code = uri.getQueryParameter("code")
             if (code != null) {
-                coroutineScope.launch {
-                    val result = authService.exchangesCodeForAccessToken(code)
+                runBlocking {
+                    val result = authService.exchangesCodeForAccessToken(code, spotifyCodeVerifier)
                     if (result.status is Status.Success) {
                         view.showMessage(R.string.success_spotify_auth)
+                        userService.integrateSpotify()
                     } else {
                         view.showMessage(R.string.auth_failed)
                     }

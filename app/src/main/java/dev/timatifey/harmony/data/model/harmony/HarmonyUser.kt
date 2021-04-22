@@ -7,7 +7,7 @@ data class User(
     val email: String,
     val password: String,
     val harmonyToken: Token,
-    val spotifyInfo: SpotifyUserBody?,
+    var spotifyInfo: SpotifyUserBody?,
 )
 
 inline class Token(val value: String)

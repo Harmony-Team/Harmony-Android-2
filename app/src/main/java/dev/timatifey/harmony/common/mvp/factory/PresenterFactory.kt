@@ -10,6 +10,7 @@ import dev.timatifey.harmony.screen.auth.recovery.RecoveryPresenter
 import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
 import dev.timatifey.harmony.screen.home.profile.ProfilePresenter
+import dev.timatifey.harmony.screen.home.settings.SettingsPresenter
 import dev.timatifey.harmony.service.AuthService
 import dev.timatifey.harmony.service.UserService
 import javax.inject.Inject
@@ -48,18 +49,26 @@ class PresenterFactory @Inject constructor(
             appScreenNavigator = appScreenNavigator,
             backPressDispatcher = backPressDispatcher,
             authService = authService,
+            userService = userService,
         )
 
     fun createMainPresenter(): MainPresenter =
         MainPresenter(
             appScreenNavigator = appScreenNavigator,
             authService = authService,
+            backPressDispatcher = backPressDispatcher,
         )
 
     fun createProfilePresenter(): ProfilePresenter =
         ProfilePresenter(
-            appScreenNavigator = appScreenNavigator,
             userService = userService,
-            backPressDispatcher = backPressDispatcher
+            backPressDispatcher = backPressDispatcher,
+        )
+
+    fun createSettingsPresenter(): SettingsPresenter =
+        SettingsPresenter(
+            appScreenNavigator = appScreenNavigator,
+            backPressDispatcher = backPressDispatcher,
+            userService = userService,
         )
 }

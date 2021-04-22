@@ -26,7 +26,6 @@ class ProfileMvpViewImpl(
 
     init {
         ibMenu.setOnClickListener {
-            Toast.makeText(context, "CLICKED", Toast.LENGTH_SHORT).show()
             listeners.forEach { it.onMenuBtnClicked() }
         }
     }

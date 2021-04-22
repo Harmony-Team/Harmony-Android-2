@@ -24,7 +24,6 @@ class AuthService @Inject constructor(
     private val spotifyAuthAPI: SpotifyAuthAPI,
     private val ioDispatcher: CoroutineDispatcher
 ) {
-    private var spotifyCodeVerifier: String? = null
 
     // HARMONY
     suspend fun authHarmony(username: String, password: String): Resource<Token> =
@@ -63,7 +62,6 @@ class AuthService @Inject constructor(
             }
         }
 
-
     suspend fun authCacheIsValid(): Resource<Token> =
         withContext(ioDispatcher) {
             try {
@@ -90,22 +88,22 @@ class AuthService @Inject constructor(
         }
 
     fun logoutHarmony() {
-        userRepo.clearHarmonyTokenFromCache()
+        userRepo.clearAll()
     }
 
     // SPOTIFY
-    suspend fun exchangesCodeForAccessToken(code: String): Resource<SpotifyTokens> =
+    suspend fun exchangesCodeForAccessToken(
+        code: String,
+        spotifyCodeVerifier: String
+    ): Resource<SpotifyTokens> =
         withContext(ioDispatcher) {
             try {
-                if (spotifyCodeVerifier == null) {
-                    return@withContext Resource.error(msg = "Spotify Code Verifier is null")
-                }
                 val spotifyAuthResponseDto = spotifyAuthAPI.exchangesCodeForToken(
                     clientId = SPOTIFY_CLIENT_ID,
                     grantType = "authorization_code",
                     redirectURI = SPOTIFY_REDIRECT_URI,
                     code = code,
-                    codeVerifier = spotifyCodeVerifier!!
+                    codeVerifier = spotifyCodeVerifier
                 )
                 val spotifyTokens = spotifyAuthResponseDto.mapToResourceSpotifyTokens()
                 if (spotifyTokens.status is Status.Success) {
@@ -124,13 +122,25 @@ class AuthService @Inject constructor(
                 if (tokens.status is Error) {
                     return@withContext Resource.error("Spotify token is null")
                 }
-                val refreshToken = tokens.data!!.refreshToken
+                return@withContext refreshToken(tokens.data!!.refreshToken)
+            } catch (t: Throwable) {
+                return@withContext Resource.error(msg = t.message)
+            }
+        }
+
+    private suspend fun refreshToken(refreshToken: Token): Resource<SpotifyTokens> =
+        withContext(ioDispatcher) {
+            try {
                 val spotifyAuthResponseDto = spotifyAuthAPI.refreshToken(
                     clientId = SPOTIFY_CLIENT_ID,
                     grantType = "refresh_token",
                     refreshToken = refreshToken
                 )
-                return@withContext spotifyAuthResponseDto.mapToResourceSpotifyTokens()
+                val spotifyTokens = spotifyAuthResponseDto.mapToResourceSpotifyTokens()
+                if (spotifyTokens.status is Status.Success) {
+                    userRepo.saveSpotifyToken(spotifyTokens.data!!)
+                }
+                return@withContext spotifyTokens
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }

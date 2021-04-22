@@ -1,6 +1,7 @@
 package dev.timatifey.harmony.repo.user
 
 import android.content.SharedPreferences
+import android.util.Log
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.app.Config.Companion.APP_PREFERENCES_TOKEN
 import dev.timatifey.harmony.data.Resource
@@ -54,11 +55,19 @@ class UserRepoImpl @Inject constructor(
         this.spotifyTokens = spotifyTokens
     }
 
-    override fun clearHarmonyTokenFromCache() {
+    override fun clearAll() {
         clearFromSharedPreferences(APP_PREFERENCES_TOKEN)
+        clearSpotify()
+        harmonyUser = null
+    }
+
+    override fun clearSpotify() {
+        spotifyTokens = null
+        harmonyUser?.spotifyInfo = null
     }
 
     override fun saveHarmonyUser(harmonyUser: User) {
+        Log.e("UserRepo", "Saved harmony user $harmonyUser")
         this.harmonyUser = harmonyUser
     }
 
