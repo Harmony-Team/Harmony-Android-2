@@ -4,7 +4,6 @@ import dev.timatifey.harmony.screen.auth.signin.SignInPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.di.scope.ActivityScope
-import dev.timatifey.harmony.di.scope.PresentationScope
 import dev.timatifey.harmony.screen.activity.MainPresenter
 import dev.timatifey.harmony.screen.auth.recovery.RecoveryPresenter
 import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
@@ -15,7 +14,7 @@ import dev.timatifey.harmony.service.AuthService
 import dev.timatifey.harmony.service.UserService
 import javax.inject.Inject
 
-@PresentationScope
+@ActivityScope
 class PresenterFactory @Inject constructor(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
@@ -57,6 +56,7 @@ class PresenterFactory @Inject constructor(
             appScreenNavigator = appScreenNavigator,
             authService = authService,
             backPressDispatcher = backPressDispatcher,
+            userService = userService,
         )
 
     fun createProfilePresenter(): ProfilePresenter =

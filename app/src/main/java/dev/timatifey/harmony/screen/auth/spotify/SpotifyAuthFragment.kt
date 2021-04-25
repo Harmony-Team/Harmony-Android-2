@@ -13,14 +13,7 @@ import javax.inject.Inject
 class SpotifyAuthFragment: BaseFragment() {
     private lateinit var presenter: SpotifyAuthPresenter
 
-    @Inject
-    lateinit var mvpViewFactory: MvpViewFactory
-
-    @Inject
-    lateinit var presenterFactory: PresenterFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
         presenter = presenterFactory.createSpotifyAuthPresenter()
     }

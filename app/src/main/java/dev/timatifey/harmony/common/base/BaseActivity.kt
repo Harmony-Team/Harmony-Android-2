@@ -2,8 +2,11 @@ package dev.timatifey.harmony.common.base
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import dev.timatifey.harmony.common.app.App
+import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
+import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
 import dev.timatifey.harmony.di.component.ActivityComponent
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.BackPressedListener
@@ -19,15 +22,19 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
     private val backPressedListeners: MutableSet<BackPressedListener> = HashSet()
 
     @Inject
+    lateinit var presenterFactory: PresenterFactory
+    @Inject
+    lateinit var mvpViewFactory: MvpViewFactory
+    @Inject
     lateinit var appScreenNavigator: AppScreenNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         activityComponent = (application as App).appComponent
             .newActivityComponentBuilder()
             .activity(this)
             .savedInstanceState(savedInstanceState)
             .build()
+        super.onCreate(savedInstanceState)
         activityComponent.inject(this)
     }
 

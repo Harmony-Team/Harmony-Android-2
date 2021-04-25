@@ -26,7 +26,7 @@ class ProfilePresenter(
 
     private fun initUser() {
         coroutineScope.launch {
-            val user = userService.fetchUser().data
+            val user = userService.getUser().data
             if (user != null) {
                 view.setUsername(user.username)
             } else {

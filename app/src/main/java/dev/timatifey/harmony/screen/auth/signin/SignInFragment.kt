@@ -1,6 +1,7 @@
 package dev.timatifey.harmony.screen.auth.signin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +14,7 @@ import javax.inject.Inject
 class SignInFragment : BaseFragment() {
     private lateinit var presenter: SignInPresenter
 
-    @Inject
-    lateinit var mvpViewFactory: MvpViewFactory
-
-    @Inject
-    lateinit var presenterFactory: PresenterFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
         presenter = presenterFactory.createSignInPresenter()
     }

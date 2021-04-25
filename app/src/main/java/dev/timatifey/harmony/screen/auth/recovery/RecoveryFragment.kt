@@ -14,13 +14,7 @@ class RecoveryFragment: BaseFragment() {
 
     private lateinit var presenter: RecoveryPresenter
 
-    @Inject
-    lateinit var mvpViewFactory: MvpViewFactory
-    @Inject
-    lateinit var presenterFactory: PresenterFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
         presenter = presenterFactory.createRecoveryPresenter()
     }

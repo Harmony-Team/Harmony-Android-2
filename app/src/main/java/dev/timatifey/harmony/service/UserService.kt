@@ -32,7 +32,20 @@ class UserService @Inject constructor(
     private val authService: AuthService,
 ) {
 
-    suspend fun fetchUser(): Resource<User> =
+    suspend fun getUser(): Resource<User> =
+        withContext(ioDispatcher) {
+            try {
+                val user = userRepo.getHarmonyUser()
+                if (user.status is Status.Error) {
+                    return@withContext fetchUser()
+                }
+                return@withContext user
+            } catch (t: Throwable) {
+                return@withContext Resource.error(msg = t.message)
+            }
+        }
+
+    private suspend fun fetchUser(): Resource<User> =
         withContext(ioDispatcher) {
             try {
                 val token = userRepo.getHarmonyTokenFromCache().data
@@ -56,7 +69,6 @@ class UserService @Inject constructor(
                     spotifyInfo = fetchSpotifyUser().data
                 )
                 userRepo.saveHarmonyUser(user)
-                integrateSpotify()
                 return@withContext Resource.success(user)
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
@@ -87,8 +99,9 @@ class UserService @Inject constructor(
                 return@withContext dto.mapToResourceSpotifyUserBody()
             } catch (t: Throwable) {
                 if (t.message?.contains("401") == true) {
-                    authService.refreshToken()
-                    return@withContext fetchSpotifyUser()
+                    val tokens = authService.refreshToken()
+                    integrateSpotify()
+                    return@withContext fetchSpotifyUser(tokens.data!!.accessToken)
                 }
                 return@withContext Resource.error(msg = t.message)
             }

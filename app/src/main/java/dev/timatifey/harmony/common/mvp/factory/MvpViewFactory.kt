@@ -3,7 +3,6 @@ package dev.timatifey.harmony.common.mvp.factory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import dev.timatifey.harmony.di.scope.ActivityScope
-import dev.timatifey.harmony.di.scope.PresentationScope
 import dev.timatifey.harmony.screen.activity.MainMvpView
 import dev.timatifey.harmony.screen.activity.MainMvpViewImpl
 import dev.timatifey.harmony.screen.auth.recovery.RecoveryMvpView
@@ -22,7 +21,7 @@ import dev.timatifey.harmony.screen.home.settings.SettingsMvpView
 import dev.timatifey.harmony.screen.home.settings.SettingsMvpViewImpl
 import javax.inject.Inject
 
-@PresentationScope
+@ActivityScope
 class MvpViewFactory @Inject constructor(
     private val layoutInflater: LayoutInflater
 ) {

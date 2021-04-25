@@ -6,6 +6,7 @@ import dagger.Subcomponent
 import dev.timatifey.harmony.di.module.ActivityModule
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
+import dev.timatifey.harmony.common.base.BaseFragment
 
 @Subcomponent(modules = [
         ActivityModule::class,
@@ -13,8 +14,6 @@ import dev.timatifey.harmony.common.base.BaseActivity
 ])
 @ActivityScope
 interface ActivityComponent {
-
-    fun newPresentationComponent(): PresentationComponent
 
     @Subcomponent.Builder
     interface Builder {
@@ -29,4 +28,6 @@ interface ActivityComponent {
     }
 
     fun inject(baseActivity: BaseActivity)
+
+    fun inject(baseFragment: BaseFragment)
 }

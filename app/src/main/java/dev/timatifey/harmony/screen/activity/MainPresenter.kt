@@ -8,18 +8,32 @@ import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.screen.RequireDrawerDispatcher
 import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.UserService
+import kotlinx.coroutines.*
 
 class MainPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val authService: AuthService,
+    private val userService: UserService,
     private val backPressDispatcher: BackPressDispatcher,
 ) : MvpPresenter<MainMvpView>, MainMvpView.Listener, RequireDrawerDispatcher {
 
     private lateinit var view: MainMvpView
     private lateinit var drawerDispatcher: DrawerDispatcher
 
+    private val coroutineScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
     override fun bindView(view: MainMvpView) {
         this.view = view
+        loadUsername()
+    }
+
+    private fun loadUsername() {
+        coroutineScope.launch {
+            val user = userService.getUser().data
+            if (user != null) {
+                view.setUsername(user.username)
+            }
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

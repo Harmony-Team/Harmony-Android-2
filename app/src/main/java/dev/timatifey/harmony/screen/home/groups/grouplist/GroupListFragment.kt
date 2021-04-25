@@ -11,11 +11,8 @@ import javax.inject.Inject
 
 class GroupListFragment: BaseFragment() {
 
-    @Inject
-    lateinit var mvpViewFactory: MvpViewFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
         super.onCreate(savedInstanceState)
     }
 

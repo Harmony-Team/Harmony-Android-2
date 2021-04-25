@@ -1,5 +1,6 @@
 package dev.timatifey.harmony.common.app
 
+import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.service.AuthService
 import kotlinx.coroutines.*
@@ -10,15 +11,16 @@ import javax.inject.Singleton
 class AppSettings @Inject constructor(
     authService: AuthService
 ) {
-    val isAuthorized: Boolean
-        get() = harmonyToken != null
+    var isAuthorized: Boolean = false
 
     var harmonyToken: Token? = null
         private set
 
     init {
         runBlocking {
-            harmonyToken = authService.authCacheIsValid().data
+            val authResult = authService.authCacheIsValid()
+            harmonyToken = authResult.data
+            isAuthorized = authResult.status is Status.Success
         }
     }
 }

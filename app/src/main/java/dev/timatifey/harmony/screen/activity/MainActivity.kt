@@ -1,6 +1,7 @@
 package dev.timatifey.harmony.screen.activity
 
 import android.os.Bundle
+import android.util.Log
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.base.BaseActivity
 import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
@@ -11,14 +12,9 @@ class MainActivity : BaseActivity(), DrawerDispatcher {
 
     private lateinit var presenter: MainPresenter
     private lateinit var view: MainMvpView
-    @Inject
-    lateinit var presenterFactory: PresenterFactory
-    @Inject
-    lateinit var mvpViewFactory: MvpViewFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent.newPresentationComponent().inject(this)
         setTheme(R.style.Theme_Harmony)
         view = mvpViewFactory.createMainMvpView()
         setContentView(view.rootView)
@@ -40,6 +36,11 @@ class MainActivity : BaseActivity(), DrawerDispatcher {
     override fun onStop() {
         presenter.onStop()
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
     }
 
     override fun lockDrawer() {

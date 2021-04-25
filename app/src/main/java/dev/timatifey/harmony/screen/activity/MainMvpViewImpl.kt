@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -13,13 +14,15 @@ import javax.inject.Inject
 
 class MainMvpViewImpl @Inject constructor(
     layoutInflater: LayoutInflater
-): MvpViewObservableBase<MainMvpView.Listener>(), MainMvpView {
+) : MvpViewObservableBase<MainMvpView.Listener>(), MainMvpView {
 
     @SuppressLint("InflateParams")
     override var rootView: View = layoutInflater.inflate(R.layout.activity_main, null, true)
 
     private val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
     private val navigationView: NavigationView = findViewById(R.id.activity_main__navigationView)
+    private val tvUsername: AppCompatTextView =
+        navigationView.getHeaderView(0).findViewById(R.id.navigation_header__name)
 
     init {
         navigationView.setNavigationItemSelectedListener { item ->
@@ -47,6 +50,10 @@ class MainMvpViewImpl @Inject constructor(
 
     override fun lockDrawer() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    override fun setUsername(text: String) {
+        tvUsername.text = text
     }
 
     override fun drawerIsOpen(): Boolean =

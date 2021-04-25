@@ -19,4 +19,6 @@ interface MainMvpView: MvpViewObservable<MainMvpView.Listener> {
     fun lockDrawer()
 
     fun drawerIsOpen(): Boolean
+
+    fun setUsername(text: String)
 }

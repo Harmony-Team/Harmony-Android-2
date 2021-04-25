@@ -14,16 +14,9 @@ class SettingsFragment: BaseFragment() {
 
     private lateinit var presenter: SettingsPresenter
 
-    @Inject
-    lateinit var mvpViewFactory: MvpViewFactory
-
-    @Inject
-    lateinit var presenterFactory: PresenterFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        presentationComponent.inject(this)
-        presenter = presenterFactory.createSettingsPresenter()
         super.onCreate(savedInstanceState)
+        presenter = presenterFactory.createSettingsPresenter()
     }
 
     override fun onCreateView(

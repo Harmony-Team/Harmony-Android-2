@@ -10,14 +10,9 @@ import dagger.Provides
 import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
-import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.di.qual.ActivityFragmentManager
-import dev.timatifey.harmony.screen.activity.MainActivity
-import dev.timatifey.harmony.screen.activity.MainMvpView
-import dev.timatifey.harmony.screen.activity.MainMvpViewImpl
-import dev.timatifey.harmony.service.AuthService
 
 @Module
 object ActivityModule {
