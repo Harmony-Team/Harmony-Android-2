@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="@+id/fragment_home__groups__new_group_background" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/fragment_home__groups__join_group__code"
+        android:id="@+id/fragment_join_group__code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -44,19 +44,19 @@
         app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__join_group__label_join_group" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment_home__groups__new_group__create_btn"
+        android:id="@+id/fragment_join_group__join_btn"
         style="@style/PinkRectBtn"
         android:layout_marginBottom="25dp"
         android:background="@drawable/rectangle_btn_background"
         android:text="@string/join"
-        app:layout_constraintBottom_toTopOf="@id/fragment_home__groups__new_group__cancel_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment_join_group__cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__join_group__code"
+        app:layout_constraintTop_toBottomOf="@id/fragment_join_group__code"
         app:layout_constraintVertical_bias="1" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__new_group__cancel_btn"
+        android:id="@+id/fragment_join_group__cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

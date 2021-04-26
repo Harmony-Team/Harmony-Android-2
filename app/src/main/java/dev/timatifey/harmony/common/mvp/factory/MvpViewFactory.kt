@@ -26,6 +26,8 @@ import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupMvpView
 import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupMvpViewImpl
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupMvpView
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupMvpView
+import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupMvpViewImpl
 import dev.timatifey.harmony.screen.home.profile.ProfileMvpView
 import dev.timatifey.harmony.screen.home.profile.ProfileMvpViewImpl
 import dev.timatifey.harmony.screen.home.settings.SettingsMvpView
@@ -82,4 +84,8 @@ class MvpViewFactory @Inject constructor(
 
     fun createJoinGroupMvpView(parent: ViewGroup?): JoinGroupMvpView =
         JoinGroupMvpViewImpl(layoutInflater, parent)
+
+    fun createShareGroupMvpView(parent: ViewGroup?): ShareGroupMvpView =
+        ShareGroupMvpViewImpl(layoutInflater, parent)
+
 }

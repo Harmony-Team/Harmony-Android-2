@@ -1,20 +1,27 @@
-package dev.timatifey.harmony.screen.home.groups.joingroup
+package dev.timatifey.harmony.screen.home.groups.sharegroup
 
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.service.GroupService
+import dev.timatifey.harmony.util.generateShareLink
 
-class JoinGroupPresenter(
+class ShareGroupPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val groupService: GroupService,
-) : MvpPresenter<JoinGroupMvpView>, JoinGroupMvpView.Listener {
+    private val shareIntentListener: ShareIntentListener,
+) : MvpPresenter<ShareGroupMvpView>, ShareGroupMvpView.Listener {
 
-    private lateinit var view: JoinGroupMvpView
+    private lateinit var view: ShareGroupMvpView
+    private lateinit var shareLink: String
 
-    override fun bindView(view: JoinGroupMvpView) {
+    override fun bindView(view: ShareGroupMvpView) {
         this.view = view
+        initShareLink()
+    }
+
+    private fun initShareLink() {
+        shareLink = generateShareLink(1)
+        view.setShareLinkText(shareLink)
     }
 
     override fun onStart() {
@@ -30,9 +37,8 @@ class JoinGroupPresenter(
     override fun onDestroy() {
     }
 
-    override fun onJoinBtnClicked(code: String) {
-        val groupId = 1L //TODO("get group id by code")
-        appScreenNavigator.toLobby(groupId)
+    override fun onShareLinkBtnClicked() {
+        shareIntentListener.startActivityForShare(shareLink)
     }
 
     override fun onCancelBtnClicked() {
@@ -43,4 +49,5 @@ class JoinGroupPresenter(
         appScreenNavigator.navigateUp()
         return true
     }
+
 }

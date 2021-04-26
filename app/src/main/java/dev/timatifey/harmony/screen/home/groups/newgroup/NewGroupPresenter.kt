@@ -1,9 +1,10 @@
 package dev.timatifey.harmony.screen.home.groups.newgroup
 
+import android.net.Uri
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.service.GroupListService
+import dev.timatifey.harmony.service.GroupService
 import dev.timatifey.harmony.util.generateShareLink
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,8 @@ import kotlinx.coroutines.cancelChildren
 class NewGroupPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val groupListService: GroupListService,
+    private val groupService: GroupService,
+    private val pickPhotoIntentListener: PickPhotoIntentListener,
 ) : MvpPresenter<NewGroupMvpView>, NewGroupMvpView.Listener {
 
     private lateinit var view: NewGroupMvpView
@@ -48,7 +50,11 @@ class NewGroupPresenter(
     }
 
     override fun onPickImageBtnClicked() {
-        //TODO("Not yet implemented")
+        pickPhotoIntentListener.startActivityForPickPhoto()
+    }
+
+    fun onPickPhotoResult(returnedImage: Uri) {
+        view.selectPhoto(returnedImage)
     }
 
     override fun onBackPressed(): Boolean {

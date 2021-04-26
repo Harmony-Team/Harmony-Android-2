@@ -10,12 +10,16 @@ import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
 import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupPresenter
 import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListPresenter
+import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupPresenter
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupPresenter
+import dev.timatifey.harmony.screen.home.groups.newgroup.PickPhotoIntentListener
+import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareIntentListener
+import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupPresenter
 import dev.timatifey.harmony.screen.home.profile.ProfilePresenter
 import dev.timatifey.harmony.screen.home.settings.SettingsPresenter
 import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.service.AuthSpotifyService
-import dev.timatifey.harmony.service.GroupListService
+import dev.timatifey.harmony.service.GroupService
 import dev.timatifey.harmony.service.UserService
 import javax.inject.Inject
 
@@ -26,7 +30,7 @@ class PresenterFactory @Inject constructor(
     private val authHarmonyService: AuthHarmonyService,
     private val authSpotifyService: AuthSpotifyService,
     private val userService: UserService,
-    private val groupListService: GroupListService,
+    private val groupService: GroupService,
 ) {
 
     fun createSignInPresenter(): SignInPresenter =
@@ -83,7 +87,7 @@ class PresenterFactory @Inject constructor(
         GroupListPresenter(
             appScreenNavigator = appScreenNavigator,
             backPressDispatcher = backPressDispatcher,
-            groupListService = groupListService,
+            groupService = groupService,
         )
 
     fun createAddGroupPresenter(): AddGroupPresenter =
@@ -92,10 +96,25 @@ class PresenterFactory @Inject constructor(
             appScreenNavigator = appScreenNavigator,
         )
 
-    fun createNewGroupPresenter(): NewGroupPresenter =
+    fun createNewGroupPresenter(listener: PickPhotoIntentListener): NewGroupPresenter =
         NewGroupPresenter(
             backPressDispatcher = backPressDispatcher,
             appScreenNavigator = appScreenNavigator,
-            groupListService = groupListService,
+            groupService = groupService,
+            pickPhotoIntentListener = listener,
+        )
+
+    fun createShareGroupPresenter(listenerShare: ShareIntentListener): ShareGroupPresenter =
+        ShareGroupPresenter(
+            backPressDispatcher = backPressDispatcher,
+            appScreenNavigator = appScreenNavigator,
+            shareIntentListener = listenerShare,
+        )
+
+    fun createJoinGroupPresenter(): JoinGroupPresenter =
+        JoinGroupPresenter(
+            backPressDispatcher = backPressDispatcher,
+            appScreenNavigator = appScreenNavigator,
+            groupService = groupService
         )
 }

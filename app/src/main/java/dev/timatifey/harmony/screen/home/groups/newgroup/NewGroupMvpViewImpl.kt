@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,9 +22,9 @@ class NewGroupMvpViewImpl(
         findViewById(R.id.fragment_home__groups__new_group__create_btn)
     private val tvCancel: AppCompatTextView =
         findViewById(R.id.fragment_home__groups__new_group__cancel_btn)
-    private val tvGroupName: AppCompatTextView =
+    private val etGroupName: AppCompatEditText =
         findViewById(R.id.fragment_home__groups__new_group__name)
-    private val tvDescription: AppCompatTextView =
+    private val etDescription: AppCompatEditText =
         findViewById(R.id.fragment_home__groups__new_group__description)
     private val ivGroupImage: AppCompatImageView =
         findViewById(R.id.fragment_home__groups__new_group__groupImage)
@@ -38,8 +39,8 @@ class NewGroupMvpViewImpl(
         btnCreateGroup.setOnClickListener {
             listeners.forEach {
                 it.onCreateBtnClicked(
-                    name = tvGroupName.text.toString(),
-                    description = tvDescription.text.toString(),
+                    name = etGroupName.text.toString(),
+                    description = etDescription.text.toString(),
                     imageUri = if (selectedImage != null) selectedImage.toString() else null
                 )
             }

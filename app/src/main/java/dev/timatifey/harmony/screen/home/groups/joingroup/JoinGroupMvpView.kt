@@ -5,6 +5,7 @@ import dev.timatifey.harmony.common.nav.BackPressedListener
 
 interface JoinGroupMvpView: MvpViewObservable<JoinGroupMvpView.Listener> {
     interface Listener: BackPressedListener {
-
+        fun onJoinBtnClicked(code: String)
+        fun onCancelBtnClicked()
     }
 }

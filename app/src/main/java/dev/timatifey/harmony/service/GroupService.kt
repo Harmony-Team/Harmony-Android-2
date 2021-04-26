@@ -11,7 +11,7 @@ import javax.inject.Singleton
 import kotlin.random.Random
 
 @Singleton
-class GroupListService @Inject constructor(
+class GroupService @Inject constructor(
     private val groupRepo: GroupsRepo,
     private val ioDispatcher: CoroutineDispatcher,
 ) {

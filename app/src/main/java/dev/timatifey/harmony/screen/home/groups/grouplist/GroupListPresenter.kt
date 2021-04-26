@@ -7,11 +7,11 @@ import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.screen.RequireDrawerDispatcher
 import dev.timatifey.harmony.screen.activity.DrawerDispatcher
-import dev.timatifey.harmony.service.GroupListService
+import dev.timatifey.harmony.service.GroupService
 import kotlinx.coroutines.*
 
 class GroupListPresenter(
-    private val groupListService: GroupListService,
+    private val groupService: GroupService,
     private val backPressDispatcher: BackPressDispatcher,
     private val appScreenNavigator: AppScreenNavigator,
 ): MvpPresenter<GroupListMvpView>, GroupListMvpView.Listener, RequireDrawerDispatcher {
@@ -29,7 +29,7 @@ class GroupListPresenter(
 
     private fun initGroupList() {
         coroutineScope.launch {
-            val groupsResource = groupListService.getGroups()
+            val groupsResource = groupService.getGroups()
             if (groupsResource.status is Status.Success) {
                 groups.addAll(groupsResource.data!!)
                 view.bindData(groups)
