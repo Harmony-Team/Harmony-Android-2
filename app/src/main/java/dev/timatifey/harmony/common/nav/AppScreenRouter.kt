@@ -13,6 +13,7 @@ interface AppScreenRouter {
 
     fun toJoinGroup()
     fun toNewGroup()
+    fun toShareGroup(link: String)
 
     fun toHome()
     fun toAuth()

@@ -10,6 +10,7 @@ import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
 import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupPresenter
 import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListPresenter
+import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupPresenter
 import dev.timatifey.harmony.screen.home.profile.ProfilePresenter
 import dev.timatifey.harmony.screen.home.settings.SettingsPresenter
 import dev.timatifey.harmony.service.AuthHarmonyService
@@ -89,5 +90,12 @@ class PresenterFactory @Inject constructor(
         AddGroupPresenter(
             backPressDispatcher = backPressDispatcher,
             appScreenNavigator = appScreenNavigator,
+        )
+
+    fun createNewGroupPresenter(): NewGroupPresenter =
+        NewGroupPresenter(
+            backPressDispatcher = backPressDispatcher,
+            appScreenNavigator = appScreenNavigator,
+            groupListService = groupListService,
         )
 }

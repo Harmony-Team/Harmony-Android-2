@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:fontFamily="@font/lato_light"
-        android:text="@string/create_a_new_group"
+        android:text="@string/add_a_group"
         android:textColor="@color/pink_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/fragment_home__groups__btn_create_new"

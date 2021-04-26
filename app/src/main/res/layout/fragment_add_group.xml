@@ -34,7 +34,7 @@
         android:layout_height="24dp"
         android:layout_margin="10dp"
         android:background="@drawable/ic_cancel"
-        android:backgroundTint="@color/text_gray"
+        android:backgroundTint="#D6DBE5"
         app:layout_constraintEnd_toEndOf="@id/fragment_add_group__background"
         app:layout_constraintTop_toTopOf="@id/fragment_add_group__background" />
 

@@ -22,6 +22,7 @@ import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListFragment
 import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupFragment
 import dev.timatifey.harmony.screen.home.groups.lobby.LobbyFragment
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupFragment
+import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupFragment
 import dev.timatifey.harmony.screen.home.profile.ProfileFragment
 import dev.timatifey.harmony.screen.home.settings.SettingsFragment
 import javax.inject.Inject
@@ -169,6 +170,11 @@ class AppScreenNavigator @Inject constructor(
     override fun toNewGroup() {
         val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
         fragNavController.pushFragment(NewGroupFragment.newInstance(), options)
+    }
+
+    override fun toShareGroup(link: String) {
+        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
+        fragNavController.pushFragment(ShareGroupFragment.newInstance(link), options)
     }
 
     private fun transactionOptions(vararg animationIds: Int): FragNavTransactionOptions =

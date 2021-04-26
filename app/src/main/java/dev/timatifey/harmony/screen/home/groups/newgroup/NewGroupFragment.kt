@@ -12,7 +12,7 @@ class NewGroupFragment: BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        presenter = presenterFactory.createNewGroupPresenter()
+        presenter = presenterFactory.createNewGroupPresenter()
     }
 
     override fun onCreateView(
@@ -21,24 +21,24 @@ class NewGroupFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         val view: NewGroupMvpView = mvpViewFactory.createNewGroupMvpView(container)
-//        presenter.bindView(view)
+        presenter.bindView(view)
         return view.rootView
     }
 
-//    override fun onStart() {
-//        presenter.onStart()
-//        super.onStart()
-//    }
-//
-//    override fun onStop() {
-//        presenter.onStop()
-//        super.onStop()
-//    }
-//
-//    override fun onDestroy() {
-//        presenter.onDestroy()
-//        super.onDestroy()
-//    }
+    override fun onStart() {
+        presenter.onStart()
+        super.onStart()
+    }
+
+    override fun onStop() {
+        presenter.onStop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
 
     companion object {
         fun newInstance(): Fragment {
