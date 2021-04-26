@@ -8,6 +8,11 @@ interface AppScreenRouter {
     fun toProfile()
     fun toSettings()
     fun toGroupList()
+    fun toAddGroupFragment()
+    fun toLobby(groupId: Long)
+
+    fun toJoinGroup()
+    fun toNewGroup()
 
     fun toHome()
     fun toAuth()

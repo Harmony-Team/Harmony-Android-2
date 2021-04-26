@@ -9,14 +9,14 @@ import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.screen.activity.DrawerDispatcher
 import dev.timatifey.harmony.screen.RequireDrawerDispatcher
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
 
 class SignInPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val authService: AuthService
+    private val authHarmonyService: AuthHarmonyService
 ) : MvpPresenter<SignInMvpView>, SignInMvpView.Listener, RequireDrawerDispatcher {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -48,7 +48,7 @@ class SignInPresenter(
     override fun onSignInBtnClicked(username: String, password: String) {
         coroutineScope.launch {
             view.showLoading()
-            val result: Resource<Token> = authService.authHarmony(username, password)
+            val result: Resource<Token> = authHarmonyService.authHarmony(username, password)
             view.hideLoading()
             when (result.status) {
                 is Status.Success -> {

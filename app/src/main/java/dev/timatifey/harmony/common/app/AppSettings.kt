@@ -2,14 +2,14 @@ package dev.timatifey.harmony.common.app
 
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.model.harmony.Token
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
 import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AppSettings @Inject constructor(
-    authService: AuthService
+    authHarmonyService: AuthHarmonyService
 ) {
     var isAuthorized: Boolean = false
 
@@ -18,7 +18,7 @@ class AppSettings @Inject constructor(
 
     init {
         runBlocking {
-            val authResult = authService.authCacheIsValid()
+            val authResult = authHarmonyService.authCacheIsValid()
             harmonyToken = authResult.data
             isAuthorized = authResult.status is Status.Success
         }

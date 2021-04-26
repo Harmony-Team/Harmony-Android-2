@@ -8,9 +8,13 @@ import dev.timatifey.harmony.screen.activity.MainPresenter
 import dev.timatifey.harmony.screen.auth.recovery.RecoveryPresenter
 import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
+import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupPresenter
+import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListPresenter
 import dev.timatifey.harmony.screen.home.profile.ProfilePresenter
 import dev.timatifey.harmony.screen.home.settings.SettingsPresenter
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
+import dev.timatifey.harmony.service.AuthSpotifyService
+import dev.timatifey.harmony.service.GroupListService
 import dev.timatifey.harmony.service.UserService
 import javax.inject.Inject
 
@@ -18,28 +22,30 @@ import javax.inject.Inject
 class PresenterFactory @Inject constructor(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val authService: AuthService,
+    private val authHarmonyService: AuthHarmonyService,
+    private val authSpotifyService: AuthSpotifyService,
     private val userService: UserService,
+    private val groupListService: GroupListService,
 ) {
 
     fun createSignInPresenter(): SignInPresenter =
         SignInPresenter(
             appScreenNavigator = appScreenNavigator,
-            authService = authService,
+            authHarmonyService = authHarmonyService,
             backPressDispatcher = backPressDispatcher
         )
 
     fun createSignUpPresenter(): SignUpPresenter =
         SignUpPresenter(
             appScreenNavigator = appScreenNavigator,
-            authService = authService,
+            authHarmonyService = authHarmonyService,
             backPressDispatcher = backPressDispatcher
         )
 
     fun createRecoveryPresenter(): RecoveryPresenter =
         RecoveryPresenter(
             appScreenNavigator = appScreenNavigator,
-            authService = authService,
+            authHarmonyService = authHarmonyService,
             backPressDispatcher = backPressDispatcher
         )
 
@@ -47,14 +53,14 @@ class PresenterFactory @Inject constructor(
         SpotifyAuthPresenter(
             appScreenNavigator = appScreenNavigator,
             backPressDispatcher = backPressDispatcher,
-            authService = authService,
+            authSpotifyService = authSpotifyService,
             userService = userService,
         )
 
     fun createMainPresenter(): MainPresenter =
         MainPresenter(
             appScreenNavigator = appScreenNavigator,
-            authService = authService,
+            authHarmonyService = authHarmonyService,
             backPressDispatcher = backPressDispatcher,
             userService = userService,
         )
@@ -70,5 +76,18 @@ class PresenterFactory @Inject constructor(
             appScreenNavigator = appScreenNavigator,
             backPressDispatcher = backPressDispatcher,
             userService = userService,
+        )
+
+    fun createGroupListPresenter(): GroupListPresenter =
+        GroupListPresenter(
+            appScreenNavigator = appScreenNavigator,
+            backPressDispatcher = backPressDispatcher,
+            groupListService = groupListService,
+        )
+
+    fun createAddGroupPresenter(): AddGroupPresenter =
+        AddGroupPresenter(
+            backPressDispatcher = backPressDispatcher,
+            appScreenNavigator = appScreenNavigator,
         )
 }

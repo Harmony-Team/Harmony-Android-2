@@ -15,7 +15,7 @@
         android:src="@drawable/white_rectangle" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__share_group__label_new_group"
+        android:id="@+id/fragment_home__groups__share_group__label_share_group"
         style="@style/textPrimary"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__share_group__label_new_group" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__share_group__label_share_group" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment_home__groups__share_group__msg"

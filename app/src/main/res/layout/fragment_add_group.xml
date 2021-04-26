@@ -1,7 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/black_background_gradient">
+    android:background="@drawable/groups_background_image">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_home__groups__title_fragment"
+        style="@style/textPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/groups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/fragment_add_group__background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/white_rectangle_full_rad"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fragment_add_group__cancel"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_cancel"
+        android:backgroundTint="@color/text_gray"
+        app:layout_constraintEnd_toEndOf="@id/fragment_add_group__background"
+        app:layout_constraintTop_toTopOf="@id/fragment_add_group__background" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_add_group__label_add_group"
+        style="@style/textPrimary"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/new_group_title_background"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/add_a_new_group"
+        android:textColor="@color/text_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_add_group__background" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_add_group__tv_new_group"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center"
+        android:text="@string/create_a_new_group_and_invite_your_friends_it_s_free"
+        android:textAlignment="gravity"
+        android:textColor="@color/text_main"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_group__image_new_group"
+        app:layout_constraintEnd_toStartOf="@id/fragment_add_group__tv_join_group"
+        app:layout_constraintStart_toStartOf="@id/fragment_add_group__background"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__label_add_group"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_add_group__tv_join_group"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center"
+        android:text="@string/join_a_group_with_an_invite_code_or_link"
+        android:textAlignment="gravity"
+        android:textColor="@color/text_main"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_group__image_join_group"
+        app:layout_constraintEnd_toEndOf="@id/fragment_add_group__background"
+        app:layout_constraintStart_toEndOf="@id/fragment_add_group__tv_new_group"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__label_add_group"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/fragment_add_group__image_new_group"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:src="@drawable/new_group_image"
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_group__new_group_btn"
+        app:layout_constraintEnd_toStartOf="@id/fragment_add_group__image_join_group"
+        app:layout_constraintStart_toStartOf="@id/fragment_add_group__background"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__tv_new_group" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/fragment_add_group__image_join_group"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:src="@drawable/join_group_image"
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_group__join_group_btn"
+        app:layout_constraintEnd_toEndOf="@id/fragment_add_group__background"
+        app:layout_constraintStart_toEndOf="@id/fragment_add_group__image_new_group"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__tv_join_group" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragment_add_group__new_group_btn"
+        style="@style/PinkRectBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rectangle_btn_background"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="New group"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_add_group__background"
+        app:layout_constraintEnd_toStartOf="@id/fragment_add_group__join_group_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__image_new_group" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragment_add_group__join_group_btn"
+        style="@style/PinkRectBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rectangle_btn_background"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="Join group"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_add_group__background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fragment_add_group__new_group_btn"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__image_join_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

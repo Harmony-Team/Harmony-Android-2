@@ -7,11 +7,11 @@ import dagger.Module
 import dagger.Provides
 import dev.timatifey.harmony.common.app.AppSettings
 import dev.timatifey.harmony.common.app.Config.Companion.PREFERENCE_NAME
+import dev.timatifey.harmony.repo.groups.GroupsRepo
+import dev.timatifey.harmony.repo.groups.GroupsRepoImpl
 import dev.timatifey.harmony.repo.user.UserRepo
 import dev.timatifey.harmony.repo.user.UserRepoImpl
-import dev.timatifey.harmony.screen.activity.MainMvpView
-import dev.timatifey.harmony.screen.activity.MainMvpViewImpl
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
@@ -22,8 +22,8 @@ object AppModule {
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
-    fun provideAppSettings(authService: AuthService): AppSettings =
-        AppSettings(authService)
+    fun provideAppSettings(authHarmonyService: AuthHarmonyService): AppSettings =
+        AppSettings(authHarmonyService)
 
     @Provides
     fun provideSharedPreferences(application: Application): SharedPreferences =
@@ -36,5 +36,8 @@ object AppModule {
     interface Binds {
         @dagger.Binds
         fun userRepo(userRepoImpl: UserRepoImpl): UserRepo
+
+        @dagger.Binds
+        fun groupsRepo(groupsRepoImpl: GroupsRepoImpl): GroupsRepo
     }
 }

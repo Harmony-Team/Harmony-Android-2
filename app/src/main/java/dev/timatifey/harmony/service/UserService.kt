@@ -29,7 +29,7 @@ class UserService @Inject constructor(
     private val harmonyApi: HarmonyAPI,
     private val spotifyApi: SpotifyAPI,
     private val ioDispatcher: CoroutineDispatcher,
-    private val authService: AuthService,
+    private val authSpotifyService: AuthSpotifyService,
 ) {
 
     suspend fun getUser(): Resource<User> =
@@ -99,9 +99,11 @@ class UserService @Inject constructor(
                 return@withContext dto.mapToResourceSpotifyUserBody()
             } catch (t: Throwable) {
                 if (t.message?.contains("401") == true) {
-                    val tokens = authService.refreshToken()
-                    integrateSpotify()
-                    return@withContext fetchSpotifyUser(tokens.data!!.accessToken)
+                    val tokens = authSpotifyService.refreshToken()
+                    if (tokens.status is Status.Success) {
+                        integrateSpotify()
+                        return@withContext fetchSpotifyUser(tokens.data!!.accessToken)
+                    }
                 }
                 return@withContext Resource.error(msg = t.message)
             }

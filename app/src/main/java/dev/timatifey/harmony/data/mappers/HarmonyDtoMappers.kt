@@ -4,11 +4,10 @@ import dev.timatifey.harmony.common.app.Config
 import dev.timatifey.harmony.api.harmony.dto.*
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler
+import dev.timatifey.harmony.data.entities.GroupEntity
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.Token
-import dev.timatifey.harmony.data.model.harmony.User
 import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
-import dev.timatifey.harmony.data.model.spotify.SpotifyUserBody
 import java.lang.Exception
 
 fun HarmonyAuthResponseDto.mapToResourceToken(): Resource<Token> {
@@ -46,6 +45,7 @@ fun HarmonyGroupsResponseDto.mapToResourceGroups(): Resource<List<HarmonyGroup>>
                 hostLogin = harmonyGroupDto.hostLogin,
                 users = harmonyGroupDto.users,
                 avatarUrl = harmonyGroupDto.avatarUrl,
+                dateCreated = null
             )
         })
     } else {
@@ -63,6 +63,7 @@ fun HarmonyJoinGroupResponseDto.mapToResourceGroup(): Resource<HarmonyGroup> {
                 hostLogin = group.hostLogin,
                 users = group.users,
                 avatarUrl = group.avatarUrl,
+                dateCreated = null,
             )
         )
     } else {
@@ -75,4 +76,15 @@ fun HarmonyIntegrateSpotifyBodyDto.mapToSpotifyTokens(): SpotifyTokens =
         accessToken = Token(this.accessToken),
         expiresIn = null,
         refreshToken = Token(this.refreshToken),
+    )
+
+fun GroupEntity.toHarmonyGroup(): HarmonyGroup =
+    HarmonyGroup(
+        id = this.id,
+        name = this.groupName,
+        description = this.description,
+        hostLogin = null,
+        users = null,
+        avatarUrl = this.imageUrl,
+        dateCreated = this.dateCreated,
     )

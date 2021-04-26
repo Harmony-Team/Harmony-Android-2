@@ -7,14 +7,14 @@ import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.screen.activity.DrawerDispatcher
 import dev.timatifey.harmony.screen.RequireDrawerDispatcher
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
 
 class RecoveryPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val authService: AuthService
+    private val authHarmonyService: AuthHarmonyService
 ) : MvpPresenter<RecoveryMvpView>, RecoveryMvpView.Listener, RequireDrawerDispatcher {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -42,7 +42,7 @@ class RecoveryPresenter(
     override fun onRecoveryBtnClicked(email: String) {
         coroutineScope.launch {
             view.showLoading()
-            val result = authService.recoveryAcc(email)
+            val result = authHarmonyService.recoveryAcc(email)
             view.hideLoading()
             when (result.status) {
                 is Status.Success -> {

@@ -65,8 +65,4 @@ class RecoveryMvpViewImpl(
         etEmail.error = null
     }
 
-    private fun showToast(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-    }
-
 }

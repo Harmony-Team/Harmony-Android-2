@@ -39,6 +39,6 @@ class ProfileMvpViewImpl(
     }
 
     override fun showMessage(msgId: Int) {
-        Toast.makeText(context, getString(msgId), Toast.LENGTH_SHORT).show()
+        showToast(msgId)
     }
 }

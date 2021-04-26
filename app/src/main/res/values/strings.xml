@@ -71,4 +71,9 @@
     <string name="loading_failed">Loading failed</string>
     <string name="spotify_access_token_expired">The spotify access token expired</string>
     <string name="spotify_id_integrated">This spotify id is integrated</string>
+    <string name="create_a_new_group_and_invite_your_friends_it_s_free">Create a new group and invite your friends. It`s free!</string>
+    <string name="add_a_new_group">Add a new group</string>
+    <string name="join_a_group_with_an_invite_code_or_link">Join a group with an invite code or link.</string>
+    <string name="join">Join</string>
+    <string name="group_link_or_code">Group link or code</string>
 </resources>

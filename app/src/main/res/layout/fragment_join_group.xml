@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/fragment_home__groups__new_group_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/white_rectangle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_home__groups__join_group__label_join_group"
+        style="@style/textPrimary"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/new_group_title_background"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/join"
+        android:textColor="@color/text_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_home__groups__new_group_background" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/fragment_home__groups__join_group__code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/lato_regular"
+        android:hint="@string/group_link_or_code"
+        android:textAlignment="center"
+        android:textColor="@color/text_gray"
+        android:textColorHint="@color/text_gray"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__join_group__label_join_group" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragment_home__groups__new_group__create_btn"
+        style="@style/PinkRectBtn"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rectangle_btn_background"
+        android:text="@string/join"
+        app:layout_constraintBottom_toTopOf="@id/fragment_home__groups__new_group__cancel_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__join_group__code"
+        app:layout_constraintVertical_bias="1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_home__groups__new_group__cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/lato_regular"
+        android:letterSpacing="0.167"
+        android:text="@string/cancel"
+        android:textAllCaps="true"
+        android:textColor="@color/text_gray"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="30dp"
+    tools:background="@drawable/black_background_gradient">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/group_list__item__imageCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/group_list__item__image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/avatar" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/group_list__item__group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lato_light"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/group_list__item__imageCard"
+        app:layout_constraintTop_toTopOf="@id/group_list__item__imageCard"
+        tools:text="Alena’s Birthday" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/group_list__item__group_date_created"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lato_regular"
+        android:letterSpacing="0.1"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/group_list__item__imageCard"
+        app:layout_constraintTop_toBottomOf="@id/group_list__item__group_name"
+        tools:ignore="SmallSp"
+        tools:text="2021-16-09" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,13 +7,13 @@ import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.screen.RequireDrawerDispatcher
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.service.UserService
 import kotlinx.coroutines.*
 
 class MainPresenter(
     private val appScreenNavigator: AppScreenNavigator,
-    private val authService: AuthService,
+    private val authHarmonyService: AuthHarmonyService,
     private val userService: UserService,
     private val backPressDispatcher: BackPressDispatcher,
 ) : MvpPresenter<MainMvpView>, MainMvpView.Listener, RequireDrawerDispatcher {
@@ -43,7 +43,7 @@ class MainPresenter(
             R.id.menu__settings -> appScreenNavigator.toSettings()
             R.id.menu__about_us -> view.aboutUs()
             R.id.menu__logout -> {
-                authService.logoutHarmony()
+                authHarmonyService.logoutHarmony()
                 drawerDispatcher.lockDrawer()
                 appScreenNavigator.toAuth()
             }
@@ -76,8 +76,8 @@ class MainPresenter(
     override fun onDestroy() {
     }
 
-    override fun bindDrawerDispatcher(drawerDispatcher: DrawerDispatcher) {
-        this.drawerDispatcher = drawerDispatcher
+    override fun bindDrawerDispatcher(drawer: DrawerDispatcher) {
+        this.drawerDispatcher = drawer
     }
 
 }

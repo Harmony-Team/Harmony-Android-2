@@ -17,7 +17,11 @@ import dev.timatifey.harmony.screen.auth.recovery.RecoveryFragment
 import dev.timatifey.harmony.screen.auth.signin.SignInFragment
 import dev.timatifey.harmony.screen.auth.signup.SignUpFragment
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthFragment
+import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupFragment
 import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListFragment
+import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupFragment
+import dev.timatifey.harmony.screen.home.groups.lobby.LobbyFragment
+import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupFragment
 import dev.timatifey.harmony.screen.home.profile.ProfileFragment
 import dev.timatifey.harmony.screen.home.settings.SettingsFragment
 import javax.inject.Inject
@@ -145,6 +149,26 @@ class AppScreenNavigator @Inject constructor(
     override fun toGroupList() {
         val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
         fragNavController.switchTab(INDEX_GROUP_LIST, options)
+    }
+
+    override fun toAddGroupFragment() {
+        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
+        fragNavController.pushFragment(AddGroupFragment.newInstance(), options)
+    }
+
+    override fun toLobby(groupId: Long) {
+        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
+        fragNavController.pushFragment(LobbyFragment.newInstance(groupId), options)
+    }
+
+    override fun toJoinGroup() {
+        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
+        fragNavController.pushFragment(JoinGroupFragment.newInstance(), options)
+    }
+
+    override fun toNewGroup() {
+        val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
+        fragNavController.pushFragment(NewGroupFragment.newInstance(), options)
     }
 
     private fun transactionOptions(vararg animationIds: Int): FragNavTransactionOptions =

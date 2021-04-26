@@ -9,7 +9,8 @@ import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.service.AuthService
+import dev.timatifey.harmony.service.AuthHarmonyService
+import dev.timatifey.harmony.service.AuthSpotifyService
 import dev.timatifey.harmony.service.UserService
 import dev.timatifey.harmony.util.randomString
 import kotlinx.coroutines.*
@@ -17,7 +18,7 @@ import kotlinx.coroutines.*
 class SpotifyAuthPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
-    private val authService: AuthService,
+    private val authSpotifyService: AuthSpotifyService,
     private val userService: UserService,
 ) : MvpPresenter<SpotifyAuthMvpView>, SpotifyAuthMvpView.Listener {
 
@@ -52,7 +53,7 @@ class SpotifyAuthPresenter(
             val code = uri.getQueryParameter("code")
             if (code != null) {
                 runBlocking {
-                    val result = authService.exchangesCodeForAccessToken(code, spotifyCodeVerifier)
+                    val result = authSpotifyService.exchangesCodeForAccessToken(code, spotifyCodeVerifier)
                     if (result.status is Status.Success) {
                         view.showMessage(R.string.success_spotify_auth)
                         userService.integrateSpotify()
