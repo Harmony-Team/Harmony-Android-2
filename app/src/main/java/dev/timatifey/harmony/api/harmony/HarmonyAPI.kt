@@ -68,4 +68,27 @@ interface HarmonyAPI {
         @Field("inviteCode") inviteCode: String,
     ): HarmonyJoinGroupResponseDto
 
+    // MUSIC
+    @FormUrlEncoded
+    @POST("/api/group/music/add")
+    suspend fun addSong(
+        @Header("Authorization") authToken: Token,
+        @Field("groupId") groupId: Long,
+        @Field("spotifyId") spotifyId: Long,
+    ): HarmonySimpleResponseDto
+
+    @FormUrlEncoded
+    @POST("/api/group/music/remove")
+    suspend fun removeSong(
+        @Header("Authorization") authToken: Token,
+        @Field("groupId") groupId: Long,
+        @Field("spotifyId") spotifyId: Long,
+    ): HarmonySimpleResponseDto
+
+    @FormUrlEncoded
+    @POST("/api/group/music/get")
+    suspend fun getAllSongs(
+        @Header("Authorization") authToken: Token,
+        @Field("groupId") groupId: Long,
+    ): HarmonySongsResponseDto
 }

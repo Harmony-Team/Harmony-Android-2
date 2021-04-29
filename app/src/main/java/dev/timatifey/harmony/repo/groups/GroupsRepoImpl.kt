@@ -1,6 +1,7 @@
 package dev.timatifey.harmony.repo.groups
 
 import dev.timatifey.harmony.data.database.GroupsDao
+import dev.timatifey.harmony.data.mappers.toGroupEntity
 import dev.timatifey.harmony.data.mappers.toHarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import kotlinx.coroutines.flow.Flow
@@ -22,10 +23,10 @@ class GroupsRepoImpl @Inject constructor(
             }
 
     override suspend fun addNewGroup(group: HarmonyGroup) {
-        TODO("Not yet implemented")
+        groupsDao.addGroup(group.toGroupEntity())
     }
 
     override suspend fun deleteGroup(group: HarmonyGroup) {
-        TODO("Not yet implemented")
+        groupsDao.deleteGroup(group.toGroupEntity())
     }
 }

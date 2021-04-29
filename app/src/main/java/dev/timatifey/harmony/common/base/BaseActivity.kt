@@ -38,8 +38,8 @@ abstract class BaseActivity : AppCompatActivity(), BackPressDispatcher {
         activityComponent.inject(this)
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         appScreenNavigator.onSaveInstanceState(outState)
     }
 

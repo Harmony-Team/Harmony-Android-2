@@ -14,7 +14,8 @@ class ShareGroupFragment: BaseFragment(), ShareIntentListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = presenterFactory.createShareGroupPresenter(this)
+        val link = arguments!!.getString(ARG_LINK)!!
+        presenter = presenterFactory.createShareGroupPresenter(this, link)
     }
 
     override fun onCreateView(

@@ -64,9 +64,10 @@ class GroupListPresenter(
     }
 
     override fun onGroupSwiped(group: HarmonyGroup) {
-        //TODO("Not yet implemented")
-        view.showMessage("Swiped ${group.name}")
         groups.remove(group)
+        coroutineScope.launch {
+            groupService.deleteGroup(group)
+        }
         view.bindData(groups)
     }
 

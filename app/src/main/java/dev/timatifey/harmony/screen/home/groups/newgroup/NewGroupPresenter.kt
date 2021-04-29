@@ -6,10 +6,7 @@ import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.service.GroupService
 import dev.timatifey.harmony.util.generateShareLink
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.*
 
 class NewGroupPresenter(
     private val appScreenNavigator: AppScreenNavigator,
@@ -40,9 +37,10 @@ class NewGroupPresenter(
     }
 
     override fun onCreateBtnClicked(name: String, description: String, imageUri: String?) {
-        //TODO("Create group")
-        val shareLink = generateShareLink(1)
-        appScreenNavigator.toShareGroup(shareLink)
+        coroutineScope.launch {
+            val group = groupService.addGroup(name, description, imageUri).data
+            appScreenNavigator.toShareGroup(group?.shareLink!!)
+        }
     }
 
     override fun onCancelBtnClicked() {

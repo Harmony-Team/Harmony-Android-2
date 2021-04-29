@@ -104,11 +104,15 @@ class PresenterFactory @Inject constructor(
             pickPhotoIntentListener = listener,
         )
 
-    fun createShareGroupPresenter(listenerShare: ShareIntentListener): ShareGroupPresenter =
+    fun createShareGroupPresenter(
+        listenerShare: ShareIntentListener,
+        shareLink: String
+    ): ShareGroupPresenter =
         ShareGroupPresenter(
             backPressDispatcher = backPressDispatcher,
             appScreenNavigator = appScreenNavigator,
             shareIntentListener = listenerShare,
+            shareLink = shareLink,
         )
 
     fun createJoinGroupPresenter(): JoinGroupPresenter =

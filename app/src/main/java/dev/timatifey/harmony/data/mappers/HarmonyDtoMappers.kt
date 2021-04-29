@@ -45,7 +45,8 @@ fun HarmonyGroupsResponseDto.mapToResourceGroups(): Resource<List<HarmonyGroup>>
                 hostLogin = harmonyGroupDto.hostLogin,
                 users = harmonyGroupDto.users,
                 avatarUrl = harmonyGroupDto.avatarUrl,
-                dateCreated = null
+                dateCreated = "null",
+                shareLink = null
             )
         })
     } else {
@@ -63,7 +64,8 @@ fun HarmonyJoinGroupResponseDto.mapToResourceGroup(): Resource<HarmonyGroup> {
                 hostLogin = group.hostLogin,
                 users = group.users,
                 avatarUrl = group.avatarUrl,
-                dateCreated = null,
+                dateCreated = "null",
+                shareLink = null
             )
         )
     } else {
@@ -87,4 +89,15 @@ fun GroupEntity.toHarmonyGroup(): HarmonyGroup =
         users = null,
         avatarUrl = this.imageUrl,
         dateCreated = this.dateCreated,
+        shareLink = this.shareLink,
+    )
+
+fun HarmonyGroup.toGroupEntity(): GroupEntity =
+    GroupEntity(
+        id = this.id,
+        groupName = this.name,
+        description = this.description,
+        imageUrl = this.avatarUrl,
+        dateCreated = this.dateCreated,
+        shareLink = this.shareLink!!,
     )

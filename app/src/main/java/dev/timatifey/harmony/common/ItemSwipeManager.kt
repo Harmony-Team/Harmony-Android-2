@@ -1,4 +1,4 @@
-package dev.timatifey.harmony.screen.home.groups.grouplist
+package dev.timatifey.harmony.common
 
 import android.content.Context
 import android.view.MotionEvent

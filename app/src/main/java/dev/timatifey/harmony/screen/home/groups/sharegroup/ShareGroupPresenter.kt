@@ -9,10 +9,10 @@ class ShareGroupPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val shareIntentListener: ShareIntentListener,
+    private val shareLink: String,
 ) : MvpPresenter<ShareGroupMvpView>, ShareGroupMvpView.Listener {
 
     private lateinit var view: ShareGroupMvpView
-    private lateinit var shareLink: String
 
     override fun bindView(view: ShareGroupMvpView) {
         this.view = view
@@ -20,7 +20,6 @@ class ShareGroupPresenter(
     }
 
     private fun initShareLink() {
-        shareLink = generateShareLink(1)
         view.setShareLinkText(shareLink)
     }
 

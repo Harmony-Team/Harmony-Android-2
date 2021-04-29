@@ -9,5 +9,6 @@ data class HarmonyGroup(
     var hostLogin: String?,
     var users: List<HarmonyUserDto>?,
     var avatarUrl: String?,
-    var dateCreated: String?,
+    var dateCreated: String,
+    var shareLink: String?
 )

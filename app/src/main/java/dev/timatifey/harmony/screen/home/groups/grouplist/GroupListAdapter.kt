@@ -3,6 +3,7 @@ package dev.timatifey.harmony.screen.home.groups.grouplist
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import dev.timatifey.harmony.common.ItemSwipeManager
 import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.screen.home.groups.grouplist.row.GroupListRowMvpView

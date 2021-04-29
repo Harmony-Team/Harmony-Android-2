@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.timatifey.harmony.R
+import dev.timatifey.harmony.common.ItemSwipeManager
 import dev.timatifey.harmony.common.mvp.MvpViewObservableBase
 import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
