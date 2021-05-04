@@ -4,8 +4,8 @@ import android.net.Uri
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
+import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.service.GroupService
-import dev.timatifey.harmony.util.generateShareLink
 import kotlinx.coroutines.*
 
 class NewGroupPresenter(
@@ -38,8 +38,13 @@ class NewGroupPresenter(
 
     override fun onCreateBtnClicked(name: String, description: String, imageUri: String?) {
         coroutineScope.launch {
-            val group = groupService.addGroup(name, description, imageUri).data
-            appScreenNavigator.toShareGroup(group?.shareLink!!)
+            val groupRes = groupService.addGroup(name, description, imageUri)
+            if (groupRes.status is Status.Success) {
+                val group = groupRes.data!!
+                appScreenNavigator.toShareGroup(group.inviteCode!!, group.id)
+            } else {
+                appScreenNavigator.toGroupList()
+            }
         }
     }
 

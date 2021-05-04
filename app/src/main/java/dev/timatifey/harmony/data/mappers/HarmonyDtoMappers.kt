@@ -1,16 +1,18 @@
 package dev.timatifey.harmony.data.mappers
 
+import android.util.Log
 import dev.timatifey.harmony.common.app.Config
 import dev.timatifey.harmony.api.harmony.dto.*
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler
 import dev.timatifey.harmony.data.entities.GroupEntity
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
+import dev.timatifey.harmony.data.model.harmony.HarmonyGroupUser
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
 import java.lang.Exception
 
-fun HarmonyAuthResponseDto.mapToResourceToken(): Resource<Token> {
+fun HarmonyAuthResponseDto.toResourceToken(): Resource<Token> {
     return if (code == Config.SUCCESS_CODE) {
         ResponseHandler.handleSuccess(Token(token!!))
     } else {
@@ -18,7 +20,7 @@ fun HarmonyAuthResponseDto.mapToResourceToken(): Resource<Token> {
     }
 }
 
-fun HarmonyUserResponseDto.mapToResourceUserDto(): Resource<HarmonyUserDto> {
+fun HarmonyUserResponseDto.toResourceUserDto(): Resource<HarmonyUserDto> {
     return if (code == Config.SUCCESS_CODE && users != null) {
         val userDto = users[0]
         ResponseHandler.handleSuccess(userDto)
@@ -27,7 +29,7 @@ fun HarmonyUserResponseDto.mapToResourceUserDto(): Resource<HarmonyUserDto> {
     }
 }
 
-fun HarmonySimpleResponseDto.mapToResourceBoolean(): Resource<Boolean> {
+fun HarmonySimpleResponseDto.toResourceBoolean(): Resource<Boolean> {
     return if (code == Config.SUCCESS_CODE) {
         ResponseHandler.handleSuccess(true)
     } else {
@@ -35,45 +37,33 @@ fun HarmonySimpleResponseDto.mapToResourceBoolean(): Resource<Boolean> {
     }
 }
 
-fun HarmonyGroupsResponseDto.mapToResourceGroups(): Resource<List<HarmonyGroup>> {
+fun HarmonyGroupsResponseDto.toResourceGroups(): Resource<List<HarmonyGroup>> {
     return if (code == Config.SUCCESS_CODE && groups != null) {
-        ResponseHandler.handleSuccess(groups.map { harmonyGroupDto ->
-            HarmonyGroup(
-                id = harmonyGroupDto.id,
-                name = harmonyGroupDto.name,
-                description = harmonyGroupDto.description,
-                hostLogin = harmonyGroupDto.hostLogin,
-                users = harmonyGroupDto.users,
-                avatarUrl = harmonyGroupDto.avatarUrl,
-                dateCreated = "null",
-                shareLink = null
-            )
-        })
+        ResponseHandler.handleSuccess(groups.map {
+            Log.e("FF", it.toString())
+            it.toHarmonyGroup() })
     } else {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
 }
 
-fun HarmonyJoinGroupResponseDto.mapToResourceGroup(): Resource<HarmonyGroup> {
+fun HarmonyGroupResponseDto.toResourceGroup(): Resource<HarmonyGroup> {
     return if (code == Config.SUCCESS_CODE && group != null) {
-        ResponseHandler.handleSuccess(
-            HarmonyGroup(
-                id = group.id,
-                name = group.name,
-                description = group.description,
-                hostLogin = group.hostLogin,
-                users = group.users,
-                avatarUrl = group.avatarUrl,
-                dateCreated = "null",
-                shareLink = null
-            )
-        )
+        ResponseHandler.handleSuccess(group.toHarmonyGroup(this.inviteCode!!))
     } else {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
 }
 
-fun HarmonyIntegrateSpotifyBodyDto.mapToSpotifyTokens(): SpotifyTokens =
+fun HarmonyGroupResponseDto.toResourceGroup(inviteCode: String): Resource<HarmonyGroup> {
+    return if (code == Config.SUCCESS_CODE && group != null) {
+        ResponseHandler.handleSuccess(group.toHarmonyGroup(inviteCode))
+    } else {
+        ResponseHandler.handleException(exception = Exception(message), code = code)
+    }
+}
+
+fun HarmonyIntegrateSpotifyBodyDto.toSpotifyTokens(): SpotifyTokens =
     SpotifyTokens(
         accessToken = Token(this.accessToken),
         expiresIn = null,
@@ -83,21 +73,42 @@ fun HarmonyIntegrateSpotifyBodyDto.mapToSpotifyTokens(): SpotifyTokens =
 fun GroupEntity.toHarmonyGroup(): HarmonyGroup =
     HarmonyGroup(
         id = this.id,
-        name = this.groupName,
+        name = this.name,
         description = this.description,
-        hostLogin = null,
-        users = null,
+        hostLogin = this.hostLogin,
+        users = mutableListOf<HarmonyGroupUser>(),
         avatarUrl = this.imageUrl,
         dateCreated = this.dateCreated,
-        shareLink = this.shareLink,
+        inviteCode = this.inviteCode,
     )
 
 fun HarmonyGroup.toGroupEntity(): GroupEntity =
     GroupEntity(
         id = this.id,
-        groupName = this.name,
+        name = this.name,
         description = this.description,
         imageUrl = this.avatarUrl,
+        hostLogin = this.hostLogin,
         dateCreated = this.dateCreated,
-        shareLink = this.shareLink!!,
+        inviteCode = this.inviteCode,
+    )
+
+fun HarmonyGroupDto.toHarmonyGroup(inviteCode: String? = null): HarmonyGroup {
+    return HarmonyGroup(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        hostLogin = this.hostLogin,
+        users = this.users.map {
+            it.toHarmonyGroupUser()
+        }.toMutableList(),
+        avatarUrl = this.avatarUrl,
+        dateCreated = this.dateCreated,
+        inviteCode = inviteCode,
+    )
+}
+
+fun HarmonyGroupDto.GroupUserDto.toHarmonyGroupUser(): HarmonyGroupUser =
+    HarmonyGroupUser(
+        login = this.login
     )

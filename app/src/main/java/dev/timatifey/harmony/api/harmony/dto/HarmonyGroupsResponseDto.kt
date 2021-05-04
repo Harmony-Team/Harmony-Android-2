@@ -27,8 +27,17 @@ data class HarmonyGroupDto(
     val hostLogin: String,
 
     @SerializedName("users")
-    val users: List<HarmonyUserDto>,
+    val users: List<GroupUserDto>,
 
     @SerializedName("avatar_url")
-    var avatarUrl: String?,
-)
+    var avatarUrl: String,
+
+    @SerializedName("date_created")
+    var dateCreated: String,
+) {
+
+    data class GroupUserDto(
+        @SerializedName("login")
+        val login: String
+    )
+}

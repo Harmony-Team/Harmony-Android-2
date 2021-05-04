@@ -1,12 +1,11 @@
 package dev.timatifey.harmony.service
 
-import android.util.Log
 import dev.timatifey.harmony.api.spotify.SpotifyAuthAPI
 import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_CLIENT_ID
 import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_REDIRECT_URI
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.data.mappers.mapToResourceSpotifyTokens
+import dev.timatifey.harmony.data.mappers.toResourceSpotifyTokens
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
 import dev.timatifey.harmony.repo.user.UserRepo
@@ -34,7 +33,7 @@ class AuthSpotifyService @Inject constructor(
                     code = code,
                     codeVerifier = spotifyCodeVerifier
                 )
-                val spotifyTokens = spotifyAuthResponseDto.mapToResourceSpotifyTokens()
+                val spotifyTokens = spotifyAuthResponseDto.toResourceSpotifyTokens()
                 if (spotifyTokens.status is Status.Success) {
                     userRepo.saveSpotifyToken(spotifyTokens.data!!)
                 }
@@ -65,7 +64,7 @@ class AuthSpotifyService @Inject constructor(
                     grantType = "refresh_token",
                     refreshToken = refreshToken
                 )
-                val spotifyTokens = spotifyAuthResponseDto.mapToResourceSpotifyTokens()
+                val spotifyTokens = spotifyAuthResponseDto.toResourceSpotifyTokens()
                 if (spotifyTokens.status is Status.Success) {
                     userRepo.saveSpotifyToken(spotifyTokens.data!!)
                 }

@@ -15,7 +15,8 @@ class ShareGroupFragment: BaseFragment(), ShareIntentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val link = arguments!!.getString(ARG_LINK)!!
-        presenter = presenterFactory.createShareGroupPresenter(this, link)
+        val groupId = arguments!!.getLong(ARG_GROUP_ID)!!
+        presenter = presenterFactory.createShareGroupPresenter(this, link, groupId)
     }
 
     override fun onCreateView(
@@ -53,10 +54,13 @@ class ShareGroupFragment: BaseFragment(), ShareIntentListener {
 
     companion object {
         const val ARG_LINK = "ARG_LINk"
-        fun newInstance(link: String): Fragment {
+        const val ARG_GROUP_ID = "ARG_GROUP_ID"
+
+        fun newInstance(link: String, groupId: Long): Fragment {
             val fragment: Fragment = ShareGroupFragment()
             val args: Bundle = Bundle()
             args.putString(ARG_LINK, link)
+            args.putLong(ARG_GROUP_ID, groupId)
             fragment.arguments = args
             return fragment
         }

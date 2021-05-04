@@ -3,7 +3,9 @@ package dev.timatifey.harmony.screen.home.groups.joingroup
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
+import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.service.GroupService
+import kotlinx.coroutines.*
 
 class JoinGroupPresenter(
     private val appScreenNavigator: AppScreenNavigator,
@@ -12,6 +14,7 @@ class JoinGroupPresenter(
 ) : MvpPresenter<JoinGroupMvpView>, JoinGroupMvpView.Listener {
 
     private lateinit var view: JoinGroupMvpView
+    private val coroutineScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
 
     override fun bindView(view: JoinGroupMvpView) {
         this.view = view
@@ -31,8 +34,14 @@ class JoinGroupPresenter(
     }
 
     override fun onJoinBtnClicked(code: String) {
-        val groupId = 1L //TODO("get group id by code")
-        appScreenNavigator.toLobby(groupId)
+        coroutineScope.launch {
+            val groupRes = groupService.joinGroup(code)
+            if (groupRes.status is Status.Success) {
+                appScreenNavigator.toLobby(groupRes.data!!.id)
+            } else {
+                appScreenNavigator.toGroupList()
+            }
+        }
     }
 
     override fun onCancelBtnClicked() {

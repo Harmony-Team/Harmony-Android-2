@@ -2,7 +2,7 @@ package dev.timatifey.harmony.api.harmony.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class HarmonyJoinGroupResponseDto(
+data class HarmonyGroupResponseDto(
     @SerializedName("сode")
     val code: Int,
 
@@ -11,4 +11,7 @@ data class HarmonyJoinGroupResponseDto(
 
     @SerializedName("object")
     val group: HarmonyGroupDto?,
+
+    @SerializedName("invite_code")
+    val inviteCode: String?,
 )

@@ -1,6 +1,5 @@
 package dev.timatifey.harmony.data.mappers
 
-import android.util.Log
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.app.Config
 import dev.timatifey.harmony.api.spotify.dto.SpotifyTokenResponseDto
@@ -11,7 +10,7 @@ import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
 import dev.timatifey.harmony.data.model.spotify.SpotifyUserBody
 
-fun SpotifyTokenResponseDto.mapToResourceSpotifyTokens(): Resource<SpotifyTokens> {
+fun SpotifyTokenResponseDto.toResourceSpotifyTokens(): Resource<SpotifyTokens> {
     return if (accessToken != null) {
         ResponseHandler.handleSuccess(
             SpotifyTokens(
@@ -25,8 +24,7 @@ fun SpotifyTokenResponseDto.mapToResourceSpotifyTokens(): Resource<SpotifyTokens
     }
 }
 
-fun SpotifyUserProfileDto.mapToResourceSpotifyUserBody(): Resource<SpotifyUserBody> {
-    Log.e("MSMS", this.toString())
+fun SpotifyUserProfileDto.toResourceSpotifyUserBody(): Resource<SpotifyUserBody> {
     if (id != null) {
         return ResponseHandler.handleSuccess(
             SpotifyUserBody(

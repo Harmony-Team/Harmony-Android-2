@@ -172,9 +172,9 @@ class AppScreenNavigator @Inject constructor(
         fragNavController.pushFragment(NewGroupFragment.newInstance(), options)
     }
 
-    override fun toShareGroup(link: String) {
+    override fun toShareGroup(link: String, groupId: Long) {
         val options = transactionOptions(R.anim.fade_in, R.anim.fade_out)
-        fragNavController.pushFragment(ShareGroupFragment.newInstance(link), options)
+        fragNavController.pushFragment(ShareGroupFragment.newInstance(link, groupId), options)
     }
 
     private fun transactionOptions(vararg animationIds: Int): FragNavTransactionOptions =

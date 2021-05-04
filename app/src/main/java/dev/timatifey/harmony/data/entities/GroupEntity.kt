@@ -7,13 +7,12 @@ import androidx.room.PrimaryKey
 data class GroupEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-
-    var groupName: String,
+    var name: String,
     var description: String,
     val imageUrl: String?,
     val dateCreated: String,
-
-    val shareLink: String,
+    val hostLogin: String,
+    var inviteCode: String?,
 ) {
     companion object {
         const val TABLE_NAME = "groups_table"

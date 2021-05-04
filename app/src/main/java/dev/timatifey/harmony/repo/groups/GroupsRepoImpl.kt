@@ -29,4 +29,8 @@ class GroupsRepoImpl @Inject constructor(
     override suspend fun deleteGroup(group: HarmonyGroup) {
         groupsDao.deleteGroup(group.toGroupEntity())
     }
+
+    override fun getGroupById(id: Long): Flow<HarmonyGroup> =
+        groupsDao.getGroupById(id).map { it.toHarmonyGroup() }
+
 }

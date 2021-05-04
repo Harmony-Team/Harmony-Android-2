@@ -8,10 +8,10 @@ import dev.timatifey.harmony.api.harmony.dto.HarmonyUserDto
 import dev.timatifey.harmony.api.spotify.SpotifyAPI
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.data.mappers.mapToResourceBoolean
-import dev.timatifey.harmony.data.mappers.mapToResourceSpotifyUserBody
-import dev.timatifey.harmony.data.mappers.mapToResourceUserDto
-import dev.timatifey.harmony.data.mappers.mapToSpotifyTokens
+import dev.timatifey.harmony.data.mappers.toResourceBoolean
+import dev.timatifey.harmony.data.mappers.toResourceSpotifyUserBody
+import dev.timatifey.harmony.data.mappers.toResourceUserDto
+import dev.timatifey.harmony.data.mappers.toSpotifyTokens
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.data.model.harmony.User
 import dev.timatifey.harmony.data.model.settings.SettingFields
@@ -51,14 +51,14 @@ class UserService @Inject constructor(
                 val token = userRepo.getHarmonyTokenFromCache().data
                     ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
 
-                val userDtoResource = harmonyApi.getUser(token).mapToResourceUserDto()
+                val userDtoResource = harmonyApi.getUser(token).toResourceUserDto()
                 if (userDtoResource.status is Status.Error) {
                     return@withContext Resource.error(msgId = userDtoResource.message.messageId)
                 }
 
                 val userDto: HarmonyUserDto = userDtoResource.data!!
                 if (userDto.spotifyHarmony != null) {
-                    userRepo.saveSpotifyToken(userDto.spotifyHarmony!!.mapToSpotifyTokens())
+                    userRepo.saveSpotifyToken(userDto.spotifyHarmony!!.toSpotifyTokens())
                 }
 
                 val user = User(
@@ -96,7 +96,7 @@ class UserService @Inject constructor(
         withContext(ioDispatcher) {
             try {
                 val dto = spotifyApi.getCurrentUser(Token("Bearer ${spotifyToken.value}"))
-                return@withContext dto.mapToResourceSpotifyUserBody()
+                return@withContext dto.toResourceSpotifyUserBody()
             } catch (t: Throwable) {
                 if (t.message?.contains("401") == true) {
                     val tokens = authSpotifyService.refreshToken()
@@ -155,7 +155,7 @@ class UserService @Inject constructor(
                         authToken = harmonyToken,
                         harmonyIntegrateSpotifyBodyDto = obj
                     )
-                return@withContext response.mapToResourceBoolean()
+                return@withContext response.toResourceBoolean()
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }
@@ -176,7 +176,7 @@ class UserService @Inject constructor(
         withContext(ioDispatcher) {
             try {
                 val response = harmonyApi.disintegrateSpotify(authToken = harmonyToken)
-                val result = response.mapToResourceBoolean()
+                val result = response.toResourceBoolean()
                 if (result.status is Status.Success) {
                     userRepo.clearSpotify()
                 }

@@ -2,15 +2,12 @@ package dev.timatifey.harmony.service
 
 import dev.timatifey.harmony.api.harmony.HarmonyAPI
 import dev.timatifey.harmony.api.harmony.dto.HarmonyAuthResponseDto
-import dev.timatifey.harmony.api.spotify.SpotifyAuthAPI
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_CLIENT_ID
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_REDIRECT_URI
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.data.mappers.mapToResourceSpotifyTokens
-import dev.timatifey.harmony.data.mappers.mapToResourceToken
+import dev.timatifey.harmony.data.database.AppDatabase
+import dev.timatifey.harmony.data.mappers.toResourceToken
 import dev.timatifey.harmony.data.model.harmony.Token
-import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
+import dev.timatifey.harmony.repo.groups.GroupsRepo
 import dev.timatifey.harmony.repo.user.UserRepo
 import dev.timatifey.harmony.util.randomString
 import kotlinx.coroutines.*
@@ -20,6 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class AuthHarmonyService @Inject constructor(
     private val userRepo: UserRepo,
+    private val appDatabase: AppDatabase,
     private val harmonyApi: HarmonyAPI,
     private val ioDispatcher: CoroutineDispatcher,
 ) {
@@ -29,7 +27,7 @@ class AuthHarmonyService @Inject constructor(
         withContext(ioDispatcher) {
             try {
                 val authDto: HarmonyAuthResponseDto = harmonyApi.authUser(username, password)
-                val token = authDto.mapToResourceToken()
+                val token = authDto.toResourceToken()
                 if (token.status is Status.Success) {
                     userRepo.saveHarmonyTokenToCache(token.data!!)
                 }
@@ -51,7 +49,7 @@ class AuthHarmonyService @Inject constructor(
                     email = email,
                     password = password
                 )
-                val token = authDto.mapToResourceToken()
+                val token = authDto.toResourceToken()
                 if (token.status is Status.Success) {
                     userRepo.saveHarmonyTokenToCache(token.data!!)
                 }
@@ -67,7 +65,7 @@ class AuthHarmonyService @Inject constructor(
                 val cacheToken = userRepo.getHarmonyTokenFromCache()
                 if (cacheToken.status is Status.Success) {
                     val isValidToken = harmonyApi.isTokenValidate(cacheToken.data!!)
-                    return@withContext isValidToken.mapToResourceToken()
+                    return@withContext isValidToken.toResourceToken()
                 }
                 return@withContext Resource.error(cacheToken.message.messageId)
             } catch (t: Throwable) {
@@ -88,6 +86,7 @@ class AuthHarmonyService @Inject constructor(
 
     fun logoutHarmony() {
         userRepo.clearAll()
+        appDatabase.clearAllTables()
     }
 
 }

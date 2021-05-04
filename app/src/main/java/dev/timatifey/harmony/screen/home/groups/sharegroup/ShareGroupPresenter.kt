@@ -10,6 +10,7 @@ class ShareGroupPresenter(
     private val backPressDispatcher: BackPressDispatcher,
     private val shareIntentListener: ShareIntentListener,
     private val shareLink: String,
+    private val groupId: Long,
 ) : MvpPresenter<ShareGroupMvpView>, ShareGroupMvpView.Listener {
 
     private lateinit var view: ShareGroupMvpView
@@ -38,6 +39,7 @@ class ShareGroupPresenter(
 
     override fun onShareLinkBtnClicked() {
         shareIntentListener.startActivityForShare(shareLink)
+        appScreenNavigator.toLobby(groupId)
     }
 
     override fun onCancelBtnClicked() {

@@ -13,6 +13,9 @@ interface GroupsDao {
     @Query("SELECT * FROM ${GroupEntity.TABLE_NAME} ORDER by dateCreated DESC")
     fun loadAllGroups(): Flow<List<GroupEntity>>
 
+    @Query("SELECT * FROM ${GroupEntity.TABLE_NAME} WHERE id = :id")
+    fun getGroupById(id: Long): Flow<GroupEntity>
+
     @Update
     suspend fun updateGroup(group: GroupEntity)
 
