@@ -1,16 +1,14 @@
 package dev.timatifey.harmony.common.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import dev.timatifey.harmony.common.app.App
+import dev.timatifey.harmony.app.App
 import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
 import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
 import dev.timatifey.harmony.di.component.ActivityComponent
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.BackPressedListener
-import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import javax.inject.Inject
 
 

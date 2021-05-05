@@ -55,12 +55,12 @@ interface HarmonyAPI {
         @Field("avatar_url") avatarUrl: String?,
     ): HarmonyGroupResponseDto
 
-//    @GET("/api/group/invite")
-//    suspend fun createInviteCode(
-//        @Header("Authorization") token: Token,
-//        @Query("groupId") groupId: Int,
-//        @Query("days") codeLifetime: Int,
-//    ): HarmonySimpleResponseDto
+    @GET("/api/group/invite")
+    suspend fun createInviteCode(
+        @Header("Authorization") token: Token,
+        @Query("groupId") groupId: Long,
+        @Query("days") codeLifetime: Int,
+    ): HarmonySimpleResponseDto
 
     @FormUrlEncoded
     @POST("/api/group/join")

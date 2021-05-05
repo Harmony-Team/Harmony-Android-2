@@ -5,9 +5,9 @@ import dagger.Provides
 import dev.timatifey.harmony.api.harmony.HarmonyAPI
 import dev.timatifey.harmony.api.spotify.SpotifyAPI
 import dev.timatifey.harmony.api.spotify.SpotifyAuthAPI
-import dev.timatifey.harmony.common.app.Config.Companion.BASE_URL
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_API_BASE_URL
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_AUTH_BASE_URL
+import dev.timatifey.harmony.app.Config.Companion.BASE_URL
+import dev.timatifey.harmony.app.Config.Companion.SPOTIFY_API_BASE_URL
+import dev.timatifey.harmony.app.Config.Companion.SPOTIFY_AUTH_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor

@@ -65,8 +65,12 @@ class AuthHarmonyService @Inject constructor(
             try {
                 val cacheToken = userRepo.getHarmonyTokenFromCache()
                 if (cacheToken.status is Status.Success) {
-                    val isValidToken = harmonyApi.isTokenValidate(cacheToken.data!!)
-                    return@withContext isValidToken.toResourceToken()
+                    val isValidTokenResource = harmonyApi.isTokenValidate(cacheToken.data!!).toResourceToken()
+                    if (isValidTokenResource.status is Status.Success) {
+                        return@withContext isValidTokenResource
+                    }
+                    logoutHarmony()
+                    return@withContext Resource.error(cacheToken.message.messageId)
                 }
                 return@withContext Resource.error(cacheToken.message.messageId)
             } catch (t: Throwable) {
@@ -88,6 +92,7 @@ class AuthHarmonyService @Inject constructor(
     suspend fun logoutHarmony() {
         withContext(ioDispatcher) {
             userRepo.clearAll()
+            groupRepo.clearAll()
             appDatabase.clearAllTables()
         }
     }

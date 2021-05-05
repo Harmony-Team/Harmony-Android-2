@@ -10,11 +10,11 @@ import kotlinx.coroutines.withContext
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.mappers.toResourceBoolean
-import dev.timatifey.harmony.data.mappers.toResourceGroup
+import dev.timatifey.harmony.data.mappers.toResourceGroupWithInviteCode
+import dev.timatifey.harmony.data.mappers.toResourceGroupWithoutInviteCode
 import dev.timatifey.harmony.data.mappers.toResourceGroups
 import dev.timatifey.harmony.repo.groups.GroupsRepo
 import dev.timatifey.harmony.repo.user.UserRepo
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import java.util.*
@@ -68,7 +68,7 @@ class GroupService @Inject constructor(
         groupName: String,
         description: String,
         imageUri: String?
-    ): Resource<HarmonyGroup> =
+    ): Resource<Pair<HarmonyGroup, String?>> =
         withContext(ioDispatcher) {
             try {
                 val harmonyToken = userRepo.getHarmonyTokenFromCache().data
@@ -78,12 +78,12 @@ class GroupService @Inject constructor(
                     groupName = groupName,
                     description = description,
                     avatarUrl = imageUri,
-                ).toResourceGroup()
+                ).toResourceGroupWithInviteCode()
                 if (result.status is Status.Error) {
                     return@withContext Resource.error(msg = result.message.message)
                 }
                 val group = result.data!!
-                groupRepo.addNewGroup(group)
+                groupRepo.addNewGroup(group.first)
                 return@withContext Resource.success(group)
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
@@ -110,11 +110,12 @@ class GroupService @Inject constructor(
             try {
                 val harmonyToken = userRepo.getHarmonyTokenFromCache().data
                     ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
-                val group = harmonyAPI.joinGroup(harmonyToken, code).toResourceGroup(code)
+                val group = harmonyAPI.joinGroup(harmonyToken, code).toResourceGroupWithoutInviteCode()
                 if (group.status is Status.Success) {
                     groupRepo.addNewGroup(group.data!!)
+                    return@withContext group
                 }
-                return@withContext group
+                return@withContext Resource.error(msg = group.message.message)
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }

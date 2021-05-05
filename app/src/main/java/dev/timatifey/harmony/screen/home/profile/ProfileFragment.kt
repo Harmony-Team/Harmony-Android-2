@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dev.timatifey.harmony.common.base.BaseFragment
-import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
-import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
-import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
 
@@ -26,23 +23,23 @@ class ProfileFragment : BaseFragment() {
     ): View {
         val view: ProfileMvpView = mvpViewFactory.createProfileMvpView(container)
         presenter.bindView(view)
-        presenter.bindDrawerDispatcher(drawerDispatcher)
+        presenter.bindDrawerDispatcher(drawerController)
         return view.rootView
     }
 
     override fun onStart() {
-        presenter.onStart()
         super.onStart()
+        presenter.onStart()
     }
 
     override fun onStop() {
-        presenter.onStop()
         super.onStop()
+        presenter.onStop()
     }
 
     override fun onDestroy() {
-        presenter.onDestroy()
         super.onDestroy()
+        presenter.onDestroy()
     }
 
     companion object {

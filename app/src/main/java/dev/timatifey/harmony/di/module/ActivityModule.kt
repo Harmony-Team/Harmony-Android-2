@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
 import dagger.Module
 import dagger.Provides
-import dev.timatifey.harmony.common.app.AppSettings
+import dev.timatifey.harmony.app.AppSettings
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.di.qual.ActivityFragmentManager
 
 @Module

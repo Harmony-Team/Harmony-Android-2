@@ -7,6 +7,7 @@ import dev.timatifey.harmony.di.module.ActivityModule
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
 import dev.timatifey.harmony.common.base.BaseFragment
+import dev.timatifey.harmony.lobby.LobbyStateMachine
 
 @Subcomponent(modules = [
         ActivityModule::class,
@@ -30,4 +31,5 @@ interface ActivityComponent {
     fun inject(baseActivity: BaseActivity)
 
     fun inject(baseFragment: BaseFragment)
+
 }

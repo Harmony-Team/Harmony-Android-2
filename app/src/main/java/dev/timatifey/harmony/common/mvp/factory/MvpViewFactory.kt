@@ -15,24 +15,33 @@ import dev.timatifey.harmony.screen.auth.signup.SignUpMvpView
 import dev.timatifey.harmony.screen.auth.signup.SignUpMvpViewImpl
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthMvpView
 import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupMvpView
-import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListAdapter
-import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListMvpView
-import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.grouplist.row.GroupListRowMvpView
-import dev.timatifey.harmony.screen.home.groups.grouplist.row.GroupListRowMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupMvpView
-import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.lobby.LobbyAdapter
-import dev.timatifey.harmony.screen.home.groups.lobby.LobbyMvpView
-import dev.timatifey.harmony.screen.home.groups.lobby.LobbyMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.lobby.row.LobbyRowMvpView
-import dev.timatifey.harmony.screen.home.groups.lobby.row.LobbyRowMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupMvpView
-import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupMvpViewImpl
-import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupMvpView
-import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.group.add.AddGroupMvpView
+import dev.timatifey.harmony.screen.home.group.add.AddGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.group.list.GroupListAdapter
+import dev.timatifey.harmony.screen.home.group.list.GroupListMvpView
+import dev.timatifey.harmony.screen.home.group.list.GroupListMvpViewImpl
+import dev.timatifey.harmony.screen.home.group.list.row.GroupListRowMvpView
+import dev.timatifey.harmony.screen.home.group.list.row.GroupListRowMvpViewImpl
+import dev.timatifey.harmony.screen.home.group.join.JoinGroupMvpView
+import dev.timatifey.harmony.screen.home.group.join.JoinGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.LobbyAdapter
+import dev.timatifey.harmony.screen.home.lobby.LobbyMvpView
+import dev.timatifey.harmony.screen.home.lobby.LobbyMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.row.LobbyRowMvpView
+import dev.timatifey.harmony.screen.home.lobby.row.LobbyRowMvpViewImpl
+import dev.timatifey.harmony.screen.home.group.create.NewGroupMvpView
+import dev.timatifey.harmony.screen.home.group.create.NewGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.group.share.ShareGroupMvpView
+import dev.timatifey.harmony.screen.home.group.share.ShareGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsMvpView
+import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.tabs.ViewPagerAdapter
+import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicMvpView
+import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.tabs.playlists.PlaylistsMvpView
+import dev.timatifey.harmony.screen.home.lobby.tabs.playlists.PlaylistsMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.waiting.WaitingPlaylistMvpView
+import dev.timatifey.harmony.screen.home.lobby.waiting.WaitingPlaylistMvpViewImpl
 import dev.timatifey.harmony.screen.home.profile.ProfileMvpView
 import dev.timatifey.harmony.screen.home.profile.ProfileMvpViewImpl
 import dev.timatifey.harmony.screen.home.settings.SettingsMvpView
@@ -105,5 +114,20 @@ class MvpViewFactory @Inject constructor(
 
     fun createLobbyMvpView(parent: ViewGroup?): LobbyMvpView =
         LobbyMvpViewImpl(layoutInflater, parent, this)
+
+    fun createLobbyTabsMvpView(
+        container: ViewGroup?,
+        viewPagerAdapter: ViewPagerAdapter
+    ): LobbyTabsMvpView =
+        LobbyTabsMvpViewImpl(layoutInflater, container, viewPagerAdapter)
+
+    fun createWaitingPlaylistMvpView(container: ViewGroup?): WaitingPlaylistMvpView =
+        WaitingPlaylistMvpViewImpl(layoutInflater, container)
+
+    fun createMusicMvpView(container: ViewGroup?): MusicMvpView =
+        MusicMvpViewImpl(layoutInflater, container)
+
+    fun createPlaylistsMvpView(container: ViewGroup?): PlaylistsMvpView =
+        PlaylistsMvpViewImpl(layoutInflater, container)
 
 }

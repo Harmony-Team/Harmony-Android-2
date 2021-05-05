@@ -5,20 +5,12 @@ import dev.timatifey.harmony.common.mvp.MvpViewObservable
 import dev.timatifey.harmony.common.nav.BackPressedListener
 
 
-interface MainMvpView: MvpViewObservable<MainMvpView.Listener> {
+interface MainMvpView: MvpViewObservable<MainMvpView.Listener>, DrawerController {
 
     interface Listener : BackPressedListener {
         fun onNavigationItemSelected(item: MenuItem): Boolean
     }
 
-    fun closeDrawer()
-    fun openDrawer()
     fun aboutUs()
-
-    fun unlockDrawer()
-    fun lockDrawer()
-
     fun drawerIsOpen(): Boolean
-
-    fun setUsername(text: String)
 }

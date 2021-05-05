@@ -1,8 +1,8 @@
 package dev.timatifey.harmony.service
 
 import dev.timatifey.harmony.api.spotify.SpotifyAuthAPI
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_CLIENT_ID
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_REDIRECT_URI
+import dev.timatifey.harmony.app.Config.Companion.SPOTIFY_CLIENT_ID
+import dev.timatifey.harmony.app.Config.Companion.SPOTIFY_REDIRECT_URI
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.mappers.toResourceSpotifyTokens

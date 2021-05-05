@@ -8,5 +8,4 @@ data class HarmonyGroup(
     var users: MutableList<HarmonyGroupUser>,
     var avatarUrl: String?,
     var dateCreated: String,
-    var inviteCode: String?,
 )

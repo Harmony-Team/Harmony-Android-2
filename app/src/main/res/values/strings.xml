@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Harmony</string>
 
-<!--Menu titles-->
+    <!--Menu titles-->
     <string name="others">Others</string>
     <string name="profile">Profile</string>
     <string name="groups">Groups</string>
@@ -9,7 +9,7 @@
     <string name="about_us">About us</string>
     <string name="logout">Logout</string>
 
-<!--    Sign In-->
+    <!--    Sign In-->
     <string name="sign_in_to_continue_caps">SIGN IN TO CONTINUE</string>
     <string name="email_address_or_username_caps">EMAIL ADDRESS OR USERNAME</string>
     <string name="prompt_password">PASSWORD</string>
@@ -18,7 +18,7 @@
     <string name="don_t_have_an_account_caps">DON’T HAVE AN ACCOUNT?</string>
     <string name="action_sign_in">Sign In</string>
 
-<!--    Sign Up-->
+    <!--    Sign Up-->
     <string name="sign_up_to_continue_caps">SIGN UP TO CONTINUE</string>
     <string name="already_have_an_account_caps">ALREADY HAVE AN ACCOUNT?</string>
     <string name="prompt_username">USERNAME</string>
@@ -26,17 +26,17 @@
     <string name="action_sign_up">Sign Up</string>
     <string name="email_address_caps">EMAIL ADDRESS</string>
 
-<!--    Settings-->
+    <!--    Settings-->
     <string name="user_account">User account</string>
     <string name="edit">Edit</string>
     <string name="spotify">Spotify</string>
     <string name="connections">Connections</string>
 
-<!--Groups-->
+    <!--Groups-->
     <string name="latest_groups">Latest groups</string>
     <string name="create_a_new_group">Create a new group…</string>
 
-<!--New group-->
+    <!--New group-->
     <string name="a_new_group">A new group</string>
     <string name="group_name">Group Name</string>
     <string name="description_caps">DESCRIPTION</string>
@@ -44,7 +44,7 @@
     <string name="cancel"><u>Cancel</u></string>
     <string name="pick_picture">Pick Picture</string>
 
-<!--Share group-->
+    <!--Share group-->
     <string name="share_group">Share group</string>
     <string name="your_group_has_created">Your group has created!</string>
     <string name="share_this_link">Share this link with your friends to make a collaborative playlist</string>
@@ -82,4 +82,8 @@
     <string name="add_my_music">Add my music</string>
     <string name="lobby_s_playlists">Lobby’s playlists</string>
     <string name="add_a_user">Add a user</string>
+    <string name="leaved_from_group">Leaved from the group</string>
+    <string name="ready">Ready</string>
+    <string name="not_ready">Not ready?</string>
+    <string name="amazing_now_wait_till_your_friends_add_their_tracks">Amazing!<br/> Now, wait till your friends add their tracks</string>
 </resources>

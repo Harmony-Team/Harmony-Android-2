@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class MainMvpViewImpl @Inject constructor(
     layoutInflater: LayoutInflater
-) : MvpViewObservableBase<MainMvpView.Listener>(), MainMvpView {
+) : MvpViewObservableBase<MainMvpView.Listener>(), MainMvpView, DrawerController {
 
     @SuppressLint("InflateParams")
     override var rootView: View = layoutInflater.inflate(R.layout.activity_main, null, true)
@@ -36,6 +36,10 @@ class MainMvpViewImpl @Inject constructor(
         drawer.closeDrawer(GravityCompat.START)
     }
 
+    override fun setDrawerUsername(username: String) {
+        tvUsername.text = username
+    }
+
     override fun openDrawer() {
         drawer.openDrawer(GravityCompat.START)
     }
@@ -50,10 +54,6 @@ class MainMvpViewImpl @Inject constructor(
 
     override fun lockDrawer() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-    }
-
-    override fun setUsername(text: String) {
-        tvUsername.text = text
     }
 
     override fun drawerIsOpen(): Boolean =

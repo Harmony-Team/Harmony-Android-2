@@ -3,4 +3,4 @@ package dev.timatifey.harmony.di.scope
 import javax.inject.Scope
 
 @Scope
-annotation class ActivityScope()
+annotation class ActivityScope

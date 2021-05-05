@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dev.timatifey.harmony.common.base.BaseFragment
-import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
-import dev.timatifey.harmony.common.mvp.factory.PresenterFactory
-import javax.inject.Inject
 
 class RecoveryFragment: BaseFragment() {
 
@@ -26,7 +23,7 @@ class RecoveryFragment: BaseFragment() {
     ): View {
         val view: RecoveryMvpView = mvpViewFactory.createRecoveryMvpView(container)
         presenter.bindView(view)
-        presenter.bindDrawerDispatcher(drawerDispatcher)
+        presenter.bindDrawerDispatcher(drawerController)
         return view.rootView
     }
 

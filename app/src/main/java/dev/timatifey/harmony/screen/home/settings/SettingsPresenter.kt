@@ -1,9 +1,8 @@
 package dev.timatifey.harmony.screen.home.settings
 
 import dev.timatifey.harmony.common.mvp.MvpPresenter
-import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.service.UserService
 import kotlinx.coroutines.*
 

@@ -3,10 +3,10 @@ package dev.timatifey.harmony.screen.auth.recovery
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.screen.activity.DrawerDispatcher
-import dev.timatifey.harmony.screen.RequireDrawerDispatcher
+import dev.timatifey.harmony.screen.activity.DrawerController
+import dev.timatifey.harmony.screen.RequireDrawerController
 import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
@@ -15,11 +15,11 @@ class RecoveryPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val authHarmonyService: AuthHarmonyService
-) : MvpPresenter<RecoveryMvpView>, RecoveryMvpView.Listener, RequireDrawerDispatcher {
+) : MvpPresenter<RecoveryMvpView>, RecoveryMvpView.Listener, RequireDrawerController {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private lateinit var view: RecoveryMvpView
-    private lateinit var drawerDispatcher: DrawerDispatcher
+    private lateinit var drawerController: DrawerController
 
     override fun bindView(view: RecoveryMvpView) {
         this.view = view
@@ -47,7 +47,7 @@ class RecoveryPresenter(
             when (result.status) {
                 is Status.Success -> {
                     appScreenNavigator.toHome()
-                    drawerDispatcher.unlockDrawer()
+                    drawerController.unlockDrawer()
                 }
                 is Status.Error -> {
                     view.showError(R.string.auth_failed)
@@ -73,7 +73,7 @@ class RecoveryPresenter(
         return true
     }
 
-    override fun bindDrawerDispatcher(drawerDispatcher: DrawerDispatcher) {
-        this.drawerDispatcher = drawerDispatcher
+    override fun bindDrawerDispatcher(drawerController: DrawerController) {
+        this.drawerController = drawerController
     }
 }

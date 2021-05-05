@@ -1,7 +1,7 @@
 package dev.timatifey.harmony.data.mappers
 
 import android.util.Log
-import dev.timatifey.harmony.common.app.Config
+import dev.timatifey.harmony.app.Config
 import dev.timatifey.harmony.api.harmony.dto.*
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler
@@ -48,17 +48,17 @@ fun HarmonyGroupsResponseDto.toResourceGroups(): Resource<List<HarmonyGroup>> {
     }
 }
 
-fun HarmonyGroupResponseDto.toResourceGroup(): Resource<HarmonyGroup> {
+fun HarmonyGroupResponseDto.toResourceGroupWithInviteCode(): Resource<Pair<HarmonyGroup, String?>> {
     return if (code == Config.SUCCESS_CODE && group != null) {
-        ResponseHandler.handleSuccess(group.toHarmonyGroup(this.inviteCode!!))
+        ResponseHandler.handleSuccess(group.toHarmonyGroup() to this.inviteCode)
     } else {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
 }
 
-fun HarmonyGroupResponseDto.toResourceGroup(inviteCode: String): Resource<HarmonyGroup> {
+fun HarmonyGroupResponseDto.toResourceGroupWithoutInviteCode(): Resource<HarmonyGroup> {
     return if (code == Config.SUCCESS_CODE && group != null) {
-        ResponseHandler.handleSuccess(group.toHarmonyGroup(inviteCode))
+        ResponseHandler.handleSuccess(group.toHarmonyGroup())
     } else {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
@@ -80,7 +80,6 @@ fun GroupEntity.toHarmonyGroup(): HarmonyGroup =
         users = mutableListOf<HarmonyGroupUser>(),
         avatarUrl = this.imageUrl,
         dateCreated = this.dateCreated,
-        inviteCode = this.inviteCode,
     )
 
 fun HarmonyGroup.toGroupEntity(): GroupEntity =
@@ -91,10 +90,9 @@ fun HarmonyGroup.toGroupEntity(): GroupEntity =
         imageUrl = this.avatarUrl,
         hostLogin = this.hostLogin,
         dateCreated = this.dateCreated,
-        inviteCode = this.inviteCode,
     )
 
-fun HarmonyGroupDto.toHarmonyGroup(inviteCode: String? = null): HarmonyGroup {
+fun HarmonyGroupDto.toHarmonyGroup(): HarmonyGroup {
     return HarmonyGroup(
         id = this.id,
         name = this.name,
@@ -103,7 +101,6 @@ fun HarmonyGroupDto.toHarmonyGroup(inviteCode: String? = null): HarmonyGroup {
         users = this.users.map { it.toHarmonyGroupUser(this.hostLogin) }.toMutableList(),
         avatarUrl = this.avatarUrl,
         dateCreated = this.dateCreated,
-        inviteCode = inviteCode,
     )
 }
 

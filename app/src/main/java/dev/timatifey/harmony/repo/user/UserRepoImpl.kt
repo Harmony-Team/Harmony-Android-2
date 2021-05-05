@@ -3,7 +3,7 @@ package dev.timatifey.harmony.repo.user
 import android.content.SharedPreferences
 import android.util.Log
 import dev.timatifey.harmony.R
-import dev.timatifey.harmony.common.app.Config.Companion.APP_PREFERENCES_TOKEN
+import dev.timatifey.harmony.app.Config.Companion.APP_PREFERENCES_TOKEN
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.data.model.harmony.User

@@ -12,7 +12,6 @@ data class GroupEntity(
     val imageUrl: String?,
     val dateCreated: String,
     val hostLogin: String,
-    var inviteCode: String?,
 ) {
     companion object {
         const val TABLE_NAME = "groups_table"

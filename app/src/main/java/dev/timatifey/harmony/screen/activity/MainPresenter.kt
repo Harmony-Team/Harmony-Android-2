@@ -4,37 +4,25 @@ import android.util.Log
 import android.view.MenuItem
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpPresenter
-import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.screen.RequireDrawerDispatcher
+import dev.timatifey.harmony.screen.RequireDrawerController
 import dev.timatifey.harmony.service.AuthHarmonyService
-import dev.timatifey.harmony.service.UserService
 import kotlinx.coroutines.*
 
 class MainPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val authHarmonyService: AuthHarmonyService,
-    private val userService: UserService,
     private val backPressDispatcher: BackPressDispatcher,
-) : MvpPresenter<MainMvpView>, MainMvpView.Listener, RequireDrawerDispatcher {
+) : MvpPresenter<MainMvpView>, MainMvpView.Listener, RequireDrawerController {
 
     private lateinit var view: MainMvpView
-    private lateinit var drawerDispatcher: DrawerDispatcher
+    private lateinit var drawerController: DrawerController
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
 
     override fun bindView(view: MainMvpView) {
         this.view = view
-        loadUsername()
-    }
-
-    private fun loadUsername() {
-        coroutineScope.launch {
-            val user = userService.getUser().data
-            if (user != null) {
-                view.setUsername(user.username)
-            }
-        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -47,7 +35,7 @@ class MainPresenter(
                 coroutineScope.launch {
                     authHarmonyService.logoutHarmony()
                 }
-                drawerDispatcher.lockDrawer()
+                drawerController.lockDrawer()
                 appScreenNavigator.clearBackStack()
                 appScreenNavigator.toAuth()
             }
@@ -68,7 +56,6 @@ class MainPresenter(
     }
 
     override fun onStart() {
-        loadUsername()
         view.registerListener(this)
         backPressDispatcher.registerListener(this)
     }
@@ -82,8 +69,8 @@ class MainPresenter(
         coroutineScope.coroutineContext.cancelChildren()
     }
 
-    override fun bindDrawerDispatcher(drawer: DrawerDispatcher) {
-        this.drawerDispatcher = drawer
+    override fun bindDrawerDispatcher(drawer: DrawerController) {
+        this.drawerController = drawer
     }
 
 }

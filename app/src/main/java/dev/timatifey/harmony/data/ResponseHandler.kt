@@ -1,6 +1,6 @@
 package dev.timatifey.harmony.data
 
-import dev.timatifey.harmony.common.app.Config.Companion.SPOTIFY_TOKENS_ERROR_CODE
+import dev.timatifey.harmony.app.Config.Companion.SPOTIFY_TOKENS_ERROR_CODE
 import dev.timatifey.harmony.R
 import java.net.SocketTimeoutException
 

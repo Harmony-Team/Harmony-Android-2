@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/groups_background_image"
-    tools:context=".screen.home.groups.newgroup.NewGroupFragment">
+    tools:context=".screen.home.group.create.NewGroupFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/fragment_new_group__background"

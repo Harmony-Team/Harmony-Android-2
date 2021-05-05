@@ -4,12 +4,11 @@ import android.net.Uri
 import android.webkit.WebResourceRequest
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.api.spotify.utils.constructAuthorizationURI
-import dev.timatifey.harmony.common.app.Config
+import dev.timatifey.harmony.app.Config
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.service.AuthSpotifyService
 import dev.timatifey.harmony.service.UserService
 import dev.timatifey.harmony.util.randomString

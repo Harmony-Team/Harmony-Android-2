@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import dev.timatifey.harmony.common.app.AppSettings
-import dev.timatifey.harmony.common.app.Config.Companion.PREFERENCE_NAME
+import dev.timatifey.harmony.app.AppSettings
+import dev.timatifey.harmony.app.Config.Companion.PREFERENCE_NAME
 import dev.timatifey.harmony.repo.groups.GroupsRepo
 import dev.timatifey.harmony.repo.groups.GroupsRepoImpl
 import dev.timatifey.harmony.repo.user.UserRepo
