@@ -8,14 +8,14 @@
     tools:context=".screen.home.groups.newgroup.NewGroupFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/fragment_home__groups__new_group_background"
+        android:id="@+id/fragment_new_group__background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="40dp"
         android:src="@drawable/white_rectangle" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__new_group__label_new_group"
+        android:id="@+id/fragment_new_group__label_new_group"
         style="@style/textPrimary"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
@@ -27,10 +27,10 @@
         android:textColor="@color/text_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_home__groups__new_group_background" />
+        app:layout_constraintTop_toTopOf="@+id/fragment_new_group__background" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/fragment_home__groups__new_group__pick_picture_card"
+        android:id="@+id/fragment_new_group__pick_picture_card"
         android:layout_width="216dp"
         android:layout_height="216dp"
         android:layout_marginTop="37dp"
@@ -38,10 +38,10 @@
         app:cardElevation="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__new_group__label_new_group">
+        app:layout_constraintTop_toBottomOf="@id/fragment_new_group__label_new_group">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fragment_home__groups__new_group__groupImage"
+            android:id="@+id/fragment_new_group__groupImage"
             android:layout_width="216dp"
             android:layout_height="216dp"
             android:layout_gravity="center"
@@ -49,7 +49,7 @@
             android:scaleType="centerCrop" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fragment_home__groups__new_group__imageLogo"
+            android:id="@+id/fragment_new_group__imageLogo"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -57,7 +57,7 @@
             android:src="@drawable/harmony_logo" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fragment_home__groups__new_group__fab_pick_picture"
+            android:id="@+id/fragment_new_group__fab_pick_picture"
             android:layout_width="59dp"
             android:layout_height="59dp"
             android:layout_gravity="center"
@@ -69,7 +69,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/fragment_home__groups__new_group__name"
+        android:id="@+id/fragment_new_group__new_group__name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -83,10 +83,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__new_group__pick_picture_card" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_new_group__pick_picture_card" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/fragment_home__groups__new_group__description"
+        android:id="@+id/fragment_new_group__description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -100,22 +100,22 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__new_group__name" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_new_group__new_group__name" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment_home__groups__new_group__create_btn"
+        android:id="@+id/fragment_new_group__create_btn"
         style="@style/PinkRectBtn"
         android:layout_marginBottom="25dp"
         android:background="@drawable/rectangle_btn_background"
         android:text="@string/create"
-        app:layout_constraintBottom_toTopOf="@id/fragment_home__groups__new_group__cancel_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment_new_group__cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__new_group__cancel_btn"
+        android:id="@+id/fragment_new_group__cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

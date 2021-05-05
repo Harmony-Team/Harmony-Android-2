@@ -52,4 +52,20 @@
         <item name="textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/tabTextAppearance</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabGravity">start</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="tabSelectedTextColor">#FF2662</item>
+    </style>
+    <style name="tabTextAppearance" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textColor">#80FF2662</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.167</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

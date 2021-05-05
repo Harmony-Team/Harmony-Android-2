@@ -1,6 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/groups_background_image"
+    tools:context=".screen.home.groups.lobby.LobbyFragment">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fragment_lobby__ic_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/ic_back_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_lobby__title_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragment_lobby__title_fragment" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_lobby__title_fragment"
+        style="@style/textPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/lobby"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fragment_lobby__ic_settings"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/ic_settings"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_lobby__title_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragment_lobby__title_fragment" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment_lobby__title_users"
+        style="@style/textPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/users_of_the_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_lobby__title_fragment" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_lobby__recycler_view"
+        android:layout_width="match_parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_height="wrap_content"
+        android:minHeight="106dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_lobby__title_users"
+        app:layout_constraintVertical_bias="0" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/fragment_lobby__tabs"
+        style="@style/TabLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_lobby__recycler_view"
+        app:layout_constraintWidth_percent="0.8">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_my_music" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lobby_s_playlists" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fragment_lobby__ic_search"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_lobby__tabs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@id/fragment_lobby__tabs"
+        app:layout_constraintTop_toTopOf="@id/fragment_lobby__tabs" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/fragment_list__view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_lobby__tabs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
@@ -20,13 +19,13 @@ class SignInMvpViewImpl(
     override var rootView: View =
         layoutInflater.inflate(R.layout.fragment_sign_in, parent, false)
 
-    private val pbLoading: ProgressBar = findViewById(R.id.login__loading)
-    private val etUsername: AppCompatEditText = findViewById(R.id.login__username)
-    private val etPassword: AppCompatEditText = findViewById(R.id.login__password)
-    private val tvForgotPsw: AppCompatTextView = findViewById(R.id.login__forgot_password_btn)
-    private val ibSpotifyAuth: AppCompatImageButton = findViewById(R.id.login__spotify_btn)
-    private val ibSignIn: AppCompatImageButton = findViewById(R.id.login__login_btn)
-    private val tvHaveNotAcc: AppCompatTextView = findViewById(R.id.login__registration_btn)
+    private val pbLoading: ProgressBar = findViewById(R.id.fragment_signin__loading)
+    private val etUsername: AppCompatEditText = findViewById(R.id.fragment_signin__username)
+    private val etPassword: AppCompatEditText = findViewById(R.id.fragment_signin__password)
+    private val tvForgotPsw: AppCompatTextView = findViewById(R.id.fragment_signin__forgot_password_btn)
+    private val ibSpotifyAuth: AppCompatImageButton = findViewById(R.id.fragment_signin__spotify_btn)
+    private val ibSignIn: AppCompatImageButton = findViewById(R.id.fragment_signin__login_btn)
+    private val tvHaveNotAcc: AppCompatTextView = findViewById(R.id.fragment_signin__registration_btn)
 
     init {
         etUsername.doAfterTextChanged {

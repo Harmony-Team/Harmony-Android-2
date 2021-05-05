@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
+import dev.timatifey.harmony.data.mappers.toResourceBoolean
 import dev.timatifey.harmony.data.mappers.toResourceGroup
 import dev.timatifey.harmony.data.mappers.toResourceGroups
 import dev.timatifey.harmony.repo.groups.GroupsRepo
@@ -49,9 +50,14 @@ class GroupService @Inject constructor(
                 val harmonyToken = userRepo.getHarmonyTokenFromCache().data
                     ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
                 val groupsDto = harmonyAPI.getGroups(harmonyToken)
-                val gr = groupsDto.toResourceGroups()
-                Log.e("GDK", gr.toString())
-                return@withContext gr
+                val groupsResource = groupsDto.toResourceGroups()
+                if (groupsResource.status is Status.Success) {
+                    groupsResource.data!!.forEach {
+                        groupRepo.addNewGroup(it)
+                    }
+                    groupRepo.loadGroupsInMemory(groupsResource.data)
+                }
+                return@withContext groupsResource
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }
@@ -87,8 +93,13 @@ class GroupService @Inject constructor(
     suspend fun deleteGroup(group: HarmonyGroup): Resource<Boolean> =
         withContext(ioDispatcher) {
             try {
-                groupRepo.deleteGroup(group)
-                return@withContext Resource.success(true)
+                val harmonyToken = userRepo.getHarmonyTokenFromCache().data
+                    ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
+                val result = harmonyAPI.leaveGroup(harmonyToken, group.id).toResourceBoolean()
+                if (result.status is Status.Success) {
+                    groupRepo.deleteGroup(group)
+                }
+                return@withContext result
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }
@@ -99,8 +110,11 @@ class GroupService @Inject constructor(
             try {
                 val harmonyToken = userRepo.getHarmonyTokenFromCache().data
                     ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
-                val groupDto = harmonyAPI.joinGroup(harmonyToken, code)
-                return@withContext groupDto.toResourceGroup(code)
+                val group = harmonyAPI.joinGroup(harmonyToken, code).toResourceGroup(code)
+                if (group.status is Status.Success) {
+                    groupRepo.addNewGroup(group.data!!)
+                }
+                return@withContext group
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }
@@ -110,9 +124,18 @@ class GroupService @Inject constructor(
         withContext(ioDispatcher) {
             try {
                 val group = groupRepo.getGroupById(id).firstOrNull()
-                return@withContext if (group != null)
-                    Resource.success(group)
-                else Resource.error(msg = "Not found")
+                if (group != null) {
+                    return@withContext Resource.success(group)
+                }
+                val fetchedGroups = fetchGroups()
+                if (fetchedGroups.status is Status.Success) {
+                    fetchedGroups.data!!.forEach {
+                        if (it.id == id) {
+                            return@withContext Resource.success(it)
+                        }
+                    }
+                }
+                return@withContext Resource.error(msg = "Not found")
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }

@@ -22,6 +22,7 @@ class MainPresenter(
     private lateinit var drawerDispatcher: DrawerDispatcher
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
+
     override fun bindView(view: MainMvpView) {
         this.view = view
         loadUsername()
@@ -43,8 +44,11 @@ class MainPresenter(
             R.id.menu__settings -> appScreenNavigator.toSettings()
             R.id.menu__about_us -> view.aboutUs()
             R.id.menu__logout -> {
-                authHarmonyService.logoutHarmony()
+                coroutineScope.launch {
+                    authHarmonyService.logoutHarmony()
+                }
                 drawerDispatcher.lockDrawer()
+                appScreenNavigator.clearBackStack()
                 appScreenNavigator.toAuth()
             }
         }
@@ -64,6 +68,7 @@ class MainPresenter(
     }
 
     override fun onStart() {
+        loadUsername()
         view.registerListener(this)
         backPressDispatcher.registerListener(this)
     }
@@ -74,6 +79,7 @@ class MainPresenter(
     }
 
     override fun onDestroy() {
+        coroutineScope.coroutineContext.cancelChildren()
     }
 
     override fun bindDrawerDispatcher(drawer: DrawerDispatcher) {

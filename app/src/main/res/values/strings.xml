@@ -48,7 +48,7 @@
     <string name="share_group">Share group</string>
     <string name="your_group_has_created">Your group has created!</string>
     <string name="share_this_link">Share this link with your friends to make a collaborative playlist</string>
-    <string name="link_example"><u>https://harmony/HbK2YSzd</u></string>
+    <string name="link_example"><u>https://harmony/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0OCIsImlhdCI6MTYyMDE2MTI1NCwiZXhwIjoxNjIwMjQ3NjU0fQ.Sh3Fqo3yV2jm-3Y9TxR6x9Hk18mcQ4r2F5vCxr84hnOFJ4ewBYRoVRUIYbcWGuKuqSpJuzZH0kPlfcS4C2QQYQ</u></string>
     <string name="share_link">Share Link</string>
 
     <string name="auth_failed">Authentication failed</string>
@@ -77,4 +77,9 @@
     <string name="join">Join</string>
     <string name="group_link_or_code">Group link or code</string>
     <string name="add_a_group">Add a group</string>
+    <string name="lobby">Lobby</string>
+    <string name="users_of_the_group">Users of the group</string>
+    <string name="add_my_music">Add my music</string>
+    <string name="lobby_s_playlists">Lobby’s playlists</string>
+    <string name="add_a_user">Add a user</string>
 </resources>

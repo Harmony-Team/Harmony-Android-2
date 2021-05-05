@@ -16,11 +16,11 @@ class ShareGroupMvpViewImpl(
     override var rootView: View =
         layoutInflater.inflate(R.layout.fragment_share_group, parent, false)
     private val btnShare: AppCompatButton =
-        findViewById(R.id.fragment_home__groups__share_group__share_btn)
+        findViewById(R.id.fragment_share_group__share_btn)
     private val tvCancel: AppCompatTextView =
-        findViewById(R.id.fragment_home__groups__share_group__cancel_btn)
+        findViewById(R.id.fragment_share_group__cancel_btn)
     private val tvShareLink: AppCompatTextView =
-        findViewById(R.id.fragment_home__groups__share_group__link)
+        findViewById(R.id.fragment_share_group__link)
 
     init {
         btnShare.setOnClickListener { listeners.forEach { it.onShareLinkBtnClicked() } }

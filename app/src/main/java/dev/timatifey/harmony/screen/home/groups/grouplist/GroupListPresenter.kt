@@ -31,6 +31,7 @@ class GroupListPresenter(
         coroutineScope.launch {
             val groupsResource = groupService.getGroups()
             if (groupsResource.status is Status.Success) {
+                groups.clear()
                 groups.addAll(groupsResource.data!!)
                 view.bindData(groups)
             } else {
@@ -55,8 +56,7 @@ class GroupListPresenter(
     }
 
     override fun onGroupClicked(group: HarmonyGroup) {
-        view.showMessage("Clicked ${group.name}")
-//        appScreenNavigator.toLobby(group.id)
+        appScreenNavigator.toLobby(group.id)
     }
 
     override fun onMenuBtnClicked() {

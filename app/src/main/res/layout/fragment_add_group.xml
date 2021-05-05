@@ -7,7 +7,7 @@
     android:background="@drawable/groups_background_image">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__title_fragment"
+        android:id="@+id/fragment_add_group__title_fragment"
         style="@style/textPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

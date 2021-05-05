@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
@@ -18,12 +17,12 @@ class SignUpMvpViewImpl(
 ) : MvpViewObservableBase<SignUpMvpView.Listener>(), SignUpMvpView {
     override var rootView: View = inflater.inflate(R.layout.fragment_sign_up, parent, false)
 
-    private val pbLoading: ProgressBar = findViewById(R.id.register__loading)
-    private val etUsername: AppCompatEditText = findViewById(R.id.register__username)
-    private val etPassword: AppCompatEditText = findViewById(R.id.register__password)
-    private val etEmail: AppCompatEditText = findViewById(R.id.register__email)
-    private val ibSignUp: AppCompatImageButton = findViewById(R.id.register__register_btn)
-    private val tvHaveAcc: AppCompatTextView = findViewById(R.id.register__already_have_an_acc)
+    private val pbLoading: ProgressBar = findViewById(R.id.fragment_signup__loading)
+    private val etUsername: AppCompatEditText = findViewById(R.id.fragment_signup__username)
+    private val etPassword: AppCompatEditText = findViewById(R.id.fragment_signup__password)
+    private val etEmail: AppCompatEditText = findViewById(R.id.fragment_signup__email)
+    private val ibSignUp: AppCompatImageButton = findViewById(R.id.fragment_signup__register_btn)
+    private val tvHaveAcc: AppCompatTextView = findViewById(R.id.fragment_signup__already_have_an_acc)
 
     init {
         etUsername.doAfterTextChanged {

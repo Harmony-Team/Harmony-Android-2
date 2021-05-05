@@ -9,8 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="secondaryTextColor">#576E98</color>
     <color name="barrier_color">#283040</color>
-    <color name="pink_text">#FF2662</color>
+    <color name="pink">#FF2662</color>
     <color name="text_gray">#8D99B2</color>
     <color name="text_main">#283040</color>
     <color name="progress_bar_background">#CC212939</color>
+    <color name="black_blue">#1D2432</color>
 </resources>

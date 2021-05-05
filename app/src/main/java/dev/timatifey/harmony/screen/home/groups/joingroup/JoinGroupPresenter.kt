@@ -31,12 +31,14 @@ class JoinGroupPresenter(
     }
 
     override fun onDestroy() {
+        coroutineScope.coroutineContext.cancelChildren()
     }
 
     override fun onJoinBtnClicked(code: String) {
         coroutineScope.launch {
             val groupRes = groupService.joinGroup(code)
             if (groupRes.status is Status.Success) {
+//                appScreenNavigator.toGroupList()
                 appScreenNavigator.toLobby(groupRes.data!!.id)
             } else {
                 appScreenNavigator.toGroupList()

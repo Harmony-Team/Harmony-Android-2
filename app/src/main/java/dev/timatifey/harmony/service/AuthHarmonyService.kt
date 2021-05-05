@@ -17,6 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class AuthHarmonyService @Inject constructor(
     private val userRepo: UserRepo,
+    private val groupRepo: GroupsRepo,
     private val appDatabase: AppDatabase,
     private val harmonyApi: HarmonyAPI,
     private val ioDispatcher: CoroutineDispatcher,
@@ -84,9 +85,11 @@ class AuthHarmonyService @Inject constructor(
             }
         }
 
-    fun logoutHarmony() {
-        userRepo.clearAll()
-        appDatabase.clearAllTables()
+    suspend fun logoutHarmony() {
+        withContext(ioDispatcher) {
+            userRepo.clearAll()
+            appDatabase.clearAllTables()
+        }
     }
 
 }

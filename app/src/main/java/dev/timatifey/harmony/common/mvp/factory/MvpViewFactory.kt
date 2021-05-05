@@ -24,6 +24,11 @@ import dev.timatifey.harmony.screen.home.groups.grouplist.row.GroupListRowMvpVie
 import dev.timatifey.harmony.screen.home.groups.grouplist.row.GroupListRowMvpViewImpl
 import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupMvpView
 import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupMvpViewImpl
+import dev.timatifey.harmony.screen.home.groups.lobby.LobbyAdapter
+import dev.timatifey.harmony.screen.home.groups.lobby.LobbyMvpView
+import dev.timatifey.harmony.screen.home.groups.lobby.LobbyMvpViewImpl
+import dev.timatifey.harmony.screen.home.groups.lobby.row.LobbyRowMvpView
+import dev.timatifey.harmony.screen.home.groups.lobby.row.LobbyRowMvpViewImpl
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupMvpView
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupMvpViewImpl
 import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareGroupMvpView
@@ -87,5 +92,18 @@ class MvpViewFactory @Inject constructor(
 
     fun createShareGroupMvpView(parent: ViewGroup?): ShareGroupMvpView =
         ShareGroupMvpViewImpl(layoutInflater, parent)
+
+    fun createLobbyRowView(
+        parent: ViewGroup,
+        listener: LobbyRowMvpView.Listener,
+        context: Context
+    ): LobbyRowMvpView =
+        LobbyRowMvpViewImpl(layoutInflater, parent, listener, Glide.with(context))
+
+    fun createLobbyAdapter(listener: LobbyRowMvpView.Listener, context: Context): LobbyAdapter =
+        LobbyAdapter(listener, this, context)
+
+    fun createLobbyMvpView(parent: ViewGroup?): LobbyMvpView =
+        LobbyMvpViewImpl(layoutInflater, parent, this)
 
 }

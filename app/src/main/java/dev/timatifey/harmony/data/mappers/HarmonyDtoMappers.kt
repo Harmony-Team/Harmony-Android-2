@@ -41,7 +41,8 @@ fun HarmonyGroupsResponseDto.toResourceGroups(): Resource<List<HarmonyGroup>> {
     return if (code == Config.SUCCESS_CODE && groups != null) {
         ResponseHandler.handleSuccess(groups.map {
             Log.e("FF", it.toString())
-            it.toHarmonyGroup() })
+            it.toHarmonyGroup()
+        })
     } else {
         ResponseHandler.handleException(exception = Exception(message), code = code)
     }
@@ -99,16 +100,17 @@ fun HarmonyGroupDto.toHarmonyGroup(inviteCode: String? = null): HarmonyGroup {
         name = this.name,
         description = this.description,
         hostLogin = this.hostLogin,
-        users = this.users.map {
-            it.toHarmonyGroupUser()
-        }.toMutableList(),
+        users = this.users.map { it.toHarmonyGroupUser(this.hostLogin) }.toMutableList(),
         avatarUrl = this.avatarUrl,
         dateCreated = this.dateCreated,
         inviteCode = inviteCode,
     )
 }
 
-fun HarmonyGroupDto.GroupUserDto.toHarmonyGroupUser(): HarmonyGroupUser =
+fun HarmonyGroupDto.GroupUserDto.toHarmonyGroupUser(hostLogin: String): HarmonyGroupUser =
     HarmonyGroupUser(
-        login = this.login
+        login = this.login,
+        avatarUrl = null,
+        isHost = this.login == hostLogin,
+        isReady = false,
     )

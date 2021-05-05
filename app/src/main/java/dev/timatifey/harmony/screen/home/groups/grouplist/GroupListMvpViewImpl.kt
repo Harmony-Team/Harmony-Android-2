@@ -25,9 +25,9 @@ class GroupListMvpViewImpl(
         layoutInflater.inflate(R.layout.fragment_group_list, parent, false)
 
     private val ibAddGroup: AppCompatImageButton =
-        findViewById(R.id.fragment_home__groups__btn_create_new)
-    private val ibMenu: AppCompatImageButton = findViewById(R.id.fragment_home__groups__ic_menu)
-    private val rvGroupList: RecyclerView = findViewById(R.id.fragment_home__profile__recycler_view)
+        findViewById(R.id.fragment_groups__btn_create_new)
+    private val ibMenu: AppCompatImageButton = findViewById(R.id.fragment_groups__ic_menu)
+    private val rvGroupList: RecyclerView = findViewById(R.id.fragment_groups__recycler_view)
     private val adapter: GroupListAdapter = viewFactory.createGroupListAdapter(this, context)
     private val itemSwipeManager = ItemSwipeManager(context, adapter)
 

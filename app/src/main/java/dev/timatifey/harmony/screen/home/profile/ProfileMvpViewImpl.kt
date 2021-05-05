@@ -4,7 +4,6 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -18,11 +17,11 @@ class ProfileMvpViewImpl(
 
     override var rootView: View = layoutInflater.inflate(R.layout.fragment_profile, parent, false)
 
-    private val ibMenu: AppCompatImageButton = findViewById(R.id.fragment_home__profile__ic_menu)
+    private val ibMenu: AppCompatImageButton = findViewById(R.id.fragment_profile__ic_menu)
     private val ivProfileImage: AppCompatImageView =
-        findViewById(R.id.fragment_home__profile__image)
+        findViewById(R.id.fragment_profile__image)
     private val tvUsername: AppCompatTextView =
-        findViewById(R.id.fragment_home__profile__username_label)
+        findViewById(R.id.fragment_profile__username_label)
 
     init {
         ibMenu.setOnClickListener {

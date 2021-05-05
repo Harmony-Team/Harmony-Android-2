@@ -11,6 +11,7 @@ import dev.timatifey.harmony.screen.auth.spotify.SpotifyAuthPresenter
 import dev.timatifey.harmony.screen.home.groups.addgroup.AddGroupPresenter
 import dev.timatifey.harmony.screen.home.groups.grouplist.GroupListPresenter
 import dev.timatifey.harmony.screen.home.groups.joingroup.JoinGroupPresenter
+import dev.timatifey.harmony.screen.home.groups.lobby.LobbyPresenter
 import dev.timatifey.harmony.screen.home.groups.newgroup.NewGroupPresenter
 import dev.timatifey.harmony.screen.home.groups.newgroup.PickPhotoIntentListener
 import dev.timatifey.harmony.screen.home.groups.sharegroup.ShareIntentListener
@@ -122,5 +123,13 @@ class PresenterFactory @Inject constructor(
             backPressDispatcher = backPressDispatcher,
             appScreenNavigator = appScreenNavigator,
             groupService = groupService
+        )
+
+    fun createLobbyPresenter(groupId: Long): LobbyPresenter =
+        LobbyPresenter(
+            groupService = groupService,
+            backPressDispatcher = backPressDispatcher,
+            appScreenNavigator = appScreenNavigator,
+            groupId = groupId,
         )
 }

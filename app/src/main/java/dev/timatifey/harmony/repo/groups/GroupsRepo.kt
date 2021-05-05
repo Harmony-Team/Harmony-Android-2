@@ -8,4 +8,6 @@ interface GroupsRepo {
     fun getGroupById(id: Long): Flow<HarmonyGroup>
     suspend fun addNewGroup(group: HarmonyGroup)
     suspend fun deleteGroup(group: HarmonyGroup)
+    fun loadGroupsInMemory(groups: List<HarmonyGroup>)
+    fun clearAll()
 }

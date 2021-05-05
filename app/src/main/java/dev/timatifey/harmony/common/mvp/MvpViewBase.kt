@@ -1,9 +1,11 @@
 package dev.timatifey.harmony.common.mvp
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
@@ -36,6 +38,10 @@ abstract class MvpViewBase : MvpView {
 
     protected fun getDrawable(@DrawableRes id: Int): Drawable? {
         return ContextCompat.getDrawable(context, id)
+    }
+
+    protected fun getColorStateList(@ColorRes id: Int): ColorStateList? {
+        return ContextCompat.getColorStateList(context, id)
     }
 
     protected fun showToast(@StringRes id: Int) {

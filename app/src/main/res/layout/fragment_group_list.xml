@@ -8,17 +8,17 @@
     tools:context=".screen.home.groups.grouplist.GroupListFragment">
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/fragment_home__groups__ic_menu"
+        android:id="@+id/fragment_groups__ic_menu"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="30dp"
         android:background="@drawable/ic_action_menu"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_home__groups__title_fragment"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_add_group__title_fragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/fragment_home__groups__title_fragment" />
+        app:layout_constraintTop_toTopOf="@id/fragment_add_group__title_fragment" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__title_fragment"
+        android:id="@+id/fragment_add_group__title_fragment"
         style="@style/textPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__label_latest"
+        android:id="@+id/fragment_groups__label_latest"
         style="@style/textPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,17 +39,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__title_fragment" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_group__title_fragment" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/fragment_home__groups__btn_create_new"
+        android:id="@+id/fragment_groups__btn_create_new"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/add_new_group_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__label_latest" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_groups__label_latest" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -57,17 +57,17 @@
         android:layout_marginStart="21dp"
         android:fontFamily="@font/lato_light"
         android:text="@string/add_a_group"
-        android:textColor="@color/pink_text"
+        android:textColor="@color/pink"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_home__groups__btn_create_new"
-        app:layout_constraintStart_toEndOf="@id/fragment_home__groups__btn_create_new"
-        app:layout_constraintTop_toTopOf="@id/fragment_home__groups__btn_create_new" />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_groups__btn_create_new"
+        app:layout_constraintStart_toEndOf="@id/fragment_groups__btn_create_new"
+        app:layout_constraintTop_toTopOf="@id/fragment_groups__btn_create_new" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_home__profile__recycler_view"
+        android:id="@+id/fragment_groups__recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__btn_create_new"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_groups__btn_create_new"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

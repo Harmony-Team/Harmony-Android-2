@@ -19,19 +19,19 @@ class NewGroupMvpViewImpl(
 
     override var rootView: View = layoutInflater.inflate(R.layout.fragment_new_group, parent, false)
     private val btnCreateGroup: AppCompatButton =
-        findViewById(R.id.fragment_home__groups__new_group__create_btn)
+        findViewById(R.id.fragment_new_group__create_btn)
     private val tvCancel: AppCompatTextView =
-        findViewById(R.id.fragment_home__groups__new_group__cancel_btn)
+        findViewById(R.id.fragment_new_group__cancel_btn)
     private val etGroupName: AppCompatEditText =
-        findViewById(R.id.fragment_home__groups__new_group__name)
+        findViewById(R.id.fragment_new_group__new_group__name)
     private val etDescription: AppCompatEditText =
-        findViewById(R.id.fragment_home__groups__new_group__description)
+        findViewById(R.id.fragment_new_group__description)
     private val ivGroupImage: AppCompatImageView =
-        findViewById(R.id.fragment_home__groups__new_group__groupImage)
+        findViewById(R.id.fragment_new_group__groupImage)
     private val fabPickImage: FloatingActionButton =
-        findViewById(R.id.fragment_home__groups__new_group__fab_pick_picture)
+        findViewById(R.id.fragment_new_group__fab_pick_picture)
     private val ivImageLogo: AppCompatImageView =
-        findViewById(R.id.fragment_home__groups__new_group__imageLogo)
+        findViewById(R.id.fragment_new_group__imageLogo)
 
     private var selectedImage: Uri? = null
 

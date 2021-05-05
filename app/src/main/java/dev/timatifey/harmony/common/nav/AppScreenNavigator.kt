@@ -97,6 +97,10 @@ class AppScreenNavigator @Inject constructor(
         fragNavController.onSaveInstanceState(outState)
     }
 
+    fun clearBackStack() {
+        fragNavController.clearStack()
+    }
+
     fun navigateUp() {
         val options = transactionOptions(
             R.anim.fade_in,

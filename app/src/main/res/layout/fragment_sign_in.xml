@@ -8,7 +8,7 @@
     tools:context="screen.auth.signin.SignInFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/login__logo"
+        android:id="@+id/fragment_signin__logo"
         android:layout_width="42dp"
         android:layout_height="43dp"
         android:layout_marginTop="40dp"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/login__sign_in_text"
+        android:id="@+id/fragment_signin__sign_in_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_regular"
@@ -32,24 +32,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login__logo"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signin__logo"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <LinearLayout
-        android:id="@+id/login__fields"
+        android:id="@+id/fragment_signin__fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login__sign_in_text"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signin__sign_in_text"
         app:layout_constraintVertical_bias="0.05"
         app:layout_constraintVertical_chainStyle="packed">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/login__username"
+            android:id="@+id/fragment_signin__username"
             style="@style/textPrimary"
             android:layout_width="335dp"
             android:layout_height="52dp"
@@ -59,7 +59,7 @@
             android:selectAllOnFocus="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/login__password"
+            android:id="@+id/fragment_signin__password"
             style="@style/textPrimary"
             android:layout_width="335dp"
             android:layout_height="52dp"
@@ -71,7 +71,7 @@
             android:selectAllOnFocus="true" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/login__forgot_password_btn"
+            android:id="@+id/fragment_signin__forgot_password_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -84,7 +84,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/login__authorize_with"
+        android:id="@+id/fragment_signin__authorize_with"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_regular"
@@ -92,15 +92,15 @@
         android:text="@string/authorize_with_caps"
         android:textColor="#8D99B2"
         android:textSize="9sp"
-        app:layout_constraintBottom_toTopOf="@id/login__spotify_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment_signin__spotify_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login__fields"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signin__fields"
         app:layout_constraintVertical_bias="0.1"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/login__spotify_btn"
+        android:id="@+id/fragment_signin__spotify_btn"
         android:layout_width="31dp"
         android:layout_height="31dp"
         android:layout_marginTop="15dp"
@@ -110,11 +110,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login__authorize_with"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signin__authorize_with"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/login__login_btn"
+        android:id="@+id/fragment_signin__login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -122,15 +122,15 @@
         android:background="@drawable/pink_circle_button"
         android:enabled="false"
         android:src="@drawable/ic_right_arrow"
-        app:layout_constraintBottom_toTopOf="@id/login__registration_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment_signin__registration_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login__spotify_btn"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signin__spotify_btn"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/login__registration_btn"
+        android:id="@+id/fragment_signin__registration_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
@@ -147,7 +147,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ProgressBar
-        android:id="@+id/login__loading"
+        android:id="@+id/fragment_signin__loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

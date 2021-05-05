@@ -8,7 +8,7 @@
     tools:context=".screen.auth.signup.SignUpFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/register__logo"
+        android:id="@+id/fragment_signup__logo"
         android:layout_width="42dp"
         android:layout_height="43dp"
         android:layout_marginTop="40dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/register_sign_up_text"
+        android:id="@+id/fragment_signup__sign_up_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_regular"
@@ -31,23 +31,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register__logo"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signup__logo"
         app:layout_constraintVertical_bias="0.2" />
 
     <LinearLayout
-        android:id="@+id/register_fields"
+        android:id="@+id/fragment_signup__fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_sign_up_text"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signup__sign_up_text"
         app:layout_constraintVertical_bias="0.05"
         app:layout_constraintVertical_chainStyle="spread_inside">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/register__username"
+            android:id="@+id/fragment_signup__username"
             style="@style/textPrimary"
             android:layout_width="335dp"
             android:layout_height="52dp"
@@ -57,7 +57,7 @@
             android:selectAllOnFocus="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/register__email"
+            android:id="@+id/fragment_signup__email"
             style="@style/textPrimary"
             android:layout_width="335dp"
             android:layout_height="52dp"
@@ -67,7 +67,7 @@
             android:selectAllOnFocus="true" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/register__password"
+            android:id="@+id/fragment_signup__password"
             style="@style/textPrimary"
             android:layout_width="335dp"
             android:layout_height="52dp"
@@ -80,7 +80,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/register__register_btn"
+        android:id="@+id/fragment_signup__register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -88,15 +88,15 @@
         android:background="@drawable/pink_circle_button"
         android:enabled="false"
         android:src="@drawable/ic_right_arrow"
-        app:layout_constraintBottom_toTopOf="@id/register__already_have_an_acc"
+        app:layout_constraintBottom_toTopOf="@id/fragment_signup__already_have_an_acc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_fields"
+        app:layout_constraintTop_toBottomOf="@id/fragment_signup__fields"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/register__already_have_an_acc"
+        android:id="@+id/fragment_signup__already_have_an_acc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
@@ -113,7 +113,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ProgressBar
-        android:id="@+id/register__loading"
+        android:id="@+id/fragment_signup__loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

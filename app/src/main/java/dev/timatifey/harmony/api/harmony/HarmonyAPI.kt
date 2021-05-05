@@ -69,6 +69,12 @@ interface HarmonyAPI {
         @Field("inviteCode") inviteCode: String,
     ): HarmonyGroupResponseDto
 
+    @GET("/api/group/leave")
+    suspend fun leaveGroup(
+        @Header("Authorization") authToken: Token,
+        @Query("groupId") groupId: Long,
+    ): HarmonySimpleResponseDto
+
     // MUSIC
     @FormUrlEncoded
     @POST("/api/group/music/add")

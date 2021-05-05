@@ -5,6 +5,7 @@ import dev.timatifey.harmony.data.mappers.toGroupEntity
 import dev.timatifey.harmony.data.mappers.toHarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,6 +14,8 @@ import javax.inject.Singleton
 class GroupsRepoImpl @Inject constructor(
     private val groupsDao: GroupsDao
 ) : GroupsRepo {
+
+    private val groups = mutableListOf<HarmonyGroup>()
 
     override fun getAllGroups(): Flow<List<HarmonyGroup>> =
         groupsDao.loadAllGroups()
@@ -30,7 +33,23 @@ class GroupsRepoImpl @Inject constructor(
         groupsDao.deleteGroup(group.toGroupEntity())
     }
 
+    override fun loadGroupsInMemory(groups: List<HarmonyGroup>) {
+        this.groups.clear()
+        this.groups.addAll(groups)
+    }
+
+    override fun clearAll() {
+        groups.clear()
+    }
+
     override fun getGroupById(id: Long): Flow<HarmonyGroup> =
-        groupsDao.getGroupById(id).map { it.toHarmonyGroup() }
+        flow {
+            for (group in groups) {
+                if (group.id == id) {
+                    emit(group)
+                }
+            }
+        }
+//        groupsDao.getGroupById(id).map { it.toHarmonyGroup() }
 
 }
