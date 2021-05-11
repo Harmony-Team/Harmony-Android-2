@@ -8,6 +8,8 @@ interface ShareGroupMvpView: MvpViewObservable<ShareGroupMvpView.Listener> {
         fun onShareLinkBtnClicked()
         fun onCancelBtnClicked()
     }
-
+    fun isVisibleLoading(isVisible: Boolean)
+    fun disableAll()
+    fun enableAll()
     fun setShareCodeText(link: String)
 }

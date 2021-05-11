@@ -1,14 +1,14 @@
 package dev.timatifey.harmony.service
 
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.util.Log
+import android.widget.Toast
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.api.spotify.SpotifyAPI
-import dev.timatifey.harmony.api.spotify.dto.ItemPlaylistsDto
 import dev.timatifey.harmony.data.Resource
-import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.data.mappers.toResourceGroups
 import dev.timatifey.harmony.data.mappers.toSpotifyTrack
-import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.data.model.spotify.SpotifyTrack
 import dev.timatifey.harmony.repo.tracks.TracksRepo
@@ -19,8 +19,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 class TracksService @Inject constructor(
+    private val mediaPlayer: MediaPlayer,
     private val userRepo: UserRepo,
     private val tracksRepo: TracksRepo,
     private val spotifyApi: SpotifyAPI,
@@ -31,11 +33,11 @@ class TracksService @Inject constructor(
         withContext(ioDispatcher) {
             try {
                 val cachedTracks = tracksRepo.getAllTracks().first()
-                Log.e("TracksService", cachedTracks.toString())
+//                Log.e("TracksService", cachedTracks.toString())
                 if (cachedTracks.isNotEmpty()) {
                     return@withContext Resource.success(cachedTracks)
                 }
-                Log.e("TracksService", "LOAD TRACKS")
+//                Log.e("TracksService", "LOAD TRACKS")
                 return@withContext fetchTracks()
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
@@ -68,4 +70,28 @@ class TracksService @Inject constructor(
                 return@withContext Resource.error(msg = t.message)
             }
         }
+
+    fun playAudio(track: SpotifyTrack, completionListener: MediaPlayer.OnCompletionListener) {
+        stopPlayAudio()
+        mediaPlayer.apply {
+            setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build()
+            )
+            setDataSource(track.previewUrl)
+            setOnPreparedListener {
+                start()
+            }
+            setOnCompletionListener(completionListener)
+            prepareAsync()
+        }
+    }
+
+    fun stopPlayAudio() {
+        mediaPlayer.apply {
+            stop()
+            reset()
+        }
+    }
 }

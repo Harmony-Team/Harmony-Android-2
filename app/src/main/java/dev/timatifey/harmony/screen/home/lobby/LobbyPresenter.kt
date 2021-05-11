@@ -1,5 +1,6 @@
 package dev.timatifey.harmony.screen.home.lobby
 
+import android.content.Intent
 import android.util.Log
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
@@ -69,6 +70,8 @@ class LobbyPresenter(
                 coroutineScope.launch {
                     val code = lobbyService.generateShareCode(lobbyProvider.groupId!!)
                     if (code.status is Status.Success) {
+                        view.isVisibleLoading(true)
+                        view.disableAll()
                         listenerShare.startActivityForShare(code.data!!)
                     }
                 }
@@ -77,6 +80,11 @@ class LobbyPresenter(
                 view.showMessage("Clicked on ${item.login}")
             }
         }
+    }
+
+    fun onShareResult(resultCode: Int, data: Intent?) {
+        view.isVisibleLoading(false)
+        view.enableAll()
     }
 
     override fun onBackBtnClicked() {

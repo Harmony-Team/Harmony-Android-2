@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,156 +7,161 @@
     android:background="@drawable/sign_in_image"
     tools:context="screen.auth.signin.SignInFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/fragment_signin__logo"
-        android:layout_width="42dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="40dp"
-        android:scaleType="fitCenter"
-        android:scaleX="1.3"
-        android:scaleY="1.3"
-        android:src="@drawable/harmony_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_signin__sign_in_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_regular"
-        android:letterSpacing="0.08"
-        android:text="@string/sign_in_to_continue_caps"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_signin__logo"
-        app:layout_constraintVertical_bias="0.2"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <LinearLayout
-        android:id="@+id/fragment_signin__fields"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_signin__sign_in_text"
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintVertical_chainStyle="packed">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/fragment_signin__username"
-            style="@style/textPrimary"
-            android:layout_width="335dp"
-            android:layout_height="52dp"
-            android:background="@drawable/sign_edit_text_frame_top"
-            android:hint="@string/email_address_or_username_caps"
-            android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/fragment_signin__password"
-            style="@style/textPrimary"
-            android:layout_width="335dp"
-            android:layout_height="52dp"
-            android:background="@drawable/sign_edit_text_frame_bottom"
-            android:hint="@string/prompt_password"
-            android:imeActionLabel="@string/action_sign_in"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_signin__logo"
+            android:layout_width="42dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitCenter"
+            android:scaleX="1.3"
+            android:scaleY="1.3"
+            android:src="@drawable/harmony_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment_signin__forgot_password_btn"
+            android:id="@+id/fragment_signin__sign_in_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:letterSpacing="0.08"
+            android:text="@string/sign_in_to_continue_caps"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_signin__logo"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <LinearLayout
+            android:id="@+id/fragment_signin__fields"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_signin__sign_in_text"
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/fragment_signin__username"
+                style="@style/textPrimary"
+                android:layout_width="335dp"
+                android:layout_height="52dp"
+                android:background="@drawable/sign_edit_text_frame_top"
+                android:hint="@string/email_address_or_username_caps"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/fragment_signin__password"
+                style="@style/textPrimary"
+                android:layout_width="335dp"
+                android:layout_height="52dp"
+                android:background="@drawable/sign_edit_text_frame_bottom"
+                android:hint="@string/prompt_password"
+                android:imeActionLabel="@string/action_sign_in"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_signin__forgot_password_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/lato_regular"
+                android:letterSpacing="0.16"
+                android:text="@string/forgot_your_password_caps"
+                android:textColor="#8D99B2"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_signin__authorize_with"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:letterSpacing="0.16"
-            android:text="@string/forgot_your_password_caps"
+            android:text="@string/authorize_with_caps"
             android:textColor="#8D99B2"
-            android:textSize="10sp" />
-    </LinearLayout>
+            android:textSize="9sp"
+            app:layout_constraintBottom_toTopOf="@id/fragment_signin__spotify_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_signin__fields"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_signin__authorize_with"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_regular"
-        android:letterSpacing="0.16"
-        android:text="@string/authorize_with_caps"
-        android:textColor="#8D99B2"
-        android:textSize="9sp"
-        app:layout_constraintBottom_toTopOf="@id/fragment_signin__spotify_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_signin__fields"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/fragment_signin__spotify_btn"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/ic_spotify"
+            android:backgroundTint="#8D99B2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_signin__authorize_with"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/fragment_signin__spotify_btn"
-        android:layout_width="31dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/ic_spotify"
-        android:backgroundTint="#8D99B2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_signin__authorize_with"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/fragment_signin__login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/pink_circle_button"
+            android:enabled="false"
+            android:src="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toTopOf="@id/fragment_signin__registration_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_signin__spotify_btn"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/fragment_signin__login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/pink_circle_button"
-        android:enabled="false"
-        android:src="@drawable/ic_right_arrow"
-        app:layout_constraintBottom_toTopOf="@id/fragment_signin__registration_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_signin__spotify_btn"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_signin__registration_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:layout_marginBottom="41dp"
+            android:fontFamily="@font/lato_regular"
+            android:letterSpacing="0.16"
+            android:text="@string/don_t_have_an_account_caps"
+            android:textColor="#8D99B2"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_signin__registration_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_marginBottom="41dp"
-        android:fontFamily="@font/lato_regular"
-        android:letterSpacing="0.16"
-        android:text="@string/don_t_have_an_account_caps"
-        android:textColor="#8D99B2"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <ProgressBar
+            android:id="@+id/fragment_signin__loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/black_alpha__background_gradient"
+            android:padding="160dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/fragment_signin__loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@drawable/black_alpha__background_gradient"
-        android:padding="160dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

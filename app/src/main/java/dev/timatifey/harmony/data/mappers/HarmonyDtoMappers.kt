@@ -44,7 +44,6 @@ fun HarmonySimpleResponseDto.toResourceBoolean(): Resource<Boolean> {
 fun HarmonyGroupsResponseDto.toResourceGroups(): Resource<List<HarmonyGroup>> {
     return if (code == Config.SUCCESS_CODE && groups != null) {
         ResponseHandler.handleSuccess(groups.map {
-            Log.e("FF", it.toString())
             it.toHarmonyGroup()
         })
     } else {
@@ -147,3 +146,14 @@ fun PlaylistTrackObject.toSpotifyTrack(): SpotifyTrack =
         addedAt = addedAt,
         previewUrl = track.previewUrl,
     )
+
+fun SpotifyLobbyTrack.toModel(): SpotifyTrack =
+    SpotifyTrack(id, name, albumImage, artistName, durationMs, addedAt, previewUrl)
+
+fun HarmonySongsResponseDto.toResource(): Resource<List<HarmonySongDto>> {
+    return if (code == Config.SUCCESS_CODE && songs != null) {
+        ResponseHandler.handleSuccess(songs)
+    } else {
+        ResponseHandler.handleException(code = code)
+    }
+}

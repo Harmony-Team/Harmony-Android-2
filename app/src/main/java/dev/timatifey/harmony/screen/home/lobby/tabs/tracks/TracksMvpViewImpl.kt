@@ -3,6 +3,7 @@ package dev.timatifey.harmony.screen.home.lobby.tabs.tracks
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -27,6 +28,7 @@ class TracksMvpViewImpl(
     private val recyclerView: RecyclerView = findViewById(R.id.fragment_music__recycler_view)
     private val progressBar: ProgressBar = findViewById(R.id.fragment_music__loading)
     private val waitingContent: View = findViewById(R.id.fragment_music__waiting_content)
+    private val scroll: ViewGroup = findViewById(R.id.fragment_music__waiting_scroll)
 
     private val tracksAdapter: TracksAdapter = viewFactory.createTracksAdapter(this, context)
 
@@ -38,22 +40,29 @@ class TracksMvpViewImpl(
             getDrawable(R.drawable.group_list__item_divider)?.let { itemDecoration.setDrawable(it) }
             addItemDecoration(itemDecoration)
         }
-        btnReady.setOnClickListener { listeners.forEach { it.onReadyBtnClicked() } }
-        btnNotReady.setOnClickListener { listeners.forEach { it.onNotReadyBtnClicked() } }
+        btnReady.setOnClickListener { listeners.forEach { it.onReadyBtnClicked(tracksAdapter.getSelectedTracks()) } }
+        btnNotReady.setOnClickListener { listeners.forEach { it.onNotReadyBtnClicked(tracksAdapter.getSelectedTracks()) } }
     }
 
     override fun showReadyBtn() {
+        val animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
         btnReady.visibility = View.VISIBLE
-        btnNotReady.visibility = View.INVISIBLE
-        waitingContent.visibility = View.INVISIBLE
         recyclerView.visibility = View.VISIBLE
+        scroll.visibility = View.GONE
+//        btnNotReady.visibility = View.GONE
+
+//        btnReady.startAnimation(animation)
+        recyclerView.startAnimation(animation)
     }
 
     override fun showNotReadyBtn() {
-        btnReady.visibility = View.INVISIBLE
+        val animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        btnReady.visibility = View.GONE
+        recyclerView.visibility = View.GONE
+        scroll.visibility = View.VISIBLE
         btnNotReady.visibility = View.VISIBLE
-        waitingContent.visibility = View.VISIBLE
-        recyclerView.visibility = View.INVISIBLE
+        scroll.startAnimation(animation)
+//        btnNotReady.startAnimation(animation)
     }
 
     override fun showLoading() {
@@ -61,7 +70,7 @@ class TracksMvpViewImpl(
     }
 
     override fun hideLoading() {
-        progressBar.visibility = View.INVISIBLE
+        progressBar.visibility = View.GONE
     }
 
     override fun showSnackbar(msg: String) {
@@ -76,12 +85,15 @@ class TracksMvpViewImpl(
         tracksAdapter.bindData(tracks)
     }
 
-    override fun onTrackClicked(track: SpotifyLobbyTrack) {
-        listeners.forEach { it.onTrackClicked(track) }
+    override fun stopLastPlayingTrack() {
+        tracksAdapter.stopLastPlayingTrack()
     }
 
-    override fun onCheckBtnClicked(track: SpotifyLobbyTrack) {
-        listeners.forEach { it.onTrackCheckBtnClicked(track) }
+    override fun onTrackClicked(trackView: TracksRowMvpView, track: SpotifyLobbyTrack) {
+        listeners.forEach { it.onTrackClicked(trackView, track) }
     }
 
+    @SuppressWarnings("unused")
+    override fun onCheckBtnClicked(trackView: TracksRowMvpView, track: SpotifyLobbyTrack) {
+    }
 }

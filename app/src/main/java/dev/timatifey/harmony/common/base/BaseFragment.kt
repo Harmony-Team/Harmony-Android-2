@@ -1,6 +1,10 @@
 package dev.timatifey.harmony.common.base
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dev.timatifey.harmony.common.mvp.factory.MvpViewFactory
 import dev.timatifey.harmony.common.mvp.factory.PresenterFactory

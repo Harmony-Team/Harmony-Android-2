@@ -2,8 +2,10 @@ package dev.timatifey.harmony.service
 
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.api.harmony.HarmonyAPI
+import dev.timatifey.harmony.api.harmony.dto.HarmonySongDto
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
+import dev.timatifey.harmony.data.mappers.toResource
 import dev.timatifey.harmony.data.mappers.toResourceBoolean
 import dev.timatifey.harmony.repo.lobby.LobbyState
 import dev.timatifey.harmony.repo.user.UserRepo
@@ -59,7 +61,7 @@ class LobbyService @Inject constructor(
             }
         }
 
-    suspend fun addTrack(trackId: Long, groupId: Long): Resource<Boolean> =
+    suspend fun addTrack(trackId: String, groupId: Long): Resource<Boolean> =
         withContext(ioDispatcher) {
             try {
                 val harmonyToken = userRepo.getHarmonyTokenFromCache().data
@@ -71,13 +73,24 @@ class LobbyService @Inject constructor(
             }
         }
 
-    suspend fun removeTrack(trackId: Long, groupId: Long): Resource<Boolean> =
+    suspend fun removeTrack(trackId: String, groupId: Long): Resource<Boolean> =
         withContext(ioDispatcher) {
             try {
                 val harmonyToken = userRepo.getHarmonyTokenFromCache().data
                     ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
-                return@withContext harmonyAPI.addSong(harmonyToken, groupId, trackId)
+                return@withContext harmonyAPI.removeSong(harmonyToken, groupId, trackId)
                     .toResourceBoolean()
+            } catch (t: Throwable) {
+                return@withContext Resource.error(msg = t.message)
+            }
+        }
+
+    suspend fun getLobbyTracks(groupId: Long): Resource<List<HarmonySongDto>> =
+        withContext(ioDispatcher) {
+            try {
+                val harmonyToken = userRepo.getHarmonyTokenFromCache().data
+                    ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
+                return@withContext harmonyAPI.getAllSongs(harmonyToken, groupId).toResource()
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }

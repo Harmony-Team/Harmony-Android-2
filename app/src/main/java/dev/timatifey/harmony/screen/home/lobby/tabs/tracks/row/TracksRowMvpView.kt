@@ -5,11 +5,12 @@ import dev.timatifey.harmony.data.model.spotify.SpotifyLobbyTrack
 
 interface TracksRowMvpView: MvpView {
     interface Listener {
-        fun onTrackClicked(track: SpotifyLobbyTrack)
-        fun onCheckBtnClicked(track: SpotifyLobbyTrack)
+        fun onTrackClicked(trackView: TracksRowMvpView, track: SpotifyLobbyTrack)
+        fun onCheckBtnClicked(trackView: TracksRowMvpView, track: SpotifyLobbyTrack)
     }
 
     fun bindData(track: SpotifyLobbyTrack)
     fun showPlayingImage()
     fun hidePlayingImage()
+    fun isSelectedTrack(isSelected: Boolean)
 }

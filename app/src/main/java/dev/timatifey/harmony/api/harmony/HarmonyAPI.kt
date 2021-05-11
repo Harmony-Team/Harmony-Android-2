@@ -81,7 +81,7 @@ interface HarmonyAPI {
     suspend fun addSong(
         @Header("Authorization") authToken: Token,
         @Field("groupId") groupId: Long,
-        @Field("spotifyId") trackId: Long,
+        @Field("spotifyId") trackId: String,
     ): HarmonySimpleResponseDto
 
     @FormUrlEncoded
@@ -89,7 +89,7 @@ interface HarmonyAPI {
     suspend fun removeSong(
         @Header("Authorization") authToken: Token,
         @Field("groupId") groupId: Long,
-        @Field("spotifyId") spotifyId: Long,
+        @Field("spotifyId") trackId: String,
     ): HarmonySimpleResponseDto
 
     @GET("/api/group/music/get")

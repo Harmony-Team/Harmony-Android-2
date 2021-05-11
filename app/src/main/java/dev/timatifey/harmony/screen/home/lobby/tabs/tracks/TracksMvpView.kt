@@ -6,10 +6,9 @@ import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.row.TracksRowMvpView
 
 interface TracksMvpView : MvpViewObservable<TracksMvpView.Listener> {
     interface Listener {
-        fun onReadyBtnClicked()
-        fun onNotReadyBtnClicked()
-        fun onTrackClicked(track: SpotifyLobbyTrack)
-        fun onTrackCheckBtnClicked(track: SpotifyLobbyTrack)
+        fun onReadyBtnClicked(selectedTracks: List<SpotifyLobbyTrack>)
+        fun onNotReadyBtnClicked(selectedTracks: List<SpotifyLobbyTrack>)
+        fun onTrackClicked(trackView: TracksRowMvpView, track: SpotifyLobbyTrack)
     }
     fun showReadyBtn()
     fun showNotReadyBtn()
@@ -18,4 +17,5 @@ interface TracksMvpView : MvpViewObservable<TracksMvpView.Listener> {
     fun showSnackbar(msg: String)
     fun showSnackbar(msgId: Int)
     fun bindData(tracks: List<SpotifyLobbyTrack>)
+    fun stopLastPlayingTrack()
 }

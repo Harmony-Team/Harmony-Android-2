@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,99 +7,128 @@
     android:background="@drawable/groups_background_image"
     tools:context=".screen.home.group.share.ShareGroupFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/fragment_share_group__background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/white_rectangle" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_share_group__label_share_group"
-        style="@style/textPrimary"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/new_group_title_background"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:text="@string/share_group"
-        android:textColor="@color/text_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_share_group__background" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_share_group__tile_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:fontFamily="@font/lato_regular"
-        android:text="@string/your_group_has_created"
-        android:textAlignment="center"
-        android:textColor="@color/text_main"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_share_group__label_share_group" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_share_group__msg"
-        android:layout_width="265dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/lato_light"
-        android:text="@string/share_this_link"
-        android:textAlignment="center"
-        android:textColor="@color/text_main"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_share_group__tile_msg" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_share_group__link"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/lato_regular"
-        android:textAlignment="center"
-        android:textColor="@color/text_main"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_share_group__msg"
-        tools:text="@string/link_example" />
+        android:layout_marginTop="40dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment_share_group__share_btn"
-        style="@style/PinkRectBtn"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/rectangle_btn_background"
-        android:text="@string/share_link"
-        app:layout_constraintBottom_toTopOf="@id/fragment_share_group__cancel_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_share_group__background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/white_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_share_group__cancel_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/lato_regular"
-        android:letterSpacing="0.167"
-        android:text="@string/cancel"
-        android:textAllCaps="true"
-        android:textColor="@color/text_gray"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="AllCaps,SmallSp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_share_group__label_share_group"
+            style="@style/textPrimary"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/new_group_title_background"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/share_group"
+            android:textColor="@color/text_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_share_group__background" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_share_group__tile_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="132dp"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/your_group_has_created"
+            android:textAlignment="center"
+            android:textColor="@color/text_main"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_share_group__label_share_group" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_share_group__msg"
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/lato_light"
+            android:text="@string/share_this_link"
+            android:textAlignment="center"
+            android:textColor="@color/text_main"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_share_group__tile_msg" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_share_group__link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/lato_regular"
+            android:textAlignment="center"
+            android:textColor="@color/text_main"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_share_group__msg"
+            tools:text="@string/link_example" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_share_group__share_btn"
+            style="@style/PinkRectBtn"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/rectangle_btn_background"
+            android:text="@string/share_link"
+            app:layout_constraintBottom_toTopOf="@id/fragment_share_group__cancel_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_share_group__link"
+            app:layout_constraintVertical_bias="1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_share_group__cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/lato_regular"
+            android:letterSpacing="0.167"
+            android:text="@string/cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/text_gray"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@id/fragment_share_group__spacer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="AllCaps,SmallSp" />
+
+        <View
+            android:id="@+id/fragment_share_group__spacer"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/fragment_share_group__loading"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/black_alpha__background_gradient"
+            android:padding="160dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

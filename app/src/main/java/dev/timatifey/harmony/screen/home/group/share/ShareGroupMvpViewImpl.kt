@@ -3,6 +3,7 @@ package dev.timatifey.harmony.screen.home.group.share
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import dev.timatifey.harmony.R
@@ -21,10 +22,29 @@ class ShareGroupMvpViewImpl(
         findViewById(R.id.fragment_share_group__cancel_btn)
     private val tvShareLink: AppCompatTextView =
         findViewById(R.id.fragment_share_group__link)
+    private val loading: ProgressBar = findViewById(R.id.fragment_share_group__loading)
 
     init {
         btnShare.setOnClickListener { listeners.forEach { it.onShareLinkBtnClicked() } }
         tvCancel.setOnClickListener { listeners.forEach { it.onCancelBtnClicked() } }
+    }
+
+    override fun isVisibleLoading(isVisible: Boolean) {
+        if (isVisible) {
+            loading.visibility = View.VISIBLE
+        } else {
+            loading.visibility = View.GONE
+        }
+    }
+
+    override fun disableAll() {
+        btnShare.isEnabled = false
+        tvCancel.isEnabled = false
+    }
+
+    override fun enableAll() {
+        btnShare.isEnabled = true
+        tvCancel.isEnabled = true
     }
 
     override fun setShareCodeText(link: String) {

@@ -3,8 +3,8 @@ package dev.timatifey.harmony.screen.home.lobby.tabs.tracks
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
 import dev.timatifey.harmony.data.Status
+import dev.timatifey.harmony.data.mappers.toModel
 import dev.timatifey.harmony.data.mappers.toSpotifyLobbyTrack
-import dev.timatifey.harmony.data.model.harmony.User
 import dev.timatifey.harmony.data.model.spotify.SpotifyLobbyTrack
 import dev.timatifey.harmony.repo.lobby.LobbyProvider
 import dev.timatifey.harmony.repo.lobby.LobbyState
@@ -12,7 +12,6 @@ import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsPageController
 import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.row.TracksRowMvpView
 import dev.timatifey.harmony.service.LobbyService
 import dev.timatifey.harmony.service.TracksService
-import dev.timatifey.harmony.service.UserService
 import kotlinx.coroutines.*
 
 class TracksPresenter(
@@ -35,9 +34,20 @@ class TracksPresenter(
         coroutineScope.launch {
             view.showLoading()
             val tracks = tracksService.getTracks()
+            val lobbyAddedTracks = lobbyService.getLobbyTracks(lobbyProvider.groupId!!)
+            var listTrackId = listOf<String>()
+            if (lobbyAddedTracks.status is Status.Success) {
+                listTrackId = lobbyAddedTracks.data!!
+                    .filter { it.username == lobbyProvider.user!!.username }
+                    .map { it.spotifyTrackId }
+            }
+            lobbyProvider.trackIdList = listTrackId
             if (tracks.status is Status.Success) {
                 view.bindData(tracks.data!!.map {
-                    it.toSpotifyLobbyTrack(isSelected = false, isPlaying = false)
+                    it.toSpotifyLobbyTrack(
+                        isSelected = listTrackId.contains(it.id),
+                        isPlaying = false
+                    )
                 })
             } else {
                 view.showSnackbar("Get tracks error ${tracks.message.message}")
@@ -51,6 +61,8 @@ class TracksPresenter(
     }
 
     override fun onStop() {
+        tracksService.stopPlayAudio()
+        view.stopLastPlayingTrack()
         view.unregisterListener(this)
     }
 
@@ -58,45 +70,51 @@ class TracksPresenter(
         coroutineScope.coroutineContext.cancelChildren()
     }
 
-    override fun onReadyBtnClicked() {
+    override fun onReadyBtnClicked(selectedTracks: List<SpotifyLobbyTrack>) {
         coroutineScope.launch {
             lobbyProvider.state = LobbyState.Waiting
             lobbyService.sendState(LobbyState.Waiting)
             if (lobbyProvider.user!!.username != lobbyProvider.hostLogin) {
                 lobbyFragmentNavigator.toReadyStateFragment()
             } else {
-                view.showNotReadyBtn()
                 pageController.setPlaylistsPage()
+                delay(300)
+                view.showNotReadyBtn()
             }
+            tracksService.stopPlayAudio()
+            view.stopLastPlayingTrack()
+            for (track in selectedTracks) {
+                lobbyService.addTrack(track.id, lobbyProvider.groupId!!)
+            }
+            val selectedIds = selectedTracks.map { it.id }
+            for (id in lobbyProvider.trackIdList!!) {
+                if (!selectedIds.contains(id)) {
+                    lobbyService.removeTrack(id, lobbyProvider.groupId!!)
+                }
+            }
+            lobbyProvider.trackIdList = selectedIds
         }
     }
 
-    override fun onNotReadyBtnClicked() {
+    override fun onNotReadyBtnClicked(selectedTracks: List<SpotifyLobbyTrack>) {
         coroutineScope.launch {
             lobbyProvider.state = LobbyState.Unready
             lobbyService.sendState(LobbyState.Unready)
             view.showReadyBtn()
-        }
-    }
-
-    override fun onTrackClicked(track: SpotifyLobbyTrack) {
-        view.showSnackbar("Play ${track.name}")
-        track.isPlaying = true
-        coroutineScope.launch {
-            delay(3000)
-            track.isPlaying = false
-        }
-    }
-
-    override fun onTrackCheckBtnClicked(track: SpotifyLobbyTrack) {
-        track.isSelected = track.isSelected.not()
-        if (track.isSelected) {
-            coroutineScope.launch {
-//                lobbyService.addTrack(track.id.toLong(), lobbyProvider.groupId!!)
+            for (track in selectedTracks) {
+                lobbyService.removeTrack(track.id, lobbyProvider.groupId!!)
             }
-        } else {
-            coroutineScope.launch {
-//                lobbyService.removeTrack(track.id.toLong(), lobbyProvider.groupId!!)
+        }
+    }
+
+    override fun onTrackClicked(trackView: TracksRowMvpView, track: SpotifyLobbyTrack) {
+        coroutineScope.launch {
+            if (track.isPlaying) {
+                tracksService.playAudio(
+                    track.toModel()
+                ) { view.stopLastPlayingTrack() }
+            } else {
+                tracksService.stopPlayAudio()
             }
         }
     }

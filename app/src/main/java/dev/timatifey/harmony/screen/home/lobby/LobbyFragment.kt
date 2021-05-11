@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import dev.timatifey.harmony.app.Config.Companion.SHARING_REQUEST_CODE
 import dev.timatifey.harmony.common.base.BaseFragment
 import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
 import dev.timatifey.harmony.repo.lobby.LobbyProvider
@@ -57,7 +59,19 @@ class LobbyFragment : BaseFragment(), ShareIntentListener {
     }
 
     override fun startActivityForShare(code: String) {
-        startActivity(Intent.createChooser(createShareLinkIntent(code), "Choose messenger"))
+        startActivityForResult(
+            Intent.createChooser(
+                createShareLinkIntent(code),
+                "Choose messenger"
+            ), SHARING_REQUEST_CODE
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            SHARING_REQUEST_CODE -> presenter.onShareResult(resultCode, data)
+        }
     }
 
     companion object {

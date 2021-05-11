@@ -1,93 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/groups_background_image">
+    android:background="@drawable/groups_background_image"
+    tools:context=".screen.home.group.share.ShareGroupFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_new_group__title_fragment"
-        style="@style/textPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/groups"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/fragment_new_group__background"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/white_rectangle_full_rad"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.6"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_home__groups__join_group__label_join_group"
-        style="@style/textPrimary"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/new_group_title_background"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:text="@string/join"
-        android:textColor="@color/text_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_new_group__background" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_new_group__title_fragment"
+            style="@style/textPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/groups"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/fragment_join_group__code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/lato_regular"
-        android:hint="@string/group_link_or_code"
-        android:textAlignment="center"
-        android:textColor="@color/text_main"
-        android:textColorHint="@color/text_main"
-        android:textSize="14sp"
-        tools:text="@string/link_example"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_new_group__background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__join_group__label_join_group"
-        app:layout_constraintVertical_bias="0.2" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_new_group__background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/white_rectangle_full_rad"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment_join_group__join_btn"
-        style="@style/PinkRectBtn"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/rectangle_btn_background"
-        android:text="@string/join"
-        app:layout_constraintBottom_toTopOf="@id/fragment_join_group__cancel_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_join_group__code"
-        app:layout_constraintVertical_bias="1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_home__groups__join_group__label_join_group"
+            style="@style/textPrimary"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/new_group_title_background"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/join"
+            android:textColor="@color/text_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_new_group__background" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment_join_group__cancel_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/lato_regular"
-        android:letterSpacing="0.167"
-        android:text="@string/cancel"
-        android:textAllCaps="true"
-        android:textColor="@color/text_gray"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_new_group__background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/fragment_join_group__code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:hint="@string/group_link_or_code"
+            android:textAlignment="center"
+            android:textColor="@color/text_main"
+            android:textColorHint="@color/text_main"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_home__groups__join_group__label_join_group"
+            app:layout_constraintVertical_bias="0.2"
+            tools:text="@string/link_example" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_join_group__join_btn"
+            style="@style/PinkRectBtn"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/rectangle_btn_background"
+            android:text="@string/join"
+            app:layout_constraintBottom_toTopOf="@id/fragment_join_group__cancel_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_join_group__code"
+            app:layout_constraintVertical_bias="1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_join_group__cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/lato_regular"
+            android:letterSpacing="0.167"
+            android:text="@string/cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/text_gray"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_new_group__background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

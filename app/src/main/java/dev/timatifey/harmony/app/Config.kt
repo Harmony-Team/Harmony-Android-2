@@ -16,6 +16,8 @@ class Config {
         const val SPOTIFY_REDIRECT_URI = ""
         const val SPOTIFY_CLIENT_ID = ""
 
+        const val SHARING_REQUEST_CODE = 3
+
         val SPOTIFY_SCOPES = listOf(
             "app-remote-control",
             "user-library-read",

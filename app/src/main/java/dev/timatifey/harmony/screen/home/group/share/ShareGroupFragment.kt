@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import dev.timatifey.harmony.app.Config
 import dev.timatifey.harmony.common.base.BaseFragment
 import dev.timatifey.harmony.util.createShareLinkIntent
 
@@ -46,7 +47,19 @@ class ShareGroupFragment: BaseFragment(), ShareIntentListener {
     }
 
     override fun startActivityForShare(code: String) {
-        startActivity(Intent.createChooser(createShareLinkIntent(code), "Choose messenger"))
+        startActivityForResult(
+            Intent.createChooser(
+                createShareLinkIntent(code),
+                "Choose messenger"
+            ), Config.SHARING_REQUEST_CODE
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Config.SHARING_REQUEST_CODE -> presenter.onShareResult(resultCode, data)
+        }
     }
 
     companion object {

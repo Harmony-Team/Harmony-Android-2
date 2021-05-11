@@ -1,5 +1,6 @@
 package dev.timatifey.harmony.screen.home.group.share
 
+import android.content.Intent
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
@@ -37,7 +38,14 @@ class ShareGroupPresenter(
     }
 
     override fun onShareLinkBtnClicked() {
+        view.isVisibleLoading(true)
+        view.disableAll()
         shareIntentListener.startActivityForShare(shareCode)
+    }
+
+    fun onShareResult(resultCode: Int, data: Intent?) {
+        view.isVisibleLoading(false)
+        view.enableAll()
         appScreenNavigator.toLobby(groupId)
     }
 

@@ -38,6 +38,7 @@ class GroupListAdapter(
 
     override fun onGroupSwiped(group: HarmonyGroup) {
         listener.onGroupSwiped(group)
+        notifyDataSetChanged()
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder) {

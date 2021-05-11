@@ -23,6 +23,7 @@ class LobbyProvider @Inject constructor(
         private set
     var user: User? = null
         private set
+    var trackIdList: List<String>? = null
 
     fun setGroupId(groupId: Long) {
         this.groupId = groupId

@@ -12,7 +12,9 @@ interface LobbyMvpView: MvpViewObservable<LobbyMvpView.Listener> {
     }
 
     fun bindData(users: List<HarmonyLobbyItem>)
-
+    fun isVisibleLoading(isVisible: Boolean)
+    fun disableAll()
+    fun enableAll()
     fun showMessage(msg: String)
     fun showMessage(msgId: Int)
 }
