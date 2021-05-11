@@ -3,13 +3,17 @@ package dev.timatifey.harmony.data.mappers
 import android.util.Log
 import dev.timatifey.harmony.app.Config
 import dev.timatifey.harmony.api.harmony.dto.*
+import dev.timatifey.harmony.api.spotify.dto.PlaylistTrackObject
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.ResponseHandler
 import dev.timatifey.harmony.data.entities.GroupEntity
+import dev.timatifey.harmony.data.entities.TrackEntity
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroupUser
 import dev.timatifey.harmony.data.model.harmony.Token
+import dev.timatifey.harmony.data.model.spotify.SpotifyLobbyTrack
 import dev.timatifey.harmony.data.model.spotify.SpotifyTokens
+import dev.timatifey.harmony.data.model.spotify.SpotifyTrack
 import java.lang.Exception
 
 fun HarmonyAuthResponseDto.toResourceToken(): Resource<Token> {
@@ -110,4 +114,36 @@ fun HarmonyGroupDto.GroupUserDto.toHarmonyGroupUser(hostLogin: String): HarmonyG
         avatarUrl = null,
         isHost = this.login == hostLogin,
         isReady = false,
+    )
+
+fun SpotifyTrack.toSpotifyLobbyTrack(isSelected: Boolean, isPlaying: Boolean): SpotifyLobbyTrack =
+    SpotifyLobbyTrack(
+        id,
+        name,
+        albumImage,
+        artistName,
+        durationMs,
+        addedAt,
+        previewUrl,
+        isSelected,
+        isPlaying
+    )
+
+fun SpotifyTrack.toEntity(): TrackEntity =
+    TrackEntity(
+        id, name, albumImage, artistName, durationMs, addedAt, previewUrl
+    )
+
+fun TrackEntity.toModel(): SpotifyTrack =
+    SpotifyTrack(id, name, albumImage, artistName, durationMs, addedAt, previewUrl)
+
+fun PlaylistTrackObject.toSpotifyTrack(): SpotifyTrack =
+    SpotifyTrack(
+        id = track.id,
+        name = track.name,
+        albumImage = track.album.images[1].url,
+        artistName = track.album.artists.first().name,
+        durationMs = track.durationMs,
+        addedAt = addedAt,
+        previewUrl = track.previewUrl,
     )

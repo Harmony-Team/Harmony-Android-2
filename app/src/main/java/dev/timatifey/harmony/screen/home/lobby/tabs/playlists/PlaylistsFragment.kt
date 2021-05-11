@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.base.BaseFragment
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsFragment
-import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicMvpView
-import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicPresenter
 
 class PlaylistsFragment : BaseFragment() {
 

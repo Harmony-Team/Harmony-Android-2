@@ -5,7 +5,7 @@ import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
 import dev.timatifey.harmony.di.scope.ActivityScope
-import dev.timatifey.harmony.lobby.LobbyStateMachine
+import dev.timatifey.harmony.repo.lobby.LobbyProvider
 import dev.timatifey.harmony.screen.activity.MainPresenter
 import dev.timatifey.harmony.screen.auth.recovery.RecoveryPresenter
 import dev.timatifey.harmony.screen.auth.signup.SignUpPresenter
@@ -20,7 +20,7 @@ import dev.timatifey.harmony.screen.home.group.share.ShareIntentListener
 import dev.timatifey.harmony.screen.home.group.share.ShareGroupPresenter
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsPageController
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsPresenter
-import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicPresenter
+import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.TracksPresenter
 import dev.timatifey.harmony.screen.home.lobby.tabs.playlists.PlaylistsPresenter
 import dev.timatifey.harmony.screen.home.lobby.waiting.WaitingPlaylistPresenter
 import dev.timatifey.harmony.screen.home.profile.ProfilePresenter
@@ -34,9 +34,11 @@ class PresenterFactory @Inject constructor(
     private val backPressDispatcher: BackPressDispatcher,
     private val authHarmonyService: AuthHarmonyService,
     private val authSpotifyService: AuthSpotifyService,
+    private val lobbyProvider: LobbyProvider,
     private val userService: UserService,
     private val groupService: GroupService,
     private val lobbyService: LobbyService,
+    private val tracksService: TracksService,
 ) {
 
     fun createSignInPresenter(): SignInPresenter =
@@ -129,18 +131,15 @@ class PresenterFactory @Inject constructor(
             groupService = groupService
         )
 
-    fun createLobbyPresenter(groupId: Long, listenerShare: ShareIntentListener,): LobbyPresenter =
+    fun createLobbyPresenter(listenerShare: ShareIntentListener): LobbyPresenter =
         LobbyPresenter(
-            groupId = groupId,
+            lobbyProvider = lobbyProvider,
             groupService = groupService,
             lobbyService = lobbyService,
             backPressDispatcher = backPressDispatcher,
             appScreenNavigator = appScreenNavigator,
             listenerShare = listenerShare,
         )
-
-    fun createLobbyStateMachine(groupId: Long): LobbyStateMachine =
-        LobbyStateMachine(lobbyService, groupId)
 
     fun createWaitingPlaylistPresenter(lobbyFragmentNavigator: LobbyFragmentNavigator): WaitingPlaylistPresenter =
         WaitingPlaylistPresenter(
@@ -155,15 +154,16 @@ class PresenterFactory @Inject constructor(
             lobbyService = lobbyService,
         )
 
-    fun createMusicPresenter(
+    fun createTracksPresenter(
         pageController: LobbyTabsPageController,
         lobbyFragmentNavigator: LobbyFragmentNavigator
-    ): MusicPresenter =
-        MusicPresenter(
+    ): TracksPresenter =
+        TracksPresenter(
+            lobbyProvider = lobbyProvider,
             lobbyService = lobbyService,
             pageController = pageController,
             lobbyFragmentNavigator = lobbyFragmentNavigator,
-            userService = userService,
+            tracksService = tracksService,
         )
 
     fun createPlaylistsPresenter(lobbyFragmentNavigator: LobbyFragmentNavigator): PlaylistsPresenter =
@@ -172,5 +172,6 @@ class PresenterFactory @Inject constructor(
             userService = userService,
             lobbyService = lobbyService,
             appScreenNavigator = appScreenNavigator,
+            lobbyProvider = lobbyProvider,
         )
 }

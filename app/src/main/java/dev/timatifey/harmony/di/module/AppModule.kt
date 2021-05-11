@@ -9,6 +9,8 @@ import dev.timatifey.harmony.app.AppSettings
 import dev.timatifey.harmony.app.Config.Companion.PREFERENCE_NAME
 import dev.timatifey.harmony.repo.groups.GroupsRepo
 import dev.timatifey.harmony.repo.groups.GroupsRepoImpl
+import dev.timatifey.harmony.repo.tracks.TracksRepo
+import dev.timatifey.harmony.repo.tracks.TracksRepoImpl
 import dev.timatifey.harmony.repo.user.UserRepo
 import dev.timatifey.harmony.repo.user.UserRepoImpl
 import dev.timatifey.harmony.service.AuthHarmonyService
@@ -39,5 +41,8 @@ object AppModule {
 
         @dagger.Binds
         fun groupsRepo(groupsRepoImpl: GroupsRepoImpl): GroupsRepo
+
+        @dagger.Binds
+        fun tracksRepo(tracksRepoImpl: TracksRepoImpl): TracksRepo
     }
 }

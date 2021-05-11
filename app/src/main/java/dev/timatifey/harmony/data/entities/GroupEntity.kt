@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = GroupEntity.TABLE_NAME)
 data class GroupEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    @PrimaryKey
+    val id: Long,
     var name: String,
     var description: String,
     val imageUrl: String?,

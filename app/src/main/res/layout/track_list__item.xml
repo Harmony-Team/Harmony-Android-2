@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@drawable/black_background_gradient">
+
+    <RelativeLayout
+        android:id="@+id/track_list__item__imageCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/track_list__item__image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/avatar" />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/track_list__item__image_playing"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:visibility="invisible"
+            tools:src="@drawable/ic_track_playing" />
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/track_list__item__track_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/lato_light"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/track_list__item__imageCard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        tools:text="Midnight City" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/track_list__item__track_artist_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
+        android:letterSpacing="0.1"
+        android:maxLines="1"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/track_list__item__imageCard"
+        app:layout_constraintTop_toBottomOf="@id/track_list__item__track_name"
+        app:layout_constraintWidth_percent="0.6"
+        tools:ignore="SmallSp"
+        tools:text="M83" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/track_list__item__check_btn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_track_checked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

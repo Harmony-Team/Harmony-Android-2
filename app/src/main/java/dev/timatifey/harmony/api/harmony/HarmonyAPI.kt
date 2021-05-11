@@ -81,7 +81,7 @@ interface HarmonyAPI {
     suspend fun addSong(
         @Header("Authorization") authToken: Token,
         @Field("groupId") groupId: Long,
-        @Field("spotifyId") spotifyId: Long,
+        @Field("spotifyId") trackId: Long,
     ): HarmonySimpleResponseDto
 
     @FormUrlEncoded

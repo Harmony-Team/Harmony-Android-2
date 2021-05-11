@@ -2,9 +2,6 @@ package dev.timatifey.harmony.screen.home.lobby.tabs
 
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
-import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.data.model.harmony.User
-import dev.timatifey.harmony.lobby.LobbyState
 import dev.timatifey.harmony.service.LobbyService
 import dev.timatifey.harmony.service.UserService
 import kotlinx.coroutines.*

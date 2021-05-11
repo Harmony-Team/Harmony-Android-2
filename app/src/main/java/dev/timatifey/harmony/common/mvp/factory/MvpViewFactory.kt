@@ -36,10 +36,13 @@ import dev.timatifey.harmony.screen.home.group.share.ShareGroupMvpViewImpl
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsMvpView
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsMvpViewImpl
 import dev.timatifey.harmony.screen.home.lobby.tabs.ViewPagerAdapter
-import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicMvpView
-import dev.timatifey.harmony.screen.home.lobby.tabs.music.MusicMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.TracksMvpView
+import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.TracksMvpViewImpl
 import dev.timatifey.harmony.screen.home.lobby.tabs.playlists.PlaylistsMvpView
 import dev.timatifey.harmony.screen.home.lobby.tabs.playlists.PlaylistsMvpViewImpl
+import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.TracksAdapter
+import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.row.TracksRowMvpView
+import dev.timatifey.harmony.screen.home.lobby.tabs.tracks.row.TracksRowMvpViewImpl
 import dev.timatifey.harmony.screen.home.lobby.waiting.WaitingPlaylistMvpView
 import dev.timatifey.harmony.screen.home.lobby.waiting.WaitingPlaylistMvpViewImpl
 import dev.timatifey.harmony.screen.home.profile.ProfileMvpView
@@ -124,10 +127,20 @@ class MvpViewFactory @Inject constructor(
     fun createWaitingPlaylistMvpView(container: ViewGroup?): WaitingPlaylistMvpView =
         WaitingPlaylistMvpViewImpl(layoutInflater, container)
 
-    fun createMusicMvpView(container: ViewGroup?): MusicMvpView =
-        MusicMvpViewImpl(layoutInflater, container)
+    fun createTracksMvpView(container: ViewGroup?): TracksMvpView =
+        TracksMvpViewImpl(layoutInflater, container, this)
 
     fun createPlaylistsMvpView(container: ViewGroup?): PlaylistsMvpView =
         PlaylistsMvpViewImpl(layoutInflater, container)
+
+    fun createTrackRowMvpView(
+        parent: ViewGroup,
+        listener: TracksRowMvpView.Listener,
+        context: Context
+    ): TracksRowMvpView =
+        TracksRowMvpViewImpl(layoutInflater, parent, listener, Glide.with(context))
+
+    fun createTracksAdapter(listener: TracksRowMvpView.Listener, context: Context): TracksAdapter =
+        TracksAdapter(listener, this, context)
 
 }

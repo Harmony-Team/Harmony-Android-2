@@ -4,10 +4,10 @@ import dev.timatifey.harmony.R
 import dev.timatifey.harmony.api.harmony.HarmonyAPI
 import dev.timatifey.harmony.data.Resource
 import dev.timatifey.harmony.data.Status
-import dev.timatifey.harmony.lobby.LobbyState
+import dev.timatifey.harmony.data.mappers.toResourceBoolean
+import dev.timatifey.harmony.repo.lobby.LobbyState
 import dev.timatifey.harmony.repo.user.UserRepo
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -54,6 +54,30 @@ class LobbyService @Inject constructor(
                     return@withContext Resource.success(share.message!!)
                 }
                 return@withContext Resource.error(msg = share.message)
+            } catch (t: Throwable) {
+                return@withContext Resource.error(msg = t.message)
+            }
+        }
+
+    suspend fun addTrack(trackId: Long, groupId: Long): Resource<Boolean> =
+        withContext(ioDispatcher) {
+            try {
+                val harmonyToken = userRepo.getHarmonyTokenFromCache().data
+                    ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
+                return@withContext harmonyAPI.addSong(harmonyToken, groupId, trackId)
+                    .toResourceBoolean()
+            } catch (t: Throwable) {
+                return@withContext Resource.error(msg = t.message)
+            }
+        }
+
+    suspend fun removeTrack(trackId: Long, groupId: Long): Resource<Boolean> =
+        withContext(ioDispatcher) {
+            try {
+                val harmonyToken = userRepo.getHarmonyTokenFromCache().data
+                    ?: return@withContext Resource.error(msgId = R.string.token_does_not_exist)
+                return@withContext harmonyAPI.addSong(harmonyToken, groupId, trackId)
+                    .toResourceBoolean()
             } catch (t: Throwable) {
                 return@withContext Resource.error(msg = t.message)
             }

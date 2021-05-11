@@ -1,4 +1,4 @@
-package dev.timatifey.harmony.screen.home.lobby.tabs.music
+package dev.timatifey.harmony.screen.home.lobby.tabs.tracks
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import dev.timatifey.harmony.common.base.BaseFragment
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsFragment
 
-class MusicFragment : BaseFragment() {
+class TracksFragment : BaseFragment() {
 
-    private lateinit var presenter: MusicPresenter
+    private lateinit var presenter: TracksPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val lobbyTabsFragment = (requireParentFragment() as LobbyTabsFragment)
-        presenter = presenterFactory.createMusicPresenter(
+        presenter = presenterFactory.createTracksPresenter(
             pageController = lobbyTabsFragment.pageController,
             lobbyFragmentNavigator = lobbyTabsFragment.lobbyFragmentNavigator
         )
@@ -27,7 +27,7 @@ class MusicFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: MusicMvpView = mvpViewFactory.createMusicMvpView(container)
+        val view: TracksMvpView = mvpViewFactory.createTracksMvpView(container)
         presenter.bindView(view)
         return view.rootView
     }
@@ -49,7 +49,7 @@ class MusicFragment : BaseFragment() {
 
     companion object {
         fun newInstance(): Fragment {
-            return MusicFragment()
+            return TracksFragment()
         }
     }
 }

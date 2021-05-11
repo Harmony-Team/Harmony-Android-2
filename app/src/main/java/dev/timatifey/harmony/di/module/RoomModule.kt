@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dev.timatifey.harmony.data.database.AppDatabase
 import dev.timatifey.harmony.data.database.GroupsDao
+import dev.timatifey.harmony.data.database.TracksDao
 import javax.inject.Singleton
 
 @Module
@@ -25,5 +26,9 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideGroupsDao(database: AppDatabase): GroupsDao = database.groupsDao()
+
+    @Singleton
+    @Provides
+    fun provideTracksDao(database: AppDatabase): TracksDao = database.tracksDao()
 
 }

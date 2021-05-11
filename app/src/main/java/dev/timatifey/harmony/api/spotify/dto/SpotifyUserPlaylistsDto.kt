@@ -17,9 +17,6 @@ data class ItemPlaylistsDto(
     @SerializedName("collaborative")
     val collaborative: Boolean,
 
-    @SerializedName("external_urls")
-    val externalUrls: ExternalUrls,
-
     @SerializedName("href")
     val href: String,
 
@@ -32,62 +29,34 @@ data class ItemPlaylistsDto(
     @SerializedName("name")
     val name: String,
 
-    @SerializedName("owner")
-    val owner: Owner,
-
     @SerializedName("public")
     val public: Boolean,
 
-    @SerializedName("snapshot_id")
-    val snapshotId: String,
-
     @SerializedName("tracks")
-    val tracks: List<Tracks>,
+    val tracks: PlaylistTracksRefObject,
 
     @SerializedName("type")
     val type: String,
 
     @SerializedName("uri")
     val uri: String,
-) {
-    data class ExternalUrls(
-        @SerializedName("spotify")
-        val spotifyUrl: String,
-    )
+)
 
-    data class ImageSpotify(
-        @SerializedName("height")
-        val height: Int?,
+data class PlaylistTracksRefObject(
+    @SerializedName("href")
+    val linkPlaylistTracks: String,
 
-        @SerializedName("url")
-        val url: String,
+    @SerializedName("total")
+    val total: Int,
+)
 
-        @SerializedName("width")
-        val width: Int?
-    )
+data class ImageSpotify(
+    @SerializedName("height")
+    val height: Int?,
 
-    data class Owner(
-        @SerializedName("external_urls")
-        val externalUrls: ExternalUrls,
+    @SerializedName("url")
+    val url: String,
 
-        @SerializedName("href")
-        val href: String,
-
-        @SerializedName("id")
-        val id: String,
-
-        @SerializedName("type")
-        val type: String,
-
-        @SerializedName("uri")
-        val uri: String,
-    )
-
-    data class Tracks(
-        @SerializedName("href")
-        val href: String,
-
-        @SerializedName("total")
-        val total: Int,
-    )
-}
+    @SerializedName("width")
+    val width: Int?
+)

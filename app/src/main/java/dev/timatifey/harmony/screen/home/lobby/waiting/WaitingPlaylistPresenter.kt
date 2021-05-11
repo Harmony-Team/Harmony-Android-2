@@ -3,7 +3,7 @@ package dev.timatifey.harmony.screen.home.lobby.waiting
 import android.util.Log
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
-import dev.timatifey.harmony.lobby.LobbyState
+import dev.timatifey.harmony.repo.lobby.LobbyState
 import dev.timatifey.harmony.service.LobbyService
 import kotlinx.coroutines.*
 

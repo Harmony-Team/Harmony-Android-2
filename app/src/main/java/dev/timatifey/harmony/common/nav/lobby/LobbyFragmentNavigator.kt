@@ -8,14 +8,15 @@ import com.ncapdevi.fragnav.FragNavSwitchController
 import com.ncapdevi.fragnav.FragNavTransactionOptions
 import com.ncapdevi.fragnav.tabhistory.UnlimitedTabHistoryStrategy
 import dev.timatifey.harmony.R
-import dev.timatifey.harmony.lobby.LobbyState
-import dev.timatifey.harmony.lobby.LobbyStateMachine
+import dev.timatifey.harmony.di.scope.ActivityScope
+import dev.timatifey.harmony.repo.lobby.LobbyState
+import dev.timatifey.harmony.repo.lobby.LobbyProvider
 import dev.timatifey.harmony.screen.home.lobby.tabs.LobbyTabsFragment
 import dev.timatifey.harmony.screen.home.lobby.waiting.WaitingPlaylistFragment
+import javax.inject.Inject
 
 class LobbyFragmentNavigator(
-    val groupId: Long,
-    val lobbyState: LobbyStateMachine,
+    private val lobbyProvider: LobbyProvider,
     fragmentManager: FragmentManager,
     savedInstanceState: Bundle?
 ) : LobbyFragmentRouter, FragNavController.RootFragmentListener {
@@ -43,7 +44,7 @@ class LobbyFragmentNavigator(
                 R.anim.fade_in,
                 R.anim.fade_out,
             )
-            when (lobbyState.state) {
+            when (lobbyProvider.state) {
                 is LobbyState.Unready -> initialize(INDEX_TABS, savedInstanceState)
                 is LobbyState.Waiting -> initialize(INDEX_WAITING, savedInstanceState)
             }

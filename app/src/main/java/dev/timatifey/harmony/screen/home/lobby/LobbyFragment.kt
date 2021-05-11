@@ -8,28 +8,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dev.timatifey.harmony.common.base.BaseFragment
 import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
+import dev.timatifey.harmony.repo.lobby.LobbyProvider
 import dev.timatifey.harmony.screen.home.group.share.ShareIntentListener
 import dev.timatifey.harmony.util.createShareLinkIntent
+import javax.inject.Inject
 
 class LobbyFragment : BaseFragment(), ShareIntentListener {
 
     private lateinit var presenter: LobbyPresenter
     lateinit var lobbyFragmentNavigator: LobbyFragmentNavigator
 
+    @Inject
+    lateinit var lobbyProvider: LobbyProvider
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activityComponent.inject(this)
         val groupId = arguments!!.getLong(ARG_GROUP)
-
-        val lobbyStateMachine = presenterFactory.createLobbyStateMachine(groupId)
+        lobbyProvider.setGroupId(groupId)
         lobbyFragmentNavigator =
-            LobbyFragmentNavigator(
-                groupId,
-                lobbyStateMachine,
-                childFragmentManager,
-                savedInstanceState
-            )
-
-        presenter = presenterFactory.createLobbyPresenter(groupId = groupId, listenerShare = this)
+            LobbyFragmentNavigator(lobbyProvider, childFragmentManager, savedInstanceState)
+        presenter = presenterFactory.createLobbyPresenter(listenerShare = this)
     }
 
     override fun onCreateView(
@@ -60,7 +59,6 @@ class LobbyFragment : BaseFragment(), ShareIntentListener {
     override fun startActivityForShare(code: String) {
         startActivity(Intent.createChooser(createShareLinkIntent(code), "Choose messenger"))
     }
-
 
     companion object {
         const val ARG_GROUP = "ARG_GROUP"

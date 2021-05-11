@@ -12,7 +12,9 @@ import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.common.base.BaseActivity
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
+import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
 import dev.timatifey.harmony.di.qual.ActivityFragmentManager
+import dev.timatifey.harmony.repo.lobby.LobbyProvider
 
 @Module
 object ActivityModule {

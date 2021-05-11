@@ -4,20 +4,18 @@ import android.util.Log
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
-import dev.timatifey.harmony.common.nav.lobby.LobbyFragmentNavigator
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.model.harmony.AddUserBtn
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroupUser
 import dev.timatifey.harmony.data.model.harmony.HarmonyLobbyItem
-import dev.timatifey.harmony.lobby.LobbyState
-import dev.timatifey.harmony.lobby.LobbyStateMachine
+import dev.timatifey.harmony.repo.lobby.LobbyProvider
 import dev.timatifey.harmony.screen.home.group.share.ShareIntentListener
 import dev.timatifey.harmony.service.GroupService
 import dev.timatifey.harmony.service.LobbyService
 import kotlinx.coroutines.*
 
 class LobbyPresenter(
-    private val groupId: Long,
+    private val lobbyProvider: LobbyProvider,
 
     private val groupService: GroupService,
     private val lobbyService: LobbyService,
@@ -30,23 +28,21 @@ class LobbyPresenter(
     private lateinit var view: LobbyMvpView
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-    private val users = mutableListOf<HarmonyGroupUser>()
 
     override fun bindView(view: LobbyMvpView) {
         this.view = view
         initUsers()
     }
 
-
     private fun initUsers() {
         coroutineScope.launch {
-            val groupResource = groupService.getGroupById(groupId)
+            val groupResource = groupService.getGroupById(lobbyProvider.groupId!!)
             if (groupResource.status is Status.Success) {
-                users.clear()
+                lobbyProvider.users.clear()
                 val userList = groupResource.data!!.users
                 Log.e("LobbyPresenter", userList.toString())
-                users.addAll(userList)
-                view.bindData(users)
+                lobbyProvider.users.addAll(userList)
+                view.bindData(lobbyProvider.users)
             } else {
                 view.showMessage("GROUPS ERROR") //TODO("handle error groups")
             }
@@ -71,7 +67,7 @@ class LobbyPresenter(
         when (item) {
             is AddUserBtn -> {
                 coroutineScope.launch {
-                    val code = lobbyService.generateShareCode(groupId)
+                    val code = lobbyService.generateShareCode(lobbyProvider.groupId!!)
                     if (code.status is Status.Success) {
                         listenerShare.startActivityForShare(code.data!!)
                     }

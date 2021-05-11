@@ -17,7 +17,6 @@ class WaitingPlaylistFragment : BaseFragment() {
         presenter = presenterFactory.createWaitingPlaylistPresenter(
             lobbyFragmentNavigator = (requireParentFragment() as LobbyFragment).lobbyFragmentNavigator,
         )
-
     }
 
     override fun onCreateView(
