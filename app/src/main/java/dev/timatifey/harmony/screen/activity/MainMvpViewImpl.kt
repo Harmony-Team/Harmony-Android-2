@@ -1,62 +1,97 @@
 package dev.timatifey.harmony.screen.activity
 
-import android.annotation.SuppressLint
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.yarolegovich.slidingrootnav.SlidingRootNav
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.mvp.MvpViewObservableBase
+import dev.timatifey.harmony.screen.menu.*
 import javax.inject.Inject
 
 class MainMvpViewImpl @Inject constructor(
-    layoutInflater: LayoutInflater
-) : MvpViewObservableBase<MainMvpView.Listener>(), MainMvpView, DrawerController {
+    private val slidingRootNav: SlidingRootNav,
+) : MvpViewObservableBase<MainMvpView.Listener>(), MainMvpView, MenuController,
+    DrawerAdapter.OnItemSelectedListener {
 
-    @SuppressLint("InflateParams")
-    override var rootView: View = layoutInflater.inflate(R.layout.activity_main, null, true)
+    companion object {
+        const val POS_PROFILE = 0
+        const val POS_GROUPS = 1
+        const val POS_SETTINGS = 2
+        const val POS_LOGOUT = 4
 
-    private val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
-    private val navigationView: NavigationView = findViewById(R.id.activity_main__navigationView)
-    private val tvUsername: AppCompatTextView =
-        navigationView.getHeaderView(0).findViewById(R.id.navigation_header__name)
+        val screenTitleIds = listOf(
+            R.string.profile,
+            R.string.groups,
+            R.string.settings,
+            -1,
+            R.string.logout
+        )
+    }
+
+    override var rootView: View = slidingRootNav.layout.rootView
+    private val tvUsername: AppCompatTextView =  findViewById(R.id.navigation__header_name)
+    private val drawerList: RecyclerView = findViewById(R.id.navigation__list)
+
+    @Suppress("UNCHECKED_CAST")
+    private val drawerAdapter = DrawerAdapter(
+        listOf(
+            createItemFor(POS_PROFILE).setChecked(true),
+            createItemFor(POS_GROUPS),
+            createItemFor(POS_SETTINGS),
+            SpaceItem(48),
+            createItemFor(POS_LOGOUT)
+        ) as List<DrawerItem<DrawerAdapter.ViewHolder>>
+    )
 
     init {
-        navigationView.setNavigationItemSelectedListener { item ->
-            listeners.forEach { it.onNavigationItemSelected(item) }
-            true
+        drawerAdapter.setListener(this)
+
+        drawerList.apply {
+            isNestedScrollingEnabled = false
+            layoutManager = LinearLayoutManager(context)
+            adapter = drawerAdapter
         }
-        lockDrawer()
     }
 
-    override fun closeDrawer() {
-        drawer.closeDrawer(GravityCompat.START)
+    override fun closeMenu() {
+        slidingRootNav.closeMenu(true)
     }
 
-    override fun setDrawerUsername(username: String) {
+    override fun setMenuUsername(username: String) {
         tvUsername.text = username
     }
 
-    override fun openDrawer() {
-        drawer.openDrawer(GravityCompat.START)
+    override fun setSelected(position: Int) {
+        drawerAdapter.setSelected(position)
     }
 
-    override fun aboutUs() {
-        Toast.makeText(context, "About us", Toast.LENGTH_SHORT).show()
+    override fun openMenu() {
+        slidingRootNav.openMenu(true)
     }
 
-    override fun unlockDrawer() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    override fun unlockMenu() {
+        slidingRootNav.isMenuLocked = false
     }
 
-    override fun lockDrawer() {
-        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    override fun lockMenu() {
+        slidingRootNav.isMenuLocked = true
     }
 
     override fun drawerIsOpen(): Boolean =
-        drawer.isDrawerOpen(GravityCompat.START)
+        slidingRootNav.isMenuOpened
+
+    private fun createItemFor(position: Int): DrawerItem<out DrawerAdapter.ViewHolder> {
+        return SimpleItem(getString(screenTitleIds[position]))
+            .withTextAppearance(R.style.menuItemTextAppearance)
+            .withSelectedTextAppearance(R.style.menuItemTextAppearance_Selected)
+//            .withTextTint(getColor(R.color.text_main))
+//            .withSelectedTextTint(getColor(R.color.white))
+    }
+
+    override fun onItemSelected(position: Int) {
+        listeners.forEach { it.onItemSelected(position) }
+    }
 
 }

@@ -23,7 +23,7 @@ class RecoveryFragment: BaseFragment() {
     ): View {
         val view: RecoveryMvpView = mvpViewFactory.createRecoveryMvpView(container)
         presenter.bindView(view)
-        presenter.bindDrawerDispatcher(drawerController)
+        presenter.bindMenuController(menuController)
         return view.rootView
     }
 

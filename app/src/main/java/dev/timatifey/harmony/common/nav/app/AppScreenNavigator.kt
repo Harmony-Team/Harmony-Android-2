@@ -86,7 +86,7 @@ class AppScreenNavigator @Inject constructor(
     }
 
     override fun toAuth() {
-        fragNavController.switchTab(INDEX_AUTH)
+        fragNavController.switchTab(INDEX_AUTH, null)
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
@@ -125,15 +125,15 @@ class AppScreenNavigator @Inject constructor(
     }
 
     override fun toProfile() {
-        fragNavController.switchTab(INDEX_PROFILE)
+        fragNavController.switchTab(INDEX_PROFILE, null)
     }
 
     override fun toSettings() {
-        fragNavController.switchTab(INDEX_SETTINGS)
+        fragNavController.switchTab(INDEX_SETTINGS, null)
     }
 
     override fun toGroupList() {
-        fragNavController.switchTab(INDEX_GROUP_LIST)
+        fragNavController.switchTab(INDEX_GROUP_LIST, null)
     }
 
     override fun toAddGroupFragment() {

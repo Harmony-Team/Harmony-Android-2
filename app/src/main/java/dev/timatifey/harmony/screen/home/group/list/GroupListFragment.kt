@@ -22,7 +22,7 @@ class GroupListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         val view: GroupListMvpView = mvpViewFactory.createGroupListMvpView(container)
-        presenter.bindDrawerDispatcher(drawerController)
+        presenter.bindMenuController(menuController)
         presenter.bindView(view)
         return view.rootView
     }

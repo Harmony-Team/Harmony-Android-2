@@ -54,6 +54,7 @@ dependencies {
 
     // Navigation
     implementation "com.ncapdevi:frag-nav:${var.fragNavVersion}"
+    implementation "com.yarolegovich:sliding-root-nav:${var.slidingRootNavVersion}"
 
     // Room
     implementation "androidx.room:room-runtime:${var.roomVersion}"

@@ -6,8 +6,8 @@ import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.data.Status
 import dev.timatifey.harmony.data.model.harmony.HarmonyGroup
-import dev.timatifey.harmony.screen.RequireDrawerController
-import dev.timatifey.harmony.screen.activity.DrawerController
+import dev.timatifey.harmony.screen.RequireMenuController
+import dev.timatifey.harmony.screen.activity.MenuController
 import dev.timatifey.harmony.service.GroupService
 import kotlinx.coroutines.*
 
@@ -15,10 +15,10 @@ class GroupListPresenter(
     private val groupService: GroupService,
     private val backPressDispatcher: BackPressDispatcher,
     private val appScreenNavigator: AppScreenNavigator,
-): MvpPresenter<GroupListMvpView>, GroupListMvpView.Listener, RequireDrawerController {
+): MvpPresenter<GroupListMvpView>, GroupListMvpView.Listener, RequireMenuController {
 
     private lateinit var view: GroupListMvpView
-    private lateinit var drawer: DrawerController
+    private lateinit var menu: MenuController
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val groups = mutableListOf<HarmonyGroup>()
@@ -61,7 +61,7 @@ class GroupListPresenter(
     }
 
     override fun onMenuBtnClicked() {
-        drawer.openDrawer()
+        menu.openMenu()
     }
 
     override fun onGroupSwiped(group: HarmonyGroup) {
@@ -88,7 +88,7 @@ class GroupListPresenter(
         return false
     }
 
-    override fun bindDrawerDispatcher(drawer: DrawerController) {
-        this.drawer = drawer
+    override fun bindMenuController(menuController: MenuController) {
+        this.menu = menuController
     }
 }

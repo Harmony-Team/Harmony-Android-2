@@ -2,8 +2,11 @@ package dev.timatifey.harmony.common.mvp.factory
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.yarolegovich.slidingrootnav.SlidingRootNav
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import dev.timatifey.harmony.di.scope.ActivityScope
 import dev.timatifey.harmony.screen.activity.MainMvpView
 import dev.timatifey.harmony.screen.activity.MainMvpViewImpl
@@ -68,8 +71,8 @@ class MvpViewFactory @Inject constructor(
     fun createSpotifyAuthMvpView(parent: ViewGroup?): SpotifyAuthMvpView =
         SpotifyAuthMvpViewImpl(layoutInflater, parent)
 
-    fun createMainMvpView(): MainMvpView =
-        MainMvpViewImpl(layoutInflater)
+    fun createMainMvpView(slidingRootNav: SlidingRootNav): MainMvpView =
+        MainMvpViewImpl(slidingRootNav)
 
     fun createProfileMvpView(parent: ViewGroup?): ProfileMvpView =
         ProfileMvpViewImpl(layoutInflater, parent)
