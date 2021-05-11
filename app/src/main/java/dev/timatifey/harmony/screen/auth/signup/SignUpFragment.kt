@@ -23,7 +23,7 @@ class SignUpFragment: BaseFragment() {
     ): View {
         val view: SignUpMvpView = mvpViewFactory.createSignUpMvpView(container)
         presenter.bindView(view)
-        presenter.bindDrawerDispatcher(drawerController)
+        presenter.bindMenuController(menuController)
         return view.rootView
     }
 

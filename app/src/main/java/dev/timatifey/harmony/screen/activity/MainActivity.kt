@@ -1,6 +1,10 @@
 package dev.timatifey.harmony.screen.activity
 
 import android.os.Bundle
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.RecyclerView
+import com.yarolegovich.slidingrootnav.SlideGravity
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import dev.timatifey.harmony.R
 import dev.timatifey.harmony.common.base.BaseActivity
 
@@ -8,22 +12,27 @@ class MainActivity : BaseActivity() {
 
     private lateinit var presenter: MainPresenter
     private lateinit var view: MainMvpView
-    lateinit var drawerController: DrawerController
+    lateinit var menuController: MenuController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_Harmony)
-        view = mvpViewFactory.createMainMvpView()
-        drawerController = view
-        setContentView(view.rootView)
+        setContentView(R.layout.activity_main)
+
+        val slidingRootNav = SlidingRootNavBuilder(this)
+            .withMenuLocked(appScreenNavigator.appSettings.isAuthorized.not())
+            .withMenuOpened(false)
+            .withContentClickableWhenMenuOpened(false)
+            .withSavedState(savedInstanceState)
+            .withMenuLayout(R.layout.menu_left_drawer)
+            .inject()
+
+        view = mvpViewFactory.createMainMvpView(slidingRootNav)
+        menuController = view
+
         presenter = presenterFactory.createMainPresenter()
         presenter.bindView(view)
-        presenter.bindDrawerDispatcher(drawerController)
-        if (appScreenNavigator.appSettings.isAuthorized) {
-            drawerController.unlockDrawer()
-        } else {
-            drawerController.lockDrawer()
-        }
+        presenter.bindMenuController(menuController)
     }
 
     override fun onStart() {

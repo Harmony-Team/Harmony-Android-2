@@ -143,7 +143,7 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_new_group__create_btn"
             tools:ignore="AllCaps,SmallSp" />
 
-        <View
+        <Space
             android:id="@+id/fragment_new_group__spacer"
             android:layout_width="match_parent"
             android:layout_height="30dp"

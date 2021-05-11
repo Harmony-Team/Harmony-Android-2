@@ -23,7 +23,7 @@ class ProfileFragment : BaseFragment() {
     ): View {
         val view: ProfileMvpView = mvpViewFactory.createProfileMvpView(container)
         presenter.bindView(view)
-        presenter.bindDrawerDispatcher(drawerController)
+        presenter.bindMenuController(menuController)
         return view.rootView
     }
 

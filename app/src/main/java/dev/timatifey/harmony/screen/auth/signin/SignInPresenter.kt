@@ -7,8 +7,9 @@ import dev.timatifey.harmony.data.model.harmony.Token
 import dev.timatifey.harmony.common.mvp.MvpPresenter
 import dev.timatifey.harmony.common.nav.BackPressDispatcher
 import dev.timatifey.harmony.common.nav.app.AppScreenNavigator
-import dev.timatifey.harmony.screen.activity.DrawerController
-import dev.timatifey.harmony.screen.RequireDrawerController
+import dev.timatifey.harmony.screen.activity.MenuController
+import dev.timatifey.harmony.screen.RequireMenuController
+import dev.timatifey.harmony.screen.activity.MainMvpViewImpl.Companion.POS_PROFILE
 import dev.timatifey.harmony.service.AuthHarmonyService
 import dev.timatifey.harmony.util.Validator
 import kotlinx.coroutines.*
@@ -17,11 +18,11 @@ class SignInPresenter(
     private val appScreenNavigator: AppScreenNavigator,
     private val backPressDispatcher: BackPressDispatcher,
     private val authHarmonyService: AuthHarmonyService
-) : MvpPresenter<SignInMvpView>, SignInMvpView.Listener, RequireDrawerController {
+) : MvpPresenter<SignInMvpView>, SignInMvpView.Listener, RequireMenuController {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private lateinit var view: SignInMvpView
-    private lateinit var drawerController: DrawerController
+    private lateinit var menuController: MenuController
 
     override fun bindView(view: SignInMvpView) {
         this.view = view
@@ -53,7 +54,8 @@ class SignInPresenter(
             when (result.status) {
                 is Status.Success -> {
                     appScreenNavigator.toHome()
-                    drawerController.unlockDrawer()
+                    menuController.setSelected(POS_PROFILE)
+                    menuController.unlockMenu()
                 }
                 is Status.Error -> {
                     view.showError(R.string.auth_failed)
@@ -90,8 +92,8 @@ class SignInPresenter(
         }
     }
 
-    override fun bindDrawerDispatcher(drawerController: DrawerController) {
-        this.drawerController = drawerController
+    override fun bindMenuController(menuController: MenuController) {
+        this.menuController = menuController
     }
 
 }

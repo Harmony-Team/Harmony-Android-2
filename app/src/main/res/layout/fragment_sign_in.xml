@@ -153,7 +153,7 @@
         <ProgressBar
             android:id="@+id/fragment_signin__loading"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:background="@drawable/black_alpha__background_gradient"
             android:padding="160dp"
